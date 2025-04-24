@@ -10,7 +10,7 @@
 
 /* Header Styles */
 .header {
-  position: fixed;
+  position: relative; //mudar para fixed
   top: 0;
   left: 0;
   width: 100%;
@@ -112,7 +112,6 @@
   width: auto;
   background: url("../assets/Alejandro\ 2.png") no-repeat center center/cover;
   margin-bottom: 10px;
-
 }
 
 .hero-content {
