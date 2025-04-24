@@ -1,0 +1,146 @@
+{
+  "filmes": [
+    {
+      "id": 1,
+      "titulo": "Como Se Fosse a Primeira Vez",
+      "ano": 2004,
+      "papel": "Henry Roth",
+      "genero": ["Comédia Romântica"],
+      "sinopse": "Um veterinário paquerador precisará conquistar a mesma mulher todos os dias, por conta dela sofrer de um problema de memória.",
+      "imagem": "como_se_fosse_primeira_vez.jpg",
+      "destaque": false,
+      "categorias": ["Populares na Sandleflix", "Comédias", "Clássicos do Adam Sandler"]
+    },
+    {
+      "id": 2,
+      "titulo": "Esposa de Mentirinha",
+      "ano": 2011,
+      "papel": "Danny Maccabee",
+      "genero": ["Comédia Romântica"],
+      "sinopse": "Danny Maccabee queria um relacionamento sério, mas foi infeliz em sua tentativa de casamento. Para driblar a carência, passa a vivenciar somente namoricos e transas sem o menor compromisso. Assim, ele toca sua vida como cirurgião plástico bem sucedido, tendo sua melhor amiga Katherine como mãe solteira de um casal de filhos.",
+      "imagem": "esposa_de_mentirinha.jpg",
+      "destaque": false,
+      "categorias": ["Populares na Sandleflix", "Comédias"]
+    },
+    {
+      "id": 3,
+      "titulo": "Arremessando Alto",
+      "ano": 2022,
+      "papel": "Stanley Sugarman",
+      "genero": ["Drama", "Esporte"],
+      "sinopse": "Um caça-talentos de basquete decide levar um fenômeno amador espanhol para os EUA e transformá-lo em uma estrela da NBA.",
+      "imagem": "arremessando_alto.jpg",
+      "destaque": false,
+      "categorias": ["Populares na Sandleflix", "Dramas", "Filmes Recentes"]
+    },
+    {
+      "id": 4,
+      "titulo": "Uncut Gems",
+      "ano": 2019,
+      "papel": "Howard Ratner",
+      "genero": ["Drama", "Suspense", "Crime"],
+      "sinopse": "Um joalheiro carismático faz uma aposta de alto risco que pode levar à vida dos seus sonhos, mas ele deve equilibrar negócios, família e inimigos em uma busca implacável pelo grande prêmio.",
+      "imagem": "uncut_gems.jpg",
+      "destaque": true,
+      "categorias": ["Populares na Sandleflix", "Dramas", "Filmes Recentes"]
+    },
+    {
+      "id": 5,
+      "titulo": "Happy Gilmore",
+      "ano": 1996,
+      "papel": "Happy Gilmore",
+      "genero": ["Comédia", "Esporte"],
+      "sinopse": "Um jogador de hóquei fracassado descobre seu talento para o golfe e decide participar de um torneio para ganhar dinheiro e salvar a casa de sua avó.",
+      "imagem": "happy_gilmore.jpg",
+      "destaque": false,
+      "categorias": ["Populares na Sandleflix", "Comédias", "Clássicos do Adam Sandler"]
+    },
+    {
+      "id": 6,
+      "titulo": "Gente Grande",
+      "ano": 2010,
+      "papel": "Leonard \"Lenny\" Feder",
+      "genero": ["Comédia"],
+      "sinopse": "Cinco amigos de infância se reúnem após o funeral do treinador de basquete da juventude deles. Decidem passar o fim de semana do feriado de 4 de julho com suas famílias em uma casa no lago onde celebraram o campeonato anos atrás.",
+      "imagem": "gente_grande.jpg",
+      "destaque": false,
+      "categorias": ["Populares na Sandleflix", "Comédias"]
+    },
+    {
+      "id": 7,
+      "titulo": "Zohan - O Agente Bom de Corte",
+      "ano": 2008,
+      "papel": "Zohan Dvir",
+      "genero": ["Comédia", "Ação"],
+      "sinopse": "Zohan é o melhor agente anti-terrorismo de Israel, que tem habilidades sobre-humanas. Ele simula sua própria morte para realizar seu sonho: se tornar um cabeleireiro em Nova York.",
+      "imagem": "zohan.jpg",
+      "destaque": false,
+      "categorias": ["Comédias", "Ação"]
+    },
+    {
+      "id": 8,
+      "titulo": "Click",
+      "ano": 2006,
+      "papel": "Michael Newman",
+      "genero": ["Comédia", "Drama", "Fantasia"],
+      "sinopse": "Um arquiteto workaholic encontra um controle remoto universal que lhe permite controlar o tempo, mas logo percebe que está perdendo os momentos mais importantes de sua vida.",
+      "imagem": "click.jpg",
+      "destaque": false,
+      "categorias": ["Populares na Sandleflix", "Comédias", "Dramas"]
+    },
+    {
+      "id": 9,
+      "titulo": "Cada Um Tem a Gêmea Que Merece",
+      "ano": 2011,
+      "papel": "Jack & Jill Sadelstein",
+      "genero": ["Comédia"],
+      "sinopse": "Jack é um executivo de publicidade bem-sucedido que vive em Los Angeles com sua esposa e filhos. Todo ano ele teme a visita de sua irmã gêmea Jill, que sempre causa problemas.",
+      "imagem": "jack_and_jill.jpg",
+      "destaque": false,
+      "categorias": ["Comédias"]
+    },
+    {
+      "id": 10,
+      "titulo": "Hotel Transilvânia",
+      "ano": 2012,
+      "papel": "Conde Drácula (voz)",
+      "genero": ["Animação", "Comédia", "Família"],
+      "sinopse": "O Hotel Transilvânia é um resort cinco estrelas onde monstros e suas famílias podem viver livremente sem humanos para incomodá-los. Em um fim de semana especial, Drácula convidou alguns dos monstros mais famosos para comemorar o aniversário de 118 anos de sua filha.",
+      "imagem": "hotel_transilvania.jpg",
+      "destaque": false,
+      "categorias": ["Animações", "Família"]
+    },
+    {
+      "id": 11,
+      "titulo": "Hubie Halloween",
+      "ano": 2020,
+      "papel": "Hubie Dubois",
+      "genero": ["Comédia", "Terror"],
+      "sinopse": "Hubie Dubois, um cara que não é muito popular, mas mesmo sofrendo bullying e sendo medroso ele tem bom coração e busca ao máximo garantir a segurança de todos no Halloween em Salem.",
+      "imagem": "hubie_halloween.jpg",
+      "destaque": false,
+      "categorias": ["Comédias", "Filmes Recentes"]
+    },
+    {
+      "id": 12,
+      "titulo": "Mistério no Mediterrâneo",
+      "ano": 2019,
+      "papel": "Nick Spitz",
+      "genero": ["Comédia", "Mistério"],
+      "sinopse": "Um policial de Nova York e sua esposa vão para a Europa para revitalizar o casamento, mas acabam sendo acusados do assassinato de um idoso bilionário e precisam fugir.",
+      "imagem": "misterio_mediterraneo.jpg",
+      "destaque": false,
+      "categorias": ["Comédias", "Filmes Recentes"]
+    }
+  ],
+  "categorias": [
+    "Populares na Sandleflix",
+    "Comédias",
+    "Dramas",
+    "Animações",
+    "Família",
+    "Ação",
+    "Filmes Recentes",
+    "Clássicos do Adam Sandler"
+  ]
+}
