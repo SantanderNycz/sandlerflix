@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize header scroll effect
   initHeaderScroll();
 
-  // Initialize carousels
+  // Initialize carousels (definida em carousel.js)
   initCarousels();
 
   // Initialize movie modal
@@ -23,7 +23,8 @@ let moviesData = [];
 
 // Load movie data from JSON file
 function loadMovieData() {
-  fetch("../data/adam_sandler_filmes.json")
+  // Se index.html está na raiz do projeto, use este caminho:
+  fetch("data/adam_sandler_filmes.json")
     .then((response) => response.json())
     .then((data) => {
       moviesData = data.filmes;
@@ -38,7 +39,6 @@ function loadMovieData() {
 
 // Use placeholder data if JSON fetch fails
 function usePlaceholderData() {
-  // Simplified placeholder data
   moviesData = [
     {
       titulo: "Uncut Gems",
@@ -80,64 +80,17 @@ function initHeaderScroll() {
   });
 }
 
-// Initialize carousels
-function initCarousels() {
-  const carousels = document.querySelectorAll(".carousel");
-
-  carousels.forEach((carousel) => {
-    const container = carousel.querySelector(".carousel-container");
-    const leftBtn = carousel.querySelector(".carousel-control.left");
-    const rightBtn = carousel.querySelector(".carousel-control.right");
-
-    // Define quanto vai rolar: 80% da largura visível
-    const scrollAmount = container.clientWidth * 0.8;
-
-    // Botões
-    rightBtn.addEventListener("click", () => {
-      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    });
-
-    leftBtn.addEventListener("click", () => {
-      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    });
-
-    // Hover nas laterais para desktops
-    carousel.addEventListener("mousemove", (e) => {
-      const bounds = carousel.getBoundingClientRect();
-      const x = e.clientX - bounds.left;
-
-      if (x < bounds.width * 0.15) {
-        // Área esquerda
-        container.style.cursor = "w-resize";
-        carousel.onmousedown = () => {
-          container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-        };
-      } else if (x > bounds.width * 0.85) {
-        // Área direita
-        container.style.cursor = "e-resize";
-        carousel.onmousedown = () => {
-          container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-        };
-      } else {
-        container.style.cursor = "default";
-        carousel.onmousedown = null;
-      }
-    });
-  });
-}
-
 // Populate carousels with movie data
 function populateCarousels() {
-  // This would be implemented to dynamically populate carousels
-  // For now, we'll use placeholder images in HTML
+  // Neste momento os itens vêm do HTML mesmo
 
   // Add click event to all carousel items
   const carouselItems = document.querySelectorAll(".carousel-item");
 
   carouselItems.forEach((item) => {
     item.addEventListener("click", function () {
-      const movieId = this.querySelector("img").getAttribute("data-id");
-      openMovieModal(movieId);
+      const movieId = this.querySelector("img")?.getAttribute("data-id");
+      if (movieId) openMovieModal(movieId);
     });
   });
 }
@@ -145,10 +98,12 @@ function populateCarousels() {
 // Initialize movie modal
 function initMovieModal() {
   const modal = document.getElementById("movie-modal");
+  if (!modal) return;
+
   const closeBtn = modal.querySelector(".modal-close");
 
   // Close modal when clicking the close button
-  closeBtn.addEventListener("click", function () {
+  closeBtn?.addEventListener("click", function () {
     closeMovieModal();
   });
 
@@ -167,42 +122,14 @@ function initMovieModal() {
   });
 }
 
-document.querySelectorAll(".carousel").forEach((carousel) => {
-  const container = carousel.querySelector(".carousel-container");
-  const items = carousel.querySelectorAll(".carousel-item");
-  const prevBtn = carousel.querySelector(".carousel-control.left");
-  const nextBtn = carousel.querySelector(".carousel-control.right");
-
-  let index = 0;
-  const itemWidth = items[0].offsetWidth + 10; // largura + margem
-  const visibleItems = Math.floor(carousel.offsetWidth / itemWidth);
-
-  function updateCarousel() {
-    container.style.transform = `translateX(-${index * itemWidth}px)`;
-  }
-
-  nextBtn.addEventListener("click", () => {
-    if (index < items.length - visibleItems) {
-      index++;
-      updateCarousel();
-    }
-  });
-
-  prevBtn.addEventListener("click", () => {
-    if (index > 0) {
-      index--;
-      updateCarousel();
-    }
-  });
-});
-
 // Open movie modal with specific movie data
 function openMovieModal(movieId) {
   const modal = document.getElementById("movie-modal");
+  if (!modal) return;
+
   const movieData = getMovieById(movieId);
 
   if (movieData) {
-    // Update modal content with movie data
     modal.querySelector(".modal-title").textContent = movieData.titulo;
     modal.querySelector(".modal-year").textContent = movieData.ano;
     modal.querySelector(".modal-genres").textContent =
@@ -211,7 +138,6 @@ function openMovieModal(movieId) {
       movieData.sinopse || "Descrição não disponível.";
     modal.querySelector(".modal-role span").textContent = movieData.papel;
 
-    // Show modal
     modal.classList.add("active");
     document.body.style.overflow = "hidden"; // Prevent scrolling
   }
@@ -220,14 +146,15 @@ function openMovieModal(movieId) {
 // Close movie modal
 function closeMovieModal() {
   const modal = document.getElementById("movie-modal");
+  if (!modal) return;
+
   modal.classList.remove("active");
   document.body.style.overflow = ""; // Restore scrolling
 }
 
 // Get movie data by ID
 function getMovieById(id) {
-  // For demo purposes, return placeholder data
-  // In a real implementation, this would fetch from the moviesData array
+  // TODO: integrar com moviesData
   return {
     titulo: "Uncut Gems",
     ano: 2019,
@@ -243,7 +170,7 @@ function initMobileMenu() {
   const menuBtn = document.querySelector(".mobile-menu-btn");
   const mainNav = document.querySelector(".main-nav");
 
-  menuBtn.addEventListener("click", function () {
-    mainNav.classList.toggle("active");
+  menuBtn?.addEventListener("click", function () {
+    mainNav?.classList.toggle("active");
   });
 }
