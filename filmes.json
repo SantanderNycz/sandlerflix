@@ -9,7 +9,11 @@
       "sinopse": "Um veterinário paquerador precisará conquistar a mesma mulher todos os dias, por conta dela sofrer de um problema de memória.",
       "imagem": "como_se_fosse_primeira_vez.jpg",
       "destaque": false,
-      "categorias": ["Populares na Sandleflix", "Comédias", "Clássicos do Adam Sandler"]
+      "categorias": [
+        "Populares na Sandleflix",
+        "Comédias",
+        "Clássicos do Adam Sandler"
+      ]
     },
     {
       "id": 2,
@@ -53,7 +57,11 @@
       "sinopse": "Um jogador de hóquei fracassado descobre seu talento para o golfe e decide participar de um torneio para ganhar dinheiro e salvar a casa de sua avó.",
       "imagem": "happy_gilmore.jpg",
       "destaque": false,
-      "categorias": ["Populares na Sandleflix", "Comédias", "Clássicos do Adam Sandler"]
+      "categorias": [
+        "Populares na Sandleflix",
+        "Comédias",
+        "Clássicos do Adam Sandler"
+      ]
     },
     {
       "id": 6,
@@ -131,6 +139,21 @@
       "imagem": "misterio_mediterraneo.jpg",
       "destaque": false,
       "categorias": ["Comédias", "Filmes Recentes"]
+    },
+    {
+      "id": 13,
+      "titulo": "Happy Gilmore 2",
+      "ano": 2025,
+      "papel": "Happy Gilmore",
+      "genero": ["Comédia", "Esporte"],
+      "sinopse": "Happy Gilmore está de volta para ajudar sua família mais uma vez, e superar seus traumas.",
+      "imagem": "happy_gilmore.jpg",
+      "destaque": false,
+      "categorias": [
+        "Populares na Sandleflix",
+        "Comédias",
+        "Clássicos do Adam Sandler"
+      ]
     }
   ],
   "categorias": [
