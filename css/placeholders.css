@@ -12,55 +12,6 @@
   padding: 10px;
 }
 
-.carousel {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.carousel-container {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
-}
-.carousel-container::-webkit-scrollbar {
-  display: none;
-} /* Webkit */
-
-.carousel-item {
-  flex: 0 0 auto; /* impede encolher/quebrar linha */
-  min-width: 200px; /* ajusta conforme o design */
-  max-width: 260px; /* opcional: limita um máximo */
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.carousel-control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border: 0;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
-  font-size: 1.75rem;
-  line-height: 1;
-  padding: 0.5rem 0.75rem;
-  cursor: pointer;
-  z-index: 2;
-}
-.carousel-control.left {
-  left: 0.5rem;
-}
-.carousel-control.right {
-  right: 0.5rem;
-}
-.carousel-control.disabled {
-  opacity: 0.35;
-  pointer-events: none;
-}
-
 /* Placeholder para imagem de hero */
 .hero {
   background-color: #111 !important;
