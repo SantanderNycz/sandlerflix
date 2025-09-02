@@ -167,6 +167,35 @@ function initMovieModal() {
   });
 }
 
+document.querySelectorAll(".carousel").forEach((carousel) => {
+  const container = carousel.querySelector(".carousel-container");
+  const items = carousel.querySelectorAll(".carousel-item");
+  const prevBtn = carousel.querySelector(".carousel-control.left");
+  const nextBtn = carousel.querySelector(".carousel-control.right");
+
+  let index = 0;
+  const itemWidth = items[0].offsetWidth + 10; // largura + margem
+  const visibleItems = Math.floor(carousel.offsetWidth / itemWidth);
+
+  function updateCarousel() {
+    container.style.transform = `translateX(-${index * itemWidth}px)`;
+  }
+
+  nextBtn.addEventListener("click", () => {
+    if (index < items.length - visibleItems) {
+      index++;
+      updateCarousel();
+    }
+  });
+
+  prevBtn.addEventListener("click", () => {
+    if (index > 0) {
+      index--;
+      updateCarousel();
+    }
+  });
+});
+
 // Open movie modal with specific movie data
 function openMovieModal(movieId) {
   const modal = document.getElementById("movie-modal");
