@@ -1,4 +1,3 @@
-// Carrossel por translateX (clique nas setas movimenta; não cria scroll horizontal nativo)
 function initCarousels() {
   const carousels = document.querySelectorAll(".carousel");
 
@@ -17,6 +16,7 @@ function initCarousels() {
     if (!track) {
       track = document.createElement("div");
       track.className = "carousel-track";
+
       // Move os itens para dentro do track
       while (container.firstChild) {
         track.appendChild(container.firstChild);
@@ -24,10 +24,10 @@ function initCarousels() {
       container.appendChild(track);
     }
 
-    // estilos do track (pode ser feito por CSS também)
     track.style.display = "flex";
     track.style.willChange = "transform";
-    track.style.transition = "transform 420ms cubic-bezier(.22,.9,.35,1)";
+    track.style.transition =
+      "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
 
     let items = Array.from(track.children).filter((n) => n.nodeType === 1);
     let itemWidth = 0;
@@ -38,27 +38,35 @@ function initCarousels() {
     let index = 0;
 
     function readGap() {
-      // tenta pegar gap via CSS (fallback 0)
-      const cs = getComputedStyle(container);
-      const parsed = parseFloat(cs.gap || cs.columnGap || cs.rowGap) || 0;
+      const cs = getComputedStyle(track);
+      const parsed = Number.parseFloat(cs.gap || cs.columnGap || "8") || 8;
       gap = parsed;
     }
 
     function calcSizes() {
       items = Array.from(track.children).filter((n) => n.nodeType === 1);
       readGap();
+
       const first = items[0];
       if (first) {
         const rect = first.getBoundingClientRect();
-        itemWidth = Math.round(rect.width + gap);
+        itemWidth = rect.width;
       } else {
         itemWidth = Math.round(container.clientWidth / 4);
       }
-      visibleItems = Math.max(1, Math.floor(container.clientWidth / itemWidth));
-      // passo do clique: quanto avançar; evita "pular demais"
-      scrollItems = Math.max(1, visibleItems - 1);
+
+      const containerWidth = container.clientWidth;
+      visibleItems = Math.floor(containerWidth / (itemWidth + gap));
+
+      scrollItems = Math.max(1, Math.min(3, visibleItems));
+
       maxIndex = Math.max(0, items.length - visibleItems);
-      if (index > maxIndex) index = maxIndex;
+
+      // Garante que o índice não ultrapasse o máximo
+      if (index > maxIndex) {
+        index = maxIndex;
+      }
+
       updatePosition();
       updateButtons();
     }
@@ -68,53 +76,89 @@ function initCarousels() {
     }
 
     function updatePosition() {
-      const x = index * itemWidth;
+      const x = index * (itemWidth + gap);
       track.style.transform = `translateX(-${x}px)`;
     }
 
     function updateButtons() {
-      if (prevBtn) prevBtn.classList.toggle("disabled", index === 0);
-      if (nextBtn) nextBtn.classList.toggle("disabled", index === maxIndex);
+      if (prevBtn) {
+        prevBtn.classList.toggle("disabled", index === 0);
+        prevBtn.style.opacity = index === 0 ? "0.3" : "1";
+      }
+      if (nextBtn) {
+        nextBtn.classList.toggle("disabled", index >= maxIndex);
+        nextBtn.style.opacity = index >= maxIndex ? "0.3" : "1";
+      }
     }
 
-    // Handlers das setas
-    nextBtn?.addEventListener("click", () => {
+    let isAnimating = false;
+
+    nextBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (isAnimating || index >= maxIndex) return;
+
+      isAnimating = true;
       index = clamp(index + scrollItems, 0, maxIndex);
       updatePosition();
       updateButtons();
+
+      setTimeout(() => {
+        isAnimating = false;
+      }, 500);
     });
 
-    prevBtn?.addEventListener("click", () => {
+    prevBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (isAnimating || index === 0) return;
+
+      isAnimating = true;
       index = clamp(index - scrollItems, 0, maxIndex);
       updatePosition();
       updateButtons();
+
+      setTimeout(() => {
+        isAnimating = false;
+      }, 500);
     });
 
-    // Click nas "abas" laterais (opcional): clicar nas laterais avança/regressa
     carousel.addEventListener("click", (e) => {
-      if (e.target.closest(".carousel-control")) return; // não quando clicou seta
+      if (e.target.closest(".carousel-control") || isAnimating) return;
+
       const rect = carousel.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      if (x < rect.width * 0.12) {
+
+      if (x < rect.width * 0.15 && index > 0) {
+        isAnimating = true;
         index = clamp(index - scrollItems, 0, maxIndex);
         updatePosition();
         updateButtons();
-      } else if (x > rect.width * 0.88) {
+        setTimeout(() => {
+          isAnimating = false;
+        }, 500);
+      } else if (x > rect.width * 0.85 && index < maxIndex) {
+        isAnimating = true;
         index = clamp(index + scrollItems, 0, maxIndex);
         updatePosition();
         updateButtons();
+        setTimeout(() => {
+          isAnimating = false;
+        }, 500);
       }
     });
 
-    // Recalcula tamanhos em resize e quando itens mudam
-    const ro = new ResizeObserver(calcSizes);
+    const ro = new ResizeObserver(() => {
+      setTimeout(calcSizes, 100); // Debounce para evitar cálculos excessivos
+    });
     ro.observe(container);
-    const mo = new MutationObserver(calcSizes);
+
+    const mo = new MutationObserver(() => {
+      setTimeout(calcSizes, 50);
+    });
     mo.observe(track, { childList: true });
 
-    // inicializa
+    // Inicializa
     calcSizes();
-    // garante que botões estejam corretos
-    updateButtons();
+
+    setTimeout(updateButtons, 100);
   });
 }
