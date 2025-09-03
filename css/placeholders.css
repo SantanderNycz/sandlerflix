@@ -1,15 +1,62 @@
 /* Placeholder para imagens de filmes */
-.carousel-item img {
-  background-color: #333;
+/* Estilos do carrossel otimizados para transições suaves */
+.carousel-container {
+  display: flex;
+  overflow: hidden; /* Garante que não há scroll horizontal */
+  gap: 8px;
+  padding: 20px 0;
   width: 100%;
-  height: 200px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 8px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transição suave */
+}
+
+.carousel-item {
+  flex: 0 0 calc(100% / 6 - 8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer; /* Indica que é clicável */
+}
+
+.carousel-item:hover {
+  transform: scale(1.05); /* Hover mais sutil */
+  z-index: 10;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6); /* Sombra mais suave */
+}
+
+.carousel-control {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7); /* Fundo mais visível */
+  color: #fff;
+  width: 50px; /* Botões maiores para melhor usabilidade */
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 14px;
-  text-align: center;
-  padding: 10px;
+  font-size: 2rem; /* Ícones maiores */
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  border: none;
+  user-select: none;
+}
+
+.carousel-control:hover {
+  background-color: rgba(0, 0, 0, 0.9); /* Hover mais escuro */
+}
+
+.carousel-control.disabled {
+  opacity: 0.3 !important; /* Estado desabilitado mais claro */
+  cursor: not-allowed;
+}
+
+.carousel:hover .carousel-control:not(.disabled) {
+  opacity: 1;
 }
 
 /* Placeholder para imagem de hero */
