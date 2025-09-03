@@ -1,4 +1,4 @@
-function initCarousels() {
+export function initCarousels() {
   const carousels = document.querySelectorAll(".carousel");
 
   carousels.forEach((carousel) => {
