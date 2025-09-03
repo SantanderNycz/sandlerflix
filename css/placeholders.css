@@ -12,59 +12,42 @@
   padding: 10px;
 } */
 
-/* área do carrossel */
+/* ---------- CARROSSEL (override) ---------- */
 .carousel {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  padding: 0 2.5rem; /* espaço para as setas */
+  overflow: visible; /* container externo pode mostrar setas */
+  padding: 0 1rem; /* espaço lateral para setas */
 }
 
-/* container que desliza */
 .carousel-container {
+  width: 100%;
+  overflow: hidden; /* impede scroll nativo */
+}
+
+/* track que o JS cria e usa */
+.carousel-track {
   display: flex;
   gap: 1rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x proximity; /* ajuda a "encaixar" o card */
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 8px; /* evita cortar sombras */
+  transition: transform 420ms cubic-bezier(0.22, 0.9, 0.35, 1);
+  will-change: transform;
 }
 
 /* cada card */
 .carousel-item {
   flex: 0 0 auto;
-  scroll-snap-align: start;
-  min-width: 160px; /* ajusta para teu gosto */
+  min-width: 180px; /* ajusta ao teu gosto */
   max-width: 260px; /* opcional */
   border-radius: 8px;
   overflow: hidden;
 }
 
-/* imagem (mantive a tua altura 200px, mas com object-fit) */
+/* imagem (mantém tua altura, mas usa object-fit) */
 .carousel-item img {
   display: block;
   width: 100%;
-  height: 200px; /* tua preferência */
+  height: 200px; /* se preferires outra altura, muda aqui */
   object-fit: cover;
-}
-
-/* responsividade (ajusta as larguras conforme tela) */
-@media (min-width: 768px) {
-  .carousel-item {
-    min-width: 180px;
-  }
-  .carousel-item img {
-    height: 240px;
-  }
-}
-@media (min-width: 1200px) {
-  .carousel-item {
-    min-width: 220px;
-  }
-  .carousel-item img {
-    height: 300px;
-  }
 }
 
 /* botões */
@@ -75,10 +58,9 @@
   border: none;
   background: rgba(0, 0, 0, 0.6);
   color: #fff;
-  font-size: 1.6rem;
-  padding: 0.45rem 0.6rem;
+  padding: 0.5rem;
   cursor: pointer;
-  z-index: 3;
+  z-index: 5;
   border-radius: 6px;
 }
 .carousel-control.left {
@@ -92,9 +74,22 @@
   pointer-events: none;
 }
 
-/* estado durante drag */
-.carousel-container.is-dragging {
-  cursor: grabbing;
+/* responsividade */
+@media (min-width: 768px) {
+  .carousel-item {
+    min-width: 200px;
+  }
+  .carousel-item img {
+    height: 240px;
+  }
+}
+@media (min-width: 1200px) {
+  .carousel-item {
+    min-width: 240px;
+  }
+  .carousel-item img {
+    height: 300px;
+  }
 }
 
 /* Placeholder para imagem de hero */

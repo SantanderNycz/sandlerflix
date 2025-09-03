@@ -1,35 +1,24 @@
-// Wait for DOM to be fully loaded
+// Mantém o resto do teu comportamento e chama initCarousels (definida em carousel.js)
+
 document.addEventListener("DOMContentLoaded", function () {
-  // Load movie data from JSON file
   loadMovieData();
-
-  // Initialize header scroll effect
   initHeaderScroll();
-
-  // Initialize carousels (definida em carousel.js)
-  initCarousels();
-
-  // Initialize movie modal
+  initCarousels(); // função importada de js/carousel.js
   initMovieModal();
-
-  // Initialize mobile menu
   initMobileMenu();
 });
 
-// Global variable to store movie data
 let moviesData = [];
 
-// Load movie data from JSON file
 function loadMovieData() {
   fetch("../data/adam_sandler_filmes.json")
-    .then((response) => response.json())
+    .then((r) => r.json())
     .then((data) => {
       moviesData = data.filmes;
       populateCarousels();
     })
-    .catch((error) => {
-      console.error("Erro ao carregar dados dos filmes:", error);
-      // Use placeholder data if fetch fails
+    .catch((err) => {
+      console.error("Erro ao carregar dados dos filmes:", err);
       usePlaceholderData();
     });
 }
@@ -40,95 +29,65 @@ function usePlaceholderData() {
       titulo: "Uncut Gems",
       ano: 2019,
       papel: "Howard Ratner",
-      genero: ["Drama", "Suspense", "Crime"],
-      sinopse:
-        "Um joalheiro carismático faz uma aposta de alto risco que pode levar à vida dos seus sonhos.",
+      genero: ["Drama"],
+      sinopse: "...",
     },
     {
       titulo: "Happy Gilmore",
       ano: 1996,
       papel: "Happy Gilmore",
-      genero: ["Comédia", "Esporte"],
-      sinopse:
-        "Um jogador de hóquei fracassado descobre seu talento para o golfe.",
-    },
-    {
-      titulo: "Big Daddy",
-      ano: 1999,
-      papel: "Sonny Koufax",
-      genero: ["Comédia", "Drama"],
-      sinopse: "Um homem adota uma criança para impressionar sua namorada.",
+      genero: ["Comédia"],
+      sinopse: "...",
     },
   ];
   populateCarousels();
 }
 
-// Initialize header scroll effect
 function initHeaderScroll() {
   const header = document.querySelector(".header");
   if (!header) return;
-
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 50) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 50);
   });
 }
 
-// Populate carousels with movie data (attaches listeners aos itens existentes no HTML)
 function populateCarousels() {
-  const carouselItems = document.querySelectorAll(".carousel-item");
-
-  carouselItems.forEach((item) => {
+  const items = document.querySelectorAll(".carousel-item");
+  items.forEach((item) => {
     item.addEventListener("click", function () {
-      const movieId = this.querySelector("img")?.getAttribute("data-id");
-      if (movieId) openMovieModal(movieId);
+      const id = this.querySelector("img")?.getAttribute("data-id");
+      if (id) openMovieModal(id);
     });
   });
 }
 
-// Initialize movie modal
 function initMovieModal() {
   const modal = document.getElementById("movie-modal");
   if (!modal) return;
   const closeBtn = modal.querySelector(".modal-close");
-
-  closeBtn?.addEventListener("click", function () {
-    closeMovieModal();
+  closeBtn?.addEventListener("click", closeMovieModal);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeMovieModal();
   });
-
-  modal.addEventListener("click", function (e) {
-    if (e.target === modal) {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("active"))
       closeMovieModal();
-    }
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
-      closeMovieModal();
-    }
   });
 }
 
 function openMovieModal(movieId) {
   const modal = document.getElementById("movie-modal");
   if (!modal) return;
-  const movieData = getMovieById(movieId);
-
-  if (movieData) {
-    modal.querySelector(".modal-title").textContent = movieData.titulo;
-    modal.querySelector(".modal-year").textContent = movieData.ano;
-    modal.querySelector(".modal-genres").textContent =
-      movieData.genero.join(", ");
-    modal.querySelector(".modal-description").textContent =
-      movieData.sinopse || "Descrição não disponível.";
-    modal.querySelector(".modal-role span").textContent = movieData.papel;
-
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden";
-  }
+  const movie = getMovieById(movieId);
+  if (!movie) return;
+  modal.querySelector(".modal-title").textContent = movie.titulo;
+  modal.querySelector(".modal-year").textContent = movie.ano;
+  modal.querySelector(".modal-genres").textContent = movie.genero.join(", ");
+  modal.querySelector(".modal-description").textContent =
+    movie.sinopse || "Descrição não disponível.";
+  modal.querySelector(".modal-role span").textContent = movie.papel || "";
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden";
 }
 
 function closeMovieModal() {
@@ -139,22 +98,21 @@ function closeMovieModal() {
 }
 
 function getMovieById(id) {
-  // TODO: linkar com moviesData se quiseres.
-  return {
-    titulo: "Uncut Gems",
-    ano: 2019,
-    papel: "Howard Ratner",
-    genero: ["Drama", "Suspense", "Crime"],
-    sinopse:
-      "Um joalheiro carismático faz uma aposta de alto risco que pode levar à vida dos seus sonhos, mas ele deve equilibrar negócios, família e inimigos em uma busca implacável pelo grande prêmio.",
-  };
+  // Se mais tarde quiseres mapear com moviesData, faz aqui a busca
+  return (
+    moviesData.find((m) => String(m.id) === String(id)) ||
+    moviesData[0] || {
+      titulo: "Sem título",
+      ano: "-",
+      genero: [],
+      sinopse: "",
+      papel: "",
+    }
+  );
 }
 
-// Initialize mobile menu
 function initMobileMenu() {
   const menuBtn = document.querySelector(".mobile-menu-btn");
   const mainNav = document.querySelector(".main-nav");
-  menuBtn?.addEventListener("click", function () {
-    mainNav?.classList.toggle("active");
-  });
+  menuBtn?.addEventListener("click", () => mainNav?.classList.toggle("active"));
 }

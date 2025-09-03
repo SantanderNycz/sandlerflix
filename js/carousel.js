@@ -1,181 +1,120 @@
-// Inicializa comportamentos do carrossel: botões, scroll por roda, arrastar, "abas" laterais e atualização de setas.
+// Carrossel por translateX (clique nas setas movimenta; não cria scroll horizontal nativo)
 function initCarousels() {
   const carousels = document.querySelectorAll(".carousel");
 
   carousels.forEach((carousel) => {
     const container = carousel.querySelector(".carousel-container");
-    const leftBtn = carousel.querySelector(".carousel-control.left");
-    const rightBtn = carousel.querySelector(".carousel-control.right");
+    const prevBtn = carousel.querySelector(".carousel-control.left");
+    const nextBtn = carousel.querySelector(".carousel-control.right");
 
-    if (!container) {
-      console.warn("[carousel] .carousel-container não encontrado", carousel);
-      return;
+    if (!container) return;
+
+    // Garante que o container não permita scroll nativo
+    container.style.overflow = "hidden";
+
+    // Cria (se necessário) um track interno para aplicar transform
+    let track = container.querySelector(".carousel-track");
+    if (!track) {
+      track = document.createElement("div");
+      track.className = "carousel-track";
+      // Move os itens para dentro do track
+      while (container.firstChild) {
+        track.appendChild(container.firstChild);
+      }
+      container.appendChild(track);
     }
 
-    // variáveis de layout que serão recalculadas
+    // estilos do track (pode ser feito por CSS também)
+    track.style.display = "flex";
+    track.style.willChange = "transform";
+    track.style.transition = "transform 420ms cubic-bezier(.22,.9,.35,1)";
+
+    let items = Array.from(track.children).filter((n) => n.nodeType === 1);
     let itemWidth = 0;
     let gap = 0;
     let visibleItems = 1;
     let scrollItems = 1;
-    let scrollAmount = 300; // fallback
+    let maxIndex = 0;
+    let index = 0;
+
+    function readGap() {
+      // tenta pegar gap via CSS (fallback 0)
+      const cs = getComputedStyle(container);
+      const parsed = parseFloat(cs.gap || cs.columnGap || cs.rowGap) || 0;
+      gap = parsed;
+    }
 
     function calcSizes() {
-      const first = container.querySelector(".carousel-item");
-      const cs = getComputedStyle(container);
-      // pega gap (fallback 0)
-      gap = parseFloat(cs.gap || cs.columnGap || 0) || 0;
-
+      items = Array.from(track.children).filter((n) => n.nodeType === 1);
+      readGap();
+      const first = items[0];
       if (first) {
-        const r = first.getBoundingClientRect();
-        itemWidth = Math.round(r.width + gap);
+        const rect = first.getBoundingClientRect();
+        itemWidth = Math.round(rect.width + gap);
       } else {
-        itemWidth = Math.round(container.clientWidth * 0.25);
+        itemWidth = Math.round(container.clientWidth / 4);
       }
-
       visibleItems = Math.max(1, Math.floor(container.clientWidth / itemWidth));
-      // scroll menos que a tela inteira para não "pular demais" (ajusta para -1)
+      // passo do clique: quanto avançar; evita "pular demais"
       scrollItems = Math.max(1, visibleItems - 1);
-      scrollAmount = Math.round(scrollItems * itemWidth);
+      maxIndex = Math.max(0, items.length - visibleItems);
+      if (index > maxIndex) index = maxIndex;
+      updatePosition();
+      updateButtons();
     }
 
-    // Recalcula em resize e depois que as imagens carregarem
-    let resizeTimer;
-    window.addEventListener("resize", () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        calcSizes();
-        updateArrows();
-      }, 120);
+    function clamp(v, a, b) {
+      return Math.max(a, Math.min(b, v));
+    }
+
+    function updatePosition() {
+      const x = index * itemWidth;
+      track.style.transform = `translateX(-${x}px)`;
+    }
+
+    function updateButtons() {
+      if (prevBtn) prevBtn.classList.toggle("disabled", index === 0);
+      if (nextBtn) nextBtn.classList.toggle("disabled", index === maxIndex);
+    }
+
+    // Handlers das setas
+    nextBtn?.addEventListener("click", () => {
+      index = clamp(index + scrollItems, 0, maxIndex);
+      updatePosition();
+      updateButtons();
     });
 
-    window.addEventListener("load", () => {
-      calcSizes();
-      updateArrows();
+    prevBtn?.addEventListener("click", () => {
+      index = clamp(index - scrollItems, 0, maxIndex);
+      updatePosition();
+      updateButtons();
     });
 
-    // Calcula logo de início também
-    calcSizes();
-
-    // Botões (com optional chaining para evitar erros)
-    rightBtn?.addEventListener("click", () => {
-      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    });
-
-    leftBtn?.addEventListener("click", () => {
-      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    });
-
-    // roda do mouse: vertical -> horizontal
-    container.addEventListener(
-      "wheel",
-      (e) => {
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-          container.scrollLeft += e.deltaY;
-          e.preventDefault();
-        }
-      },
-      { passive: false }
-    );
-
-    // Drag para deslizar (pointer events)
-    let isDragging = false;
-    let startX = 0;
-    let startScroll = 0;
-
-    container.addEventListener("pointerdown", (e) => {
-      isDragging = true;
-      startX = e.clientX;
-      startScroll = container.scrollLeft;
-      container.classList.add("is-dragging");
-      container.setPointerCapture?.(e.pointerId);
-    });
-
-    container.addEventListener("pointermove", (e) => {
-      if (!isDragging) return;
-      const dx = e.clientX - startX;
-      container.scrollLeft = startScroll - dx;
-    });
-
-    container.addEventListener("pointerup", (e) => {
-      isDragging = false;
-      container.classList.remove("is-dragging");
-      container.releasePointerCapture?.(e.pointerId);
-    });
-
-    container.addEventListener("pointercancel", () => {
-      isDragging = false;
-      container.classList.remove("is-dragging");
-    });
-
-    // Aba lateral (hover) e clique nela para avançar
-    carousel.addEventListener("mousemove", (e) => {
+    // Click nas "abas" laterais (opcional): clicar nas laterais avança/regressa
+    carousel.addEventListener("click", (e) => {
+      if (e.target.closest(".carousel-control")) return; // não quando clicou seta
       const rect = carousel.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      const leftZone = rect.width * 0.12;
-      const rightZone = rect.width * 0.88;
-
-      if (e.target.closest(".carousel-control")) {
-        carousel.dataset.edge = "";
-        carousel.style.cursor = "default";
-        return;
-      }
-
-      if (x < leftZone) {
-        carousel.dataset.edge = "left";
-        carousel.style.cursor = "w-resize";
-      } else if (x > rightZone) {
-        carousel.dataset.edge = "right";
-        carousel.style.cursor = "e-resize";
-      } else {
-        carousel.dataset.edge = "";
-        carousel.style.cursor = "default";
+      if (x < rect.width * 0.12) {
+        index = clamp(index - scrollItems, 0, maxIndex);
+        updatePosition();
+        updateButtons();
+      } else if (x > rect.width * 0.88) {
+        index = clamp(index + scrollItems, 0, maxIndex);
+        updatePosition();
+        updateButtons();
       }
     });
 
-    carousel.addEventListener("mouseleave", () => {
-      carousel.dataset.edge = "";
-      carousel.style.cursor = "default";
-    });
+    // Recalcula tamanhos em resize e quando itens mudam
+    const ro = new ResizeObserver(calcSizes);
+    ro.observe(container);
+    const mo = new MutationObserver(calcSizes);
+    mo.observe(track, { childList: true });
 
-    carousel.addEventListener("click", (e) => {
-      if (e.target.closest(".carousel-control")) return;
-      const edge = carousel.dataset.edge;
-      if (edge === "left")
-        container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-      if (edge === "right")
-        container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    });
-
-    // Atualiza estado das setas
-    function updateArrows() {
-      if (!leftBtn || !rightBtn) return;
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      const atStart = container.scrollLeft <= 0;
-      const atEnd = container.scrollLeft >= maxScroll - 1;
-
-      leftBtn.classList.toggle("disabled", atStart);
-      rightBtn.classList.toggle("disabled", atEnd);
-      leftBtn.setAttribute("aria-disabled", atStart);
-      rightBtn.setAttribute("aria-disabled", atEnd);
-    }
-
-    container.addEventListener(
-      "scroll",
-      () => {
-        // atualiza sem pesado
-        window.requestAnimationFrame(updateArrows);
-      },
-      { passive: true }
-    );
-
-    // calcula novamente se elementos mudarem (útil se preenchimento dinâmico)
-    const mo = new MutationObserver(() => {
-      calcSizes();
-      updateArrows();
-    });
-    mo.observe(container, { childList: true, subtree: true });
-
-    // initial update
-    updateArrows();
+    // inicializa
+    calcSizes();
+    // garante que botões estejam corretos
+    updateButtons();
   });
 }
