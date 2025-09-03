@@ -6,9 +6,8 @@ const initHeaderScroll = () => {
   // Implementation for initHeaderScroll
 };
 
-const initCarousels = () => {
-  // Implementation for initCarousels
-};
+// Import the initCarousels function from carousel.js
+import { initCarousels } from "./carousel.js";
 
 const initMovieModal = () => {
   // Implementation for initMovieModal
@@ -21,7 +20,7 @@ const initMobileMenu = () => {
 document.addEventListener("DOMContentLoaded", () => {
   loadMovieData();
   initHeaderScroll();
-  initCarousels(); // função importada de js/carousel.js
+  initCarousels();
   initMovieModal();
   initMobileMenu();
 });
