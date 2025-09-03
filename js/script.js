@@ -1,5 +1,3 @@
-// Sandleflix JavaScript Functionality
-
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", function () {
   // Load movie data from JSON file
@@ -23,8 +21,7 @@ let moviesData = [];
 
 // Load movie data from JSON file
 function loadMovieData() {
-  // Se index.html está na raiz do projeto, use este caminho:
-  fetch("data/adam_sandler_filmes.json")
+  fetch("../data/adam_sandler_filmes.json")
     .then((response) => response.json())
     .then((data) => {
       moviesData = data.filmes;
@@ -37,7 +34,6 @@ function loadMovieData() {
     });
 }
 
-// Use placeholder data if JSON fetch fails
 function usePlaceholderData() {
   moviesData = [
     {
@@ -70,6 +66,7 @@ function usePlaceholderData() {
 // Initialize header scroll effect
 function initHeaderScroll() {
   const header = document.querySelector(".header");
+  if (!header) return;
 
   window.addEventListener("scroll", function () {
     if (window.scrollY > 50) {
@@ -80,11 +77,8 @@ function initHeaderScroll() {
   });
 }
 
-// Populate carousels with movie data
+// Populate carousels with movie data (attaches listeners aos itens existentes no HTML)
 function populateCarousels() {
-  // Neste momento os itens vêm do HTML mesmo
-
-  // Add click event to all carousel items
   const carouselItems = document.querySelectorAll(".carousel-item");
 
   carouselItems.forEach((item) => {
@@ -99,22 +93,18 @@ function populateCarousels() {
 function initMovieModal() {
   const modal = document.getElementById("movie-modal");
   if (!modal) return;
-
   const closeBtn = modal.querySelector(".modal-close");
 
-  // Close modal when clicking the close button
   closeBtn?.addEventListener("click", function () {
     closeMovieModal();
   });
 
-  // Close modal when clicking outside the content
   modal.addEventListener("click", function (e) {
     if (e.target === modal) {
       closeMovieModal();
     }
   });
 
-  // Close modal with Escape key
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && modal.classList.contains("active")) {
       closeMovieModal();
@@ -122,11 +112,9 @@ function initMovieModal() {
   });
 }
 
-// Open movie modal with specific movie data
 function openMovieModal(movieId) {
   const modal = document.getElementById("movie-modal");
   if (!modal) return;
-
   const movieData = getMovieById(movieId);
 
   if (movieData) {
@@ -139,22 +127,19 @@ function openMovieModal(movieId) {
     modal.querySelector(".modal-role span").textContent = movieData.papel;
 
     modal.classList.add("active");
-    document.body.style.overflow = "hidden"; // Prevent scrolling
+    document.body.style.overflow = "hidden";
   }
 }
 
-// Close movie modal
 function closeMovieModal() {
   const modal = document.getElementById("movie-modal");
   if (!modal) return;
-
   modal.classList.remove("active");
-  document.body.style.overflow = ""; // Restore scrolling
+  document.body.style.overflow = "";
 }
 
-// Get movie data by ID
 function getMovieById(id) {
-  // TODO: integrar com moviesData
+  // TODO: linkar com moviesData se quiseres.
   return {
     titulo: "Uncut Gems",
     ano: 2019,
@@ -169,7 +154,6 @@ function getMovieById(id) {
 function initMobileMenu() {
   const menuBtn = document.querySelector(".mobile-menu-btn");
   const mainNav = document.querySelector(".main-nav");
-
   menuBtn?.addEventListener("click", function () {
     mainNav?.classList.toggle("active");
   });
