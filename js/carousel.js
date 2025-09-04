@@ -1,9 +1,10 @@
-// carousel.js - Implementação do carrossel para Sandlerflix (CORRIGIDO)
+// carousel.js - Implementação do carrossel com carregamento otimizado de imagens
 class Carousel {
   constructor(carouselElement) {
     this.carousel = carouselElement;
     this.container = carouselElement.querySelector(".carousel-container");
     this.items = Array.from(carouselElement.querySelectorAll(".carousel-item"));
+    this.images = Array.from(carouselElement.querySelectorAll(".carousel-img"));
     this.controls = {
       left: carouselElement.querySelector(".carousel-control.left"),
       right: carouselElement.querySelector(".carousel-control.right"),
@@ -12,8 +13,9 @@ class Carousel {
     this.currentPosition = 0;
     this.itemWidth = 0;
     this.visibleItems = 6;
-    this.itemsToScroll = 3; // Número de itens para scrollar por vez
+    this.itemsToScroll = 3;
     this.isAnimating = false;
+    this.observer = null;
 
     this.init();
   }
@@ -22,16 +24,22 @@ class Carousel {
     // Calcular a largura dos itens
     this.calculateDimensions();
 
+    // Configurar o Intersection Observer para carregamento de imagens
+    this.setupImageLoading();
+
     // Adicionar event listeners
     this.addEventListeners();
 
     // Atualizar controles
     this.updateControls();
 
+    // Carregar imagens visíveis inicialmente
+    this.loadVisibleImages();
+
     // Adicionar observador de redimensionamento
     window.addEventListener("resize", () => {
       this.calculateDimensions();
-      this.updatePosition(true); // Reposicionar sem animação no resize
+      this.updatePosition(true);
     });
   }
 
@@ -61,10 +69,78 @@ class Carousel {
     const containerStyle = getComputedStyle(this.container);
     const gap = parseInt(containerStyle.gap) || 8;
 
-    // Usar o primeiro item para calcular a largura
     if (this.items[0]) {
       this.itemWidth = this.items[0].offsetWidth + gap;
     }
+  }
+
+  setupImageLoading() {
+    // Configurar Intersection Observer para carregar imagens quando ficarem visíveis
+    const options = {
+      root: this.container,
+      rootMargin: "100px", // Carregar imagens que estão próximas da área visível
+      threshold: 0.01,
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          this.loadImage(img);
+          this.observer.unobserve(img); // Parar de observar após o carregamento
+        }
+      });
+    }, options);
+
+    // Observar todas as imagens
+    this.images.forEach((img) => {
+      // Se a imagem já tem um src, marcar como carregada
+      if (img.src && img.complete) {
+        img.classList.add("loaded");
+      } else {
+        this.observer.observe(img);
+      }
+    });
+  }
+
+  loadImage(img) {
+    // Se a imagem já está carregada, não fazer nada
+    if (img.classList.contains("loaded") || img.src) return;
+
+    // Obter o src do data-src se existir, ou usar o src atual
+    const src = img.getAttribute("data-src") || img.getAttribute("src");
+
+    if (!src) return;
+
+    // Criar uma nova imagem para pré-carregamento
+    const tempImg = new Image();
+    tempImg.onload = () => {
+      // Quando carregar, aplicar à imagem real
+      img.src = src;
+      img.classList.add("loaded");
+    };
+
+    tempImg.onerror = () => {
+      console.error("Erro ao carregar imagem:", src);
+    };
+
+    tempImg.src = src;
+  }
+
+  loadVisibleImages() {
+    // Carregar imediatamente as imagens visíveis
+    this.images.forEach((img) => {
+      const rect = img.getBoundingClientRect();
+      const containerRect = this.container.getBoundingClientRect();
+
+      // Verificar se a imagem está visível ou próxima da área visível
+      if (
+        rect.right >= containerRect.left - 200 &&
+        rect.left <= containerRect.right + 200
+      ) {
+        this.loadImage(img);
+      }
+    });
   }
 
   addEventListeners() {
@@ -120,22 +196,26 @@ class Carousel {
           this.scrollLeft();
         }
       }
+
+      // Após swipe, carregar imagens que agora estão visíveis
+      setTimeout(() => this.loadVisibleImages(), 100);
     });
   }
 
   scrollLeft() {
     if (this.isAnimating) return;
 
-    // Calcular a nova posição
     const scrollDistance = this.itemsToScroll * this.itemWidth;
     this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
     this.updatePosition();
+
+    // Após a animação, carregar imagens que agora estão visíveis
+    setTimeout(() => this.loadVisibleImages(), 500);
   }
 
   scrollRight() {
     if (this.isAnimating) return;
 
-    // Calcular a nova posição
     const scrollDistance = this.itemsToScroll * this.itemWidth;
     const containerWidth = this.container.offsetWidth;
     const totalContentWidth = this.items.length * this.itemWidth;
@@ -146,6 +226,9 @@ class Carousel {
       maxScroll
     );
     this.updatePosition();
+
+    // Após a animação, carregar imagens que agora estão visíveis
+    setTimeout(() => this.loadVisibleImages(), 500);
   }
 
   updatePosition(instant = false) {
@@ -155,7 +238,6 @@ class Carousel {
       this.container.style.transition = "transform 0.5s ease-in-out";
       this.isAnimating = true;
 
-      // Resetar flag quando a animação terminar
       setTimeout(() => {
         this.isAnimating = false;
       }, 500);
@@ -171,19 +253,17 @@ class Carousel {
     const maxScroll = -(totalContentWidth - containerWidth);
 
     if (this.controls.left) {
-      if (this.currentPosition >= 0) {
-        this.controls.left.classList.add("disabled");
-      } else {
-        this.controls.left.classList.remove("disabled");
-      }
+      this.controls.left.classList.toggle(
+        "disabled",
+        this.currentPosition >= 0
+      );
     }
 
     if (this.controls.right) {
-      if (this.currentPosition <= maxScroll) {
-        this.controls.right.classList.add("disabled");
-      } else {
-        this.controls.right.classList.remove("disabled");
-      }
+      this.controls.right.classList.toggle(
+        "disabled",
+        this.currentPosition <= maxScroll
+      );
     }
   }
 }
@@ -197,5 +277,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Exportar a classe para uso em outros módulos, se necessário
 export default Carousel;

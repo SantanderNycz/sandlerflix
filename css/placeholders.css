@@ -61,6 +61,35 @@
   opacity: 1;
 }
 
+/* Estilos para o carregamento de imagens */
+.carousel-img {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-img.loaded {
+  opacity: 1;
+}
+
+/* Placeholder enquanto a imagem carrega */
+.carousel-img:not([src]) {
+  background: linear-gradient(45deg, #333, #555, #333);
+  background-size: 200% 200%;
+  animation: gradientShift 2s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* Placeholder para imagem de hero */
 .hero {
   background-color: #111 !important;
