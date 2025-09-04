@@ -106,6 +106,33 @@ class Carousel {
       }
     });
 
+    // Manter setas visíveis quando o mouse estiver sobre elas
+    this.controls.left.addEventListener("mouseenter", () => {
+      this.controls.left.style.opacity = "0.9";
+    });
+
+    this.controls.left.addEventListener("mouseleave", () => {
+      if (!this.carousel.matches(":hover")) {
+        this.controls.left.style.opacity = "0";
+      }
+    });
+
+    this.controls.right.addEventListener("mouseenter", () => {
+      this.controls.right.style.opacity = "0.9";
+    });
+
+    this.controls.right.addEventListener("mouseleave", () => {
+      if (!this.carousel.matches(":hover")) {
+        this.controls.right.style.opacity = "0";
+      }
+    });
+
+    // Manter setas visíveis em dispositivos touch
+    if ("ontouchstart" in window) {
+      this.controls.left.style.opacity = "0.7";
+      this.controls.right.style.opacity = "0.7";
+    }
+
     // Swipe para dispositivos móveis
     this.enableSwipe();
   }
