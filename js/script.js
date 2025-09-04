@@ -18,9 +18,9 @@ const initMobileMenu = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  initCarousels();
   loadMovieData();
   initHeaderScroll();
-  initCarousels();
   initMovieModal();
   initMobileMenu();
 });
