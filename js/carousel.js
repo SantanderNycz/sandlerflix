@@ -1,4 +1,4 @@
-// carousel.js - Implementação simplificada com carregamento de imagens
+// carousel.js - Implementação simplificada e funcional
 class Carousel {
   constructor(carouselElement) {
     this.carousel = carouselElement;
@@ -12,6 +12,7 @@ class Carousel {
 
     this.currentPosition = 0;
     this.itemWidth = 0;
+    this.gap = 8;
     this.visibleItems = 6;
     this.itemsToScroll = 3;
     this.isAnimating = false;
@@ -29,8 +30,8 @@ class Carousel {
     // Atualizar controles
     this.updateControls();
 
-    // Carregar imagens visíveis
-    this.loadVisibleImages();
+    // Forçar o carregamento de todas as imagens
+    this.loadAllImages();
 
     // Adicionar observador de redimensionamento
     window.addEventListener("resize", () => {
@@ -61,55 +62,29 @@ class Carousel {
       this.itemsToScroll = 3;
     }
 
-    // Calcular a largura de um item (incluindo gap)
-    const containerStyle = getComputedStyle(this.container);
-    const gap = parseInt(containerStyle.gap) || 8;
-
+    // Calcular a largura de um item
     if (this.items[0]) {
-      this.itemWidth = this.items[0].offsetWidth + gap;
+      this.itemWidth = this.items[0].offsetWidth;
     }
   }
 
-  loadVisibleImages() {
-    // Esta função será chamada sempre que o carrossel se mover
-    const containerRect = this.container.getBoundingClientRect();
-
+  loadAllImages() {
+    // Solução direta: carregar TODAS as imagens
     this.images.forEach((img) => {
-      const imgRect = img.getBoundingClientRect();
-
-      // Verificar se a imagem está visível ou próxima
-      const isVisible =
-        imgRect.right >= containerRect.left - 300 &&
-        imgRect.left <= containerRect.right + 300;
-
-      if (isVisible && !img.classList.contains("loaded")) {
-        this.loadImage(img);
+      const realSrc = img.getAttribute("data-src") || img.getAttribute("src");
+      if (realSrc && !img.classList.contains("loaded")) {
+        // Usar Image object para pré-carregamento
+        const newImg = new Image();
+        newImg.onload = () => {
+          img.src = realSrc;
+          img.classList.add("loaded");
+        };
+        newImg.onerror = () => {
+          console.error("Erro ao carregar imagem:", realSrc);
+        };
+        newImg.src = realSrc;
       }
     });
-  }
-
-  loadImage(img) {
-    // Se a imagem já está carregada, não fazer nada
-    if (img.classList.contains("loaded")) return;
-
-    // Obter o src real do data-src se existir
-    const realSrc = img.getAttribute("data-src") || img.getAttribute("src");
-
-    if (!realSrc) return;
-
-    // Criar uma nova imagem para pré-carregamento
-    const newImg = new Image();
-    newImg.onload = () => {
-      // Quando carregar, aplicar à imagem real
-      img.src = realSrc;
-      img.classList.add("loaded");
-    };
-
-    newImg.onerror = () => {
-      console.error("Erro ao carregar imagem:", realSrc);
-    };
-
-    newImg.src = realSrc;
   }
 
   addEventListeners() {
@@ -171,7 +146,7 @@ class Carousel {
   scrollLeft() {
     if (this.isAnimating) return;
 
-    const scrollDistance = this.itemsToScroll * this.itemWidth;
+    const scrollDistance = this.itemsToScroll * (this.itemWidth + this.gap);
     this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
     this.updatePosition();
   }
@@ -179,9 +154,9 @@ class Carousel {
   scrollRight() {
     if (this.isAnimating) return;
 
-    const scrollDistance = this.itemsToScroll * this.itemWidth;
+    const scrollDistance = this.itemsToScroll * (this.itemWidth + this.gap);
     const containerWidth = this.container.offsetWidth;
-    const totalContentWidth = this.items.length * this.itemWidth;
+    const totalContentWidth = this.items.length * (this.itemWidth + this.gap);
     const maxScroll = -(totalContentWidth - containerWidth);
 
     this.currentPosition = Math.max(
@@ -198,25 +173,18 @@ class Carousel {
       this.container.style.transition = "transform 0.5s ease-in-out";
       this.isAnimating = true;
 
-      // Quando a animação terminar, carregar imagens visíveis
       setTimeout(() => {
         this.isAnimating = false;
-        this.loadVisibleImages();
       }, 500);
     }
 
     this.container.style.transform = `translateX(${this.currentPosition}px)`;
     this.updateControls();
-
-    // Carregar imagens visíveis imediatamente também
-    if (!instant) {
-      setTimeout(() => this.loadVisibleImages(), 100);
-    }
   }
 
   updateControls() {
     const containerWidth = this.container.offsetWidth;
-    const totalContentWidth = this.items.length * this.itemWidth;
+    const totalContentWidth = this.items.length * (this.itemWidth + this.gap);
     const maxScroll = -(totalContentWidth - containerWidth);
 
     if (this.controls.left) {
@@ -243,39 +211,16 @@ document.addEventListener("DOMContentLoaded", () => {
     new Carousel(carousel);
   });
 
-  // Carregar imagens visíveis após um pequeno delay
+  // Forçar carregamento de todas as imagens após um pequeno delay
   setTimeout(() => {
-    carousels.forEach((carousel) => {
-      const instance = new Carousel(carousel);
-      instance.loadVisibleImages();
-    });
-  }, 500);
-});
-
-// Função auxiliar para forçar o carregamento de todas as imagens se necessário
-function loadAllCarouselImages() {
-  document.querySelectorAll(".carousel img").forEach((img) => {
-    const realSrc = img.getAttribute("data-src") || img.getAttribute("src");
-    if (realSrc && !img.classList.contains("loaded")) {
-      img.src = realSrc;
-      img.classList.add("loaded");
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  // Solução direta: carregar todas as imagens após um delay
-  setTimeout(() => {
-    const allImages = document.querySelectorAll(".carousel img");
-    allImages.forEach((img) => {
+    document.querySelectorAll(".carousel img").forEach((img) => {
       const realSrc = img.getAttribute("data-src") || img.getAttribute("src");
       if (realSrc && !img.classList.contains("loaded")) {
         img.src = realSrc;
         img.classList.add("loaded");
       }
     });
-  }, 1000);
+  }, 500);
 });
 
-// Exportar a classe para uso em outros módulos
 export default Carousel;
