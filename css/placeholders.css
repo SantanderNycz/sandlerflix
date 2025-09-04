@@ -64,7 +64,8 @@
 /* Estilos para o carregamento de imagens */
 .carousel-img {
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
+  min-height: 150px; /* Altura mínima para evitar layout shift */
 }
 
 .carousel-img.loaded {
@@ -72,10 +73,16 @@
 }
 
 /* Placeholder enquanto a imagem carrega */
-.carousel-img:not([src]) {
-  background: linear-gradient(45deg, #333, #555, #333);
+.carousel-img:not([src]),
+.carousel-img[src=""] {
+  background: linear-gradient(45deg, #2a2a2a, #3a3a3a, #2a2a2a);
   background-size: 200% 200%;
   animation: gradientShift 2s ease infinite;
+}
+
+.carousel-item {
+  overflow: hidden;
+  position: relative;
 }
 
 @keyframes gradientShift {

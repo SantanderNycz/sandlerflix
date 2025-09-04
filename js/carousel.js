@@ -1,10 +1,10 @@
-// carousel.js - Implementação do carrossel com carregamento otimizado de imagens
+// carousel.js - Implementação simplificada com carregamento de imagens
 class Carousel {
   constructor(carouselElement) {
     this.carousel = carouselElement;
     this.container = carouselElement.querySelector(".carousel-container");
     this.items = Array.from(carouselElement.querySelectorAll(".carousel-item"));
-    this.images = Array.from(carouselElement.querySelectorAll(".carousel-img"));
+    this.images = Array.from(carouselElement.querySelectorAll("img"));
     this.controls = {
       left: carouselElement.querySelector(".carousel-control.left"),
       right: carouselElement.querySelector(".carousel-control.right"),
@@ -15,7 +15,6 @@ class Carousel {
     this.visibleItems = 6;
     this.itemsToScroll = 3;
     this.isAnimating = false;
-    this.observer = null;
 
     this.init();
   }
@@ -24,16 +23,13 @@ class Carousel {
     // Calcular a largura dos itens
     this.calculateDimensions();
 
-    // Configurar o Intersection Observer para carregamento de imagens
-    this.setupImageLoading();
-
     // Adicionar event listeners
     this.addEventListeners();
 
     // Atualizar controles
     this.updateControls();
 
-    // Carregar imagens visíveis inicialmente
+    // Carregar imagens visíveis
     this.loadVisibleImages();
 
     // Adicionar observador de redimensionamento
@@ -74,73 +70,46 @@ class Carousel {
     }
   }
 
-  setupImageLoading() {
-    // Configurar Intersection Observer para carregar imagens quando ficarem visíveis
-    const options = {
-      root: this.container,
-      rootMargin: "100px", // Carregar imagens que estão próximas da área visível
-      threshold: 0.01,
-    };
+  loadVisibleImages() {
+    // Esta função será chamada sempre que o carrossel se mover
+    const containerRect = this.container.getBoundingClientRect();
 
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          this.loadImage(img);
-          this.observer.unobserve(img); // Parar de observar após o carregamento
-        }
-      });
-    }, options);
-
-    // Observar todas as imagens
     this.images.forEach((img) => {
-      // Se a imagem já tem um src, marcar como carregada
-      if (img.src && img.complete) {
-        img.classList.add("loaded");
-      } else {
-        this.observer.observe(img);
+      const imgRect = img.getBoundingClientRect();
+
+      // Verificar se a imagem está visível ou próxima
+      const isVisible =
+        imgRect.right >= containerRect.left - 300 &&
+        imgRect.left <= containerRect.right + 300;
+
+      if (isVisible && !img.classList.contains("loaded")) {
+        this.loadImage(img);
       }
     });
   }
 
   loadImage(img) {
     // Se a imagem já está carregada, não fazer nada
-    if (img.classList.contains("loaded") || img.src) return;
+    if (img.classList.contains("loaded")) return;
 
-    // Obter o src do data-src se existir, ou usar o src atual
-    const src = img.getAttribute("data-src") || img.getAttribute("src");
+    // Obter o src real do data-src se existir
+    const realSrc = img.getAttribute("data-src") || img.getAttribute("src");
 
-    if (!src) return;
+    if (!realSrc) return;
 
     // Criar uma nova imagem para pré-carregamento
-    const tempImg = new Image();
-    tempImg.onload = () => {
+    const newImg = new Image();
+    newImg.onload = () => {
       // Quando carregar, aplicar à imagem real
-      img.src = src;
+      img.src = realSrc;
       img.classList.add("loaded");
     };
 
-    tempImg.onerror = () => {
-      console.error("Erro ao carregar imagem:", src);
+    newImg.onerror = () => {
+      console.error("Erro ao carregar imagem:", realSrc);
     };
 
-    tempImg.src = src;
-  }
-
-  loadVisibleImages() {
-    // Carregar imediatamente as imagens visíveis
-    this.images.forEach((img) => {
-      const rect = img.getBoundingClientRect();
-      const containerRect = this.container.getBoundingClientRect();
-
-      // Verificar se a imagem está visível ou próxima da área visível
-      if (
-        rect.right >= containerRect.left - 200 &&
-        rect.left <= containerRect.right + 200
-      ) {
-        this.loadImage(img);
-      }
-    });
+    newImg.src = realSrc;
   }
 
   addEventListeners() {
@@ -196,9 +165,6 @@ class Carousel {
           this.scrollLeft();
         }
       }
-
-      // Após swipe, carregar imagens que agora estão visíveis
-      setTimeout(() => this.loadVisibleImages(), 100);
     });
   }
 
@@ -208,9 +174,6 @@ class Carousel {
     const scrollDistance = this.itemsToScroll * this.itemWidth;
     this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
     this.updatePosition();
-
-    // Após a animação, carregar imagens que agora estão visíveis
-    setTimeout(() => this.loadVisibleImages(), 500);
   }
 
   scrollRight() {
@@ -226,9 +189,6 @@ class Carousel {
       maxScroll
     );
     this.updatePosition();
-
-    // Após a animação, carregar imagens que agora estão visíveis
-    setTimeout(() => this.loadVisibleImages(), 500);
   }
 
   updatePosition(instant = false) {
@@ -238,13 +198,20 @@ class Carousel {
       this.container.style.transition = "transform 0.5s ease-in-out";
       this.isAnimating = true;
 
+      // Quando a animação terminar, carregar imagens visíveis
       setTimeout(() => {
         this.isAnimating = false;
+        this.loadVisibleImages();
       }, 500);
     }
 
     this.container.style.transform = `translateX(${this.currentPosition}px)`;
     this.updateControls();
+
+    // Carregar imagens visíveis imediatamente também
+    if (!instant) {
+      setTimeout(() => this.loadVisibleImages(), 100);
+    }
   }
 
   updateControls() {
@@ -275,6 +242,26 @@ document.addEventListener("DOMContentLoaded", () => {
   carousels.forEach((carousel) => {
     new Carousel(carousel);
   });
+
+  // Carregar imagens visíveis após um pequeno delay
+  setTimeout(() => {
+    carousels.forEach((carousel) => {
+      const instance = new Carousel(carousel);
+      instance.loadVisibleImages();
+    });
+  }, 500);
 });
 
+// Função auxiliar para forçar o carregamento de todas as imagens se necessário
+function loadAllCarouselImages() {
+  document.querySelectorAll(".carousel img").forEach((img) => {
+    const realSrc = img.getAttribute("data-src") || img.getAttribute("src");
+    if (realSrc && !img.classList.contains("loaded")) {
+      img.src = realSrc;
+      img.classList.add("loaded");
+    }
+  });
+}
+
+// Exportar a classe para uso em outros módulos
 export default Carousel;
