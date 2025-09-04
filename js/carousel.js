@@ -4,7 +4,6 @@ class Carousel {
     this.carousel = carouselElement;
     this.container = carouselElement.querySelector(".carousel-container");
     this.items = Array.from(carouselElement.querySelectorAll(".carousel-item"));
-    this.images = Array.from(carouselElement.querySelectorAll("img"));
     this.controls = {
       left: carouselElement.querySelector(".carousel-control.left"),
       right: carouselElement.querySelector(".carousel-control.right"),
@@ -30,55 +29,11 @@ class Carousel {
     // Atualizar controles
     this.updateControls();
 
-    // Forçar o carregamento de todas as imagens
-    this.loadAllImages();
-
     // Adicionar observador de redimensionamento
     window.addEventListener("resize", () => {
       this.calculateDimensions();
       this.updatePosition(true);
     });
-
-    // Ajustar máscara de gradiente dinamicamente
-    this.updateGradientMask();
-    window.addEventListener("resize", () => {
-      this.updateGradientMask();
-      this.updateArrowsWidth();
-    });
-  }
-
-  // Novo método para atualizar a máscara de gradiente
-  updateGradientMask() {
-    const screenWidth = window.innerWidth;
-    let gradientSize = 60; // tamanho base em pixels
-
-    if (screenWidth < 576) {
-      gradientSize = 20;
-    } else if (screenWidth < 768) {
-      gradientSize = 30;
-    } else if (screenWidth < 992) {
-      gradientSize = 40;
-    } else if (screenWidth < 1200) {
-      gradientSize = 50;
-    }
-
-    // Aplicar máscara de gradiente
-    this.carousel.style.maskImage = `linear-gradient(to right, transparent 0%, black ${gradientSize}px, black calc(100% - ${gradientSize}px), transparent 100%)`;
-    this.carousel.style.webkitMaskImage = `linear-gradient(to right, transparent 0%, black ${gradientSize}px, black calc(100% - ${gradientSize}px), transparent 100%)`;
-  }
-
-  // Método para verificar suporte a mask-image
-  hasMaskSupport() {
-    return (
-      CSS.supports(
-        "mask-image",
-        "linear-gradient(to right, transparent, black)"
-      ) ||
-      CSS.supports(
-        "-webkit-mask-image",
-        "linear-gradient(to right, transparent, black)"
-      )
-    );
   }
 
   calculateDimensions() {
@@ -109,25 +64,6 @@ class Carousel {
     }
   }
 
-  loadAllImages() {
-    // Solução direta: carregar TODAS as imagens
-    this.images.forEach((img) => {
-      const realSrc = img.getAttribute("data-src") || img.getAttribute("src");
-      if (realSrc && !img.classList.contains("loaded")) {
-        // Usar Image object para pré-carregamento
-        const newImg = new Image();
-        newImg.onload = () => {
-          img.src = realSrc;
-          img.classList.add("loaded");
-        };
-        newImg.onerror = () => {
-          console.error("Erro ao carregar imagem:", realSrc);
-        };
-        newImg.src = realSrc;
-      }
-    });
-  }
-
   addEventListeners() {
     // Controles de navegação
     if (this.controls.left) {
@@ -136,42 +72,6 @@ class Carousel {
 
     if (this.controls.right) {
       this.controls.right.addEventListener("click", () => this.scrollRight());
-    }
-
-    // Navegação por teclado
-    this.carousel.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") {
-        this.scrollLeft();
-      } else if (e.key === "ArrowRight") {
-        this.scrollRight();
-      }
-    });
-
-    // Manter setas visíveis quando o mouse estiver sobre elas
-    this.controls.left.addEventListener("mouseenter", () => {
-      this.controls.left.style.opacity = "0.9";
-    });
-
-    this.controls.left.addEventListener("mouseleave", () => {
-      if (!this.carousel.matches(":hover")) {
-        this.controls.left.style.opacity = "0";
-      }
-    });
-
-    this.controls.right.addEventListener("mouseenter", () => {
-      this.controls.right.style.opacity = "0.9";
-    });
-
-    this.controls.right.addEventListener("mouseleave", () => {
-      if (!this.carousel.matches(":hover")) {
-        this.controls.right.style.opacity = "0";
-      }
-    });
-
-    // Manter setas visíveis em dispositivos touch
-    if ("ontouchstart" in window) {
-      this.controls.left.style.opacity = "0.7";
-      this.controls.right.style.opacity = "0.7";
     }
 
     // Swipe para dispositivos móveis
@@ -278,17 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
   carousels.forEach((carousel) => {
     new Carousel(carousel);
   });
-
-  // Forçar carregamento de todas as imagens após um pequeno delay
-  setTimeout(() => {
-    document.querySelectorAll(".carousel img").forEach((img) => {
-      const realSrc = img.getAttribute("data-src") || img.getAttribute("src");
-      if (realSrc && !img.classList.contains("loaded")) {
-        img.src = realSrc;
-        img.classList.add("loaded");
-      }
-    });
-  }, 500);
 });
 
 export default Carousel;
