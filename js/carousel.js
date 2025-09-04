@@ -1,4 +1,4 @@
-// carousel.js - Implementação do carrossel para Sandlerflix
+// carousel.js - Implementação do carrossel para Sandlerflix (CORRIGIDO)
 class Carousel {
   constructor(carouselElement) {
     this.carousel = carouselElement;
@@ -11,8 +11,9 @@ class Carousel {
 
     this.currentPosition = 0;
     this.itemWidth = 0;
-    this.visibleItems = 9;
-    this.scrollAmount = 0;
+    this.visibleItems = 6;
+    this.itemsToScroll = 3; // Número de itens para scrollar por vez
+    this.isAnimating = false;
 
     this.init();
   }
@@ -30,7 +31,7 @@ class Carousel {
     // Adicionar observador de redimensionamento
     window.addEventListener("resize", () => {
       this.calculateDimensions();
-      this.updatePosition();
+      this.updatePosition(true); // Reposicionar sem animação no resize
     });
   }
 
@@ -41,23 +42,29 @@ class Carousel {
     const screenWidth = window.innerWidth;
     if (screenWidth < 576) {
       this.visibleItems = 2;
+      this.itemsToScroll = 1;
     } else if (screenWidth < 768) {
       this.visibleItems = 3;
+      this.itemsToScroll = 1;
     } else if (screenWidth < 992) {
       this.visibleItems = 4;
+      this.itemsToScroll = 2;
     } else if (screenWidth < 1200) {
       this.visibleItems = 5;
+      this.itemsToScroll = 2;
     } else {
       this.visibleItems = 6;
+      this.itemsToScroll = 3;
     }
 
     // Calcular a largura de um item (incluindo gap)
     const containerStyle = getComputedStyle(this.container);
     const gap = parseInt(containerStyle.gap) || 8;
-    this.itemWidth = this.items[0].offsetWidth + gap;
 
-    // Quanto scrollar por vez (metade dos itens visíveis)
-    this.scrollAmount = Math.floor(this.visibleItems / 2) * this.itemWidth;
+    // Usar o primeiro item para calcular a largura
+    if (this.items[0]) {
+      this.itemWidth = this.items[0].offsetWidth + gap;
+    }
   }
 
   addEventListeners() {
@@ -117,35 +124,51 @@ class Carousel {
   }
 
   scrollLeft() {
-    this.currentPosition = Math.min(
-      this.currentPosition + this.scrollAmount,
-      0
-    );
+    if (this.isAnimating) return;
+
+    // Calcular a nova posição
+    const scrollDistance = this.itemsToScroll * this.itemWidth;
+    this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
     this.updatePosition();
   }
 
   scrollRight() {
-    const maxScroll = -(
-      this.itemWidth *
-      (this.items.length - this.visibleItems)
-    );
+    if (this.isAnimating) return;
+
+    // Calcular a nova posição
+    const scrollDistance = this.itemsToScroll * this.itemWidth;
+    const containerWidth = this.container.offsetWidth;
+    const totalContentWidth = this.items.length * this.itemWidth;
+    const maxScroll = -(totalContentWidth - containerWidth);
+
     this.currentPosition = Math.max(
-      this.currentPosition - this.scrollAmount,
+      this.currentPosition - scrollDistance,
       maxScroll
     );
     this.updatePosition();
   }
 
-  updatePosition() {
+  updatePosition(instant = false) {
+    if (instant) {
+      this.container.style.transition = "none";
+    } else {
+      this.container.style.transition = "transform 0.5s ease-in-out";
+      this.isAnimating = true;
+
+      // Resetar flag quando a animação terminar
+      setTimeout(() => {
+        this.isAnimating = false;
+      }, 500);
+    }
+
     this.container.style.transform = `translateX(${this.currentPosition}px)`;
     this.updateControls();
   }
 
   updateControls() {
-    const maxScroll = -(
-      this.itemWidth *
-      (this.items.length - this.visibleItems)
-    );
+    const containerWidth = this.container.offsetWidth;
+    const totalContentWidth = this.items.length * this.itemWidth;
+    const maxScroll = -(totalContentWidth - containerWidth);
 
     if (this.controls.left) {
       if (this.currentPosition >= 0) {
