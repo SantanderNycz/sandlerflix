@@ -11,7 +11,7 @@ class Carousel {
 
     this.currentPosition = 0;
     this.itemWidth = 0;
-    this.visibleItems = 6;
+    this.visibleItems = 9;
     this.scrollAmount = 0;
 
     this.init();
