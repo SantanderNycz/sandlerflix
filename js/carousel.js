@@ -38,6 +38,47 @@ class Carousel {
       this.calculateDimensions();
       this.updatePosition(true);
     });
+
+    // Ajustar máscara de gradiente dinamicamente
+    this.updateGradientMask();
+    window.addEventListener("resize", () => {
+      this.updateGradientMask();
+      this.updateArrowsWidth();
+    });
+  }
+
+  // Novo método para atualizar a máscara de gradiente
+  updateGradientMask() {
+    const screenWidth = window.innerWidth;
+    let gradientSize = 60; // tamanho base em pixels
+
+    if (screenWidth < 576) {
+      gradientSize = 20;
+    } else if (screenWidth < 768) {
+      gradientSize = 30;
+    } else if (screenWidth < 992) {
+      gradientSize = 40;
+    } else if (screenWidth < 1200) {
+      gradientSize = 50;
+    }
+
+    // Aplicar máscara de gradiente
+    this.carousel.style.maskImage = `linear-gradient(to right, transparent 0%, black ${gradientSize}px, black calc(100% - ${gradientSize}px), transparent 100%)`;
+    this.carousel.style.webkitMaskImage = `linear-gradient(to right, transparent 0%, black ${gradientSize}px, black calc(100% - ${gradientSize}px), transparent 100%)`;
+  }
+
+  // Método para verificar suporte a mask-image
+  hasMaskSupport() {
+    return (
+      CSS.supports(
+        "mask-image",
+        "linear-gradient(to right, transparent, black)"
+      ) ||
+      CSS.supports(
+        "-webkit-mask-image",
+        "linear-gradient(to right, transparent, black)"
+      )
+    );
   }
 
   calculateDimensions() {
