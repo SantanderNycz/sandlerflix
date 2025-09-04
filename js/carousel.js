@@ -263,5 +263,19 @@ function loadAllCarouselImages() {
   });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  // Solução direta: carregar todas as imagens após um delay
+  setTimeout(() => {
+    const allImages = document.querySelectorAll(".carousel img");
+    allImages.forEach((img) => {
+      const realSrc = img.getAttribute("data-src") || img.getAttribute("src");
+      if (realSrc && !img.classList.contains("loaded")) {
+        img.src = realSrc;
+        img.classList.add("loaded");
+      }
+    });
+  }, 1000);
+});
+
 // Exportar a classe para uso em outros módulos
 export default Carousel;
