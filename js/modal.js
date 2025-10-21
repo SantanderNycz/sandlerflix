@@ -1,5 +1,5 @@
 // modal.js
-import { filmesData } from "./filmesData.js"; // Se você tiver um arquivo separado com o JSON
+import { filmesData } from "./script.js"; // Se você tiver um arquivo separado com o JSON
 
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("movie-modal");

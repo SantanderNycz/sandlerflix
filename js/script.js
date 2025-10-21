@@ -1,5 +1,5 @@
 // ========== DADOS DOS FILMES ==========
-const filmesData = [
+export const filmesData = [
   {
     id: 1,
     title: "Como Se Fosse a Primeira Vez",
