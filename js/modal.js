@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("movie-modal");
     if (!modal) return;
 
-    // Aqui você pode adicionar a lógica para carregar os dados do filme com base no movieId
-
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
   }
