@@ -587,6 +587,32 @@ export const filmesData = [
     rating: "3.2",
     duration: "1h 32m",
   },
+  {
+    id: 43,
+    title: "Golpe Baixo",
+    year: "2005",
+    genres: "Comédia, Drama",
+    description:
+      "Paul Crewe é um ex-astro do futebol americano que acaba sendo detido dirigindo bêbado e vai para a penitenciária de Allenville, uma das mais duras do país. Lá, Paul é encarregado pelo diretor do presídio de montar uma equipe de prisioneiros para disputar uma partida contra os guardas da instituição. Paul convoca um comerciante malandro para recrutar os melhores detentos, aos quais é prometida uma possibilidade de vingança em um confronto em que vale tudo.",
+    role: "Paul Crewe",
+    image: "assets/golpe baixo.jpg",
+    banner: "assets/golpe baixo.jpg",
+    rating: "4.2",
+    duration: "1h 53m",
+  },
+  {
+    id: 44,
+    title: "Mistério no Mediterrâneo 2",
+    year: "2023",
+    genres: "Comédia, Mistério",
+    description:
+      "Depois de abrir uma agência de investigação, Nick e Audrey Spitz finalmente conseguem um caso importante: um amigo bilionário é sequestrado no dia de seu casamento.",
+    role: "Nick Spitz",
+    image: "assets/misterio no mediterraneo 2.jpg",
+    banner: "assets/misterio no mediterraneo 2.jpg",
+    rating: "4.0",
+    duration: "1h 30m",
+  },
 ];
 
 // ========== SISTEMA DE MODAL ==========
