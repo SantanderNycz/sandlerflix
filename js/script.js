@@ -89,7 +89,7 @@ export const filmesData = [
       "Um agente secreto israelense finge a própria morte para realizar seu sonho de se tornar cabeleireiro em Nova York, mas continua envolvido em confusões internacionais.",
     role: "Zohan Dvir",
     image: "assets/zohan.jpg",
-    banner: "assets/zohan-banner.jpg",
+    banner: "assets/zohan.jpg",
     rating: "4.0",
     duration: "1h 53m",
   },
@@ -114,8 +114,8 @@ export const filmesData = [
     description:
       "Jack é um executivo de publicidade bem-sucedido que vive em Los Angeles com sua esposa e filhos. Todo ano ele teme a visita de sua irmã gêmea Jill, que sempre causa problemas.",
     role: "Jack & Jill Sadelstein",
-    image: "assets/jack_and_jill.jpg",
-    banner: "assets/jack_and_jill-banner.jpg",
+    image: "assets/gemea.jpg",
+    banner: "assets/gemea.jpg",
     rating: "3.9",
     duration: "1h 38m",
   },
@@ -127,8 +127,8 @@ export const filmesData = [
     description:
       "O Hotel Transilvânia é um resort cinco estrelas onde monstros e suas famílias podem viver livremente sem humanos para incomodá-los. Um fim de semana especial reúne vários convidados famosos para comemorar o aniversário de 118 anos da filha de Drácula.",
     role: "Conde Drácula (voz)",
-    image: "assets/hotel_transilvania.jpg",
-    banner: "assets/hotel_transilvania-banner.jpg",
+    image: "assets/ht1.jpg",
+    banner: "assets/ht1.jpg",
     rating: "4.3",
     duration: "1h 31m",
   },
@@ -140,8 +140,8 @@ export const filmesData = [
     description:
       "Hubie Dubois, um cara que não é muito popular, mas mesmo sofrendo bullying e sendo medroso ele tem bom coração e busca ao máximo garantir a segurança de todos no Halloween em Salem.",
     role: "Hubie Dubois",
-    image: "assets/hubie-halloween.jpg",
-    banner: "assets/hubie-halloween-banner.jpg",
+    image: "assets/hubie.jpg",
+    banner: "assets/hubie.jpg",
     rating: "3.9",
     duration: "1h 42m",
   },
@@ -153,8 +153,8 @@ export const filmesData = [
     description:
       "Um policial de Nova York e sua esposa vão para a Europa para revitalizar o casamento, mas acabam sendo acusados do assassinato de um idoso bilionário e precisam fugir.",
     role: "Nick Spitz",
-    image: "assets/murder-mystery.jpg",
-    banner: "assets/murder-mystery-banner.jpg",
+    image: "assets/misterio no mediterraneo 1.jpg",
+    banner: "assets/misterio no mediterraneo 1.jpg",
     rating: "4.0",
     duration: "1h 37m",
   },
@@ -166,8 +166,8 @@ export const filmesData = [
     description:
       "Happy Gilmore está de volta para ajudar sua família mais uma vez, e superar seus traumas.",
     role: "Happy Gilmore",
-    image: "assets/happy_gilmore2.jpg",
-    banner: "assets/happy_gilmore2-banner.jpg",
+    image: "assets/um maluco no golfe 2.jpg",
+    banner: "assets/um maluco no golfe 2.jpg",
     rating: "4.0",
     duration: "1h 32m",
   },
@@ -180,7 +180,7 @@ export const filmesData = [
       "Um preguiçoso que cria um filho para impressionar sua namorada acaba se apegando à criança e aprendendo sobre responsabilidade.",
     role: "Sonny Koufax",
     image: "assets/bigddaddy.png",
-    banner: "assets/bigddaddy-banner.jpg",
+    banner: "assets/bigddaddy.jpg",
     rating: "4.0",
     duration: "1h 33m",
   },
@@ -192,8 +192,8 @@ export const filmesData = [
     description:
       "Seis irmãos separados no nascimento se reencontram e precisam lidar com trapaceiros e confusões em busca do tesouro de seu pai.",
     role: "Tommy 'White Knife'",
-    image: "assets/the-ridiculous-6.jpg",
-    banner: "assets/the-ridiculous-6-banner.jpg",
+    image: "assets/os 6 ridiculos.jpg",
+    banner: "assets/os 6 ridiculos.jpg",
     rating: "3.5",
     duration: "1h 50m",
   },
@@ -205,10 +205,23 @@ export const filmesData = [
     description:
       "Um agente de talentos excêntrico trabalha para promover artistas em Los Angeles, enquanto enfrenta problemas amorosos e profissionais.",
     role: "Sandy Wexler",
-    image: "assets/sandy-wexler.jpg",
-    banner: "assets/sandy-wexler-banner.jpg",
+    image: "assets/sandy 1.png",
+    banner: "assets/sandy 1.png",
     rating: "3.8",
     duration: "2h 14m",
+  },
+  {
+    id: 16,
+    title: "Esse É O Meu Garoto",
+    year: "2012",
+    genres: "Comédia",
+    description:
+      "Donny não vê o filho Todd há anos e resolve se mudar para a casa do jovem. O rapaz, prestes a se casar, tem que lidar com a presença do pai, que tenta reatar os laços familiares e acaba criando vários problemas com a noiva.",
+    role: "Donny Berger",
+    image: "assets/esse é o meu garoto.jpg",
+    banner: "assets/esse é o meu garoto.jpg",
+    rating: "2.6",
+    duration: "1h 56m",
   },
   {
     id: 18,
@@ -218,8 +231,8 @@ export const filmesData = [
     description:
       "O filho de Satanás precisa salvar o mundo quando seus irmãos escapam do inferno e causam caos na Terra.",
     role: "Nicky",
-    image: "assets/little-nicky.jpg",
-    banner: "assets/little-nicky-banner.jpg",
+    image: "assets/little nicky.jpg",
+    banner: "assets/little nicky.jpg",
     rating: "3.7",
     duration: "1h 31m",
   },
@@ -231,8 +244,8 @@ export const filmesData = [
     description:
       "Dois homens se tornam pais de uma criança e precisam aprender a viver juntos, enfrentando situações cômicas.",
     role: "Larry",
-    image: "assets/marry-me.jpg",
-    banner: "assets/marry-me-banner.jpg",
+    image: "assets/marido e larry.jpg",
+    banner: "assets/marido e larry.jpg",
     rating: "3.6",
     duration: "1h 34m",
   },
@@ -244,8 +257,8 @@ export const filmesData = [
     description:
       "Duas famílias muito diferentes precisam conviver quando se encontram por causa de um casamento improvável, causando muitas confusões.",
     role: "Charlie",
-    image: "assets/blended.jpg",
-    banner: "assets/blended-banner.jpg",
+    image: "assets/juntos e misturados.jpg",
+    banner: "assets/juntos e misturados.jpg",
     rating: "3.8",
     duration: "1h 57m",
   },
@@ -257,36 +270,49 @@ export const filmesData = [
     description:
       "Um jovem tímido que trabalha como 'boy da água' descobre seu talento para o futebol americano e tenta conquistar o sucesso e o amor.",
     role: "Bobby Boucher",
-    image: "assets/waterboy.jpg",
-    banner: "assets/waterboy-banner.jpg",
+    image: "assets/waterboy.webp",
+    banner: "assets/waterboy.webp",
     rating: "3.7",
     duration: "1h 31m",
   },
   {
     id: 22,
-    title: "Nossa Vida com Cães",
-    year: "2005",
+    title: "A herança de Mr Deeds",
+    year: "2002",
     genres: "Comédia",
     description:
-      "Um homem aprende a lidar com sua família e seus cachorros, causando muitas confusões e situações engraçadas.",
-    role: "Charlie",
-    image: "assets/mr-deeds.jpg",
-    banner: "assets/mr-deeds-banner.jpg",
-    rating: "3.6",
-    duration: "1h 44m",
+      "Deeds é muito querido em sua pequena cidade, mas após a morte de um tio com quem havia perdido contato, e que também era um magnata bilionário, herda uma fortuna e vai para a cidade grande para assumir a empresa do falecido. A mídia faz um alvoroço sobre a herança de Deeds, e a jornalista Babe Bennett se disfarça para expor o rapaz como um caipira do interior que ela acha que ele é.",
+    role: "Longfellow Deeds",
+    image: "assets/mr deeds.jpg",
+    banner: "assets/mr deeds.jpg",
+    rating: "3.9",
+    duration: "1h 36m",
   },
   {
     id: 23,
-    title: "A Semana do Casamento",
+    title: "Lá Vem os Pais",
     year: "2018",
     genres: "Comédia",
     description:
-      "Dois pais que não se gostam precisam organizar a festa de casamento dos filhos, causando uma série de desentendimentos hilários.",
-    role: "Ken Howard",
-    image: "assets/the-week-of.jpg",
-    banner: "assets/the-week-of-banner.jpg",
+      "Dois pais com ideias opostas para a festa de casamento dos filhos dão duro para sobreviver à caótica semana de preparativos para o grande dia.",
+    role: "Kenny Lustig",
+    image: "assets/la vem os pais.jpg",
+    banner: "assets/la vem os pais.jpg",
     rating: "3.8",
-    duration: "1h 46m",
+    duration: "1h 56m",
+  },
+  {
+    id: 23,
+    title: "Trocando os Pés",
+    year: "2015",
+    genres: "Comédia, Drama",
+    description:
+      "Um solitário sapateiro encontra uma relíquia mágica que possibilita que ele se transforme em qualquer pessoa ao calçar os sapatos dela.",
+    role: "Max Simkin",
+    image: "assets/cobbler.jpg",
+    banner: "assets/cobbler.jpg",
+    rating: "4.0",
+    duration: "1h 39m",
   },
   {
     id: 25,
@@ -296,8 +322,8 @@ export const filmesData = [
     description:
       "Os amigos da infância se reencontram e precisam lidar com confusões, filhos e problemas familiares durante as férias de verão.",
     role: "Lenny Feder",
-    image: "assets/grownups2.jpg",
-    banner: "assets/grownups2-banner.jpg",
+    image: "assets/grownups 2.jpg",
+    banner: "assets/grownups 2.jpg",
     rating: "3.7",
     duration: "1h 42m",
   },
@@ -309,170 +335,262 @@ export const filmesData = [
     description:
       "Uma família disfuncional se reúne em Nova York para celebrar a carreira de seu pai, e antigos conflitos ressurgem entre irmãos e pais.",
     role: "Danny Meyerowitz",
-    image: "assets/the-meyerowitz-stories.jpg",
-    banner: "assets/the-meyerowitz-stories-banner.jpg",
+    image: "assets/meyerowitz.png",
+    banner: "assets/meyerowitz.png",
     rating: "4.0",
     duration: "1h 49m",
   },
   {
+    id: 27,
+    title: "Tratamento de Choque",
+    year: "2003",
+    genres: "Comédia",
+    description:
+      "Dave Buznik é geralmente um cara pacato que não gosta de confrontos. Porém depois de uma briga a bordo de um avião, ele tem que ir a um terapeuta para controlar sua agressividade e visita o Dr. Buddy Rydell, o qual poderia usar um pouco da sua própria terapia.",
+    role: "Dave Buznik",
+    image: "assets/tratamento.jpg",
+    banner: "assets/tratamento.jpg",
+    rating: "4.0",
+    duration: "1h 46m",
+  },
+  {
     id: 28,
-    title: "Funny People",
+    title: "Tá rindo de quê",
     year: "2009",
     genres: "Comédia, Drama",
     description:
       "Um comediante famoso recebe um diagnóstico de doença grave e começa a refletir sobre sua vida, amizade e relacionamentos amorosos.",
     role: "George Simmons",
-    image: "assets/funny-people.jpg",
-    banner: "assets/funny-people-banner.jpg",
+    image: "assets/ta rindo 1.jpg",
+    banner: "assets/ta rindo 1.jpg",
     rating: "4.0",
     duration: "2h 26m",
   },
   {
+    id: 29,
+    title: "Pixels",
+    year: "2015",
+    genres: "Comédia",
+    description:
+      "Em busca de contato com seres extraterrestres, a humanidade envia imagens e sons variados sobre sua própria cultura nos mais diversos satélites lançados ao espaço. Após encontrar um desses registros, uma raça alienígena resolve criar monstros digitais inspirados em videogames clássicos dos anos 1980 e tentar conquistar a Terra. Para combatê-los, um grupo de especialistas em jogos da época é convocado e encarregado de derrotar os invasores, salvando assim o planeta.",
+    role: "Sam Brenner",
+    image: "assets/pixels.jpg",
+    banner: "assets/pixels.jpg",
+    rating: "2.8",
+    duration: "1h 45m",
+  },
+  {
     id: 30,
-    title: "The Do-Over",
+    title: "Zerando a Vida",
     year: "2016",
     genres: "Comédia, Ação",
     description:
       "Dois amigos fingem suas mortes para começar uma nova vida, mas acabam se metendo em aventuras perigosas e hilárias.",
     role: "Charlie",
-    image: "assets/do-over.jpg",
-    banner: "assets/do-over-banner.jpg",
+    image: "assets/zerando.jpg",
+    banner: "assets/zerando.jpg",
     rating: "3.8",
     duration: "1h 52m",
+  },
+  {
+    id: 31,
+    title: "O Astronauta",
+    year: "2024",
+    genres: "Ficção Científica, Aventura",
+    description:
+      "Um astronauta enfrenta uma missão solitária de seis meses no espaço. Ele sente os efeitos extremos do isolamento e sofre com saudades da esposa. Lutando para se manter são, o homem é visitado por uma criatura alienígena que promete ajudá-lo a curar seus traumas. Os dois partem juntos em uma viagem pela mente e pelas angústias do viajante do espaço.",
+    role: "Jakub Procházka",
+    image: "assets/spaceman.jpg",
+    banner: "assets/spaceman.jpg",
+    rating: "4.2",
+    duration: "1h 49m",
+  },
+  {
+    id: 32,
+    title: "Reine Sobre Mim",
+    year: "2007",
+    genres: "Drama",
+    description:
+      "Charlie Finema perdeu sua família no ataque terrorista de 11 de Setembro e ainda não se recuperou. Ele reencontra Alan Johnson, um ex-colega de quarto da faculdade, e os dois reatam a amizade. Alan passa por um momento delicado em sua vida devido às responsabilidades do seu trabalho, mas, juntos, os dois encontram forças para enfrentar os problemas de suas vidas.",
+    role: "Charlie Finema",
+    image: "assets/rainoverme.jpg",
+    banner: "assets/rainoverme.jpg",
+    rating: "4.3",
+    duration: "2h 04m",
+  },
+  {
+    id: 33,
+    title: "Embriagado de Amor",
+    year: "2002",
+    genres: "Comédia, Romance",
+    description:
+      "O empresário Barry Egan é um homem tímido que leva uma vida solitária e tranquila. Porém, vários eventos ocorrem e mudam sua vida, como apaixonar-se por Lena Leonard. Porém, o romance é ameaçado quando Egan é vítima de um chantagista.",
+    role: "Barry Egan",
+    image: "assets/embriagado.jpg",
+    banner: "assets/embriagado.jpg",
+    rating: "4.0",
+    duration: "1h 35m",
+  },
+  {
+    id: 34,
+    title: "Espanglês",
+    year: "2004",
+    genres: "Comédia, Romance",
+    description:
+      "Uma mulher e sua filha emigram do México para os Estados Unidos, em busca de uma vida melhor. A mãe começa a trabalhar para uma família cujo patriarca é um chef badalado casado com uma mulher insegura, levando a um inevitável choque de culturas.",
+    role: "John Clasky",
+    image: "assets/espangles.jpg",
+    banner: "assets/espangles.jpg",
+    rating: "4.0",
+    duration: "2h 11m",
+  },
+  {
+    id: 35,
+    title: "Oito Noites Loucas",
+    year: "2002",
+    genres: "Comédia, Animação",
+    description:
+      "Davey Stone se mete em mais uma encrenca e vai parar atrás das grades na época das festas de fim de ano. Com boa vontade, o juiz resolve dar uma chance para Davey e, assim, ele poderá prestar serviços comunitários, ajudando um juiz de basquete juvenil. Porém, a tarefa não será tão fácil quanto parece.",
+    role: "Dave Stone",
+    image: "assets/eight crazy nights.jpg",
+    banner: "assets/eight crazy nights.jpg",
+    rating: "3.7",
+    duration: "1h 16m",
+  },
+  {
+    id: 35,
+    title: "Leo",
+    year: "2003",
+    genres: "Comédia, Animação, Musical",
+    description:
+      "Após décadas preso na escola, o lagarto Leo planeja conseguir sua liberdade.",
+    role: "Leo",
+    image: "assets/leo.jpg",
+    banner: "assets/leo.jpg",
+    rating: "3.4",
+    duration: "1h 42m",
+  },
+  {
+    id: 36,
+    title: "Turma da Monica",
+    year: "2015",
+    genres: "Comédia",
+    description:
+      "Há, te peguei! Adam Sandler entra na história da Turma da Mônica para explicar porque o Sansão foi transformado em pixels, explicando a premissa do filme Pixels.",
+    role: "Adam Sandler (já muito rico)",
+    image: "assets/monica.png",
+    banner: "assets/monica.png",
+    rating: "2.4",
+    duration: "0h 02",
+  },
+  {
+    id: 37,
+    title: "Hotel Transilvânia 2",
+    year: "2015",
+    genres: "Animação, Comédia, Família",
+    description:
+      "Drácula percebe que seu neto, que é metade humano, não está mostrando seu lado vampiro. Preocupado, o avô conta com a ajuda de seus amigos para colocar o menino em um treinamento especial enquanto Mavis e Johnny estão fora.",
+    role: "Conde Drácula (voz)",
+    image: "assets/ht2.jpg",
+    banner: "assets/ht2.jpg",
+    rating: "4.3",
+    duration: "1h 29m",
+  },
+  {
+    id: 38,
+    title: "Hotel Transilvânia 3",
+    year: "2018",
+    genres: "Animação, Comédia, Família",
+    description:
+      "A família faz um cruzeiro para que Drácula possa sair de férias e abandonar por uns dias seu trabalho no Hotel Transilvânia. Tudo vai bem até que Mavis percebe que Drácula se apaixonou por uma humana que pode colocá-los em perigo.",
+    role: "Conde Drácula (voz)",
+    image: "assets/ht3.jpg",
+    banner: "assets/ht3.jpg",
+    rating: "4.3",
+    duration: "1h 37m",
+  },
+  {
+    id: 39,
+    title: "Hotel Transilvânia 4",
+    year: "2022",
+    genres: "Animação, Comédia, Família",
+    description:
+      "A nova invenção de Van Helsing transforma Drac e os amigos em humanos, e Johnny em um monstro. Agora, Drac precisa encontrar uma maneira de reverter o feitiço antes que a mudança se torne permanente.",
+    role: "Conde Drácula (voz)",
+    image: "assets/ht4.jpg",
+    banner: "assets/ht4.jpg",
+    rating: "4.3",
+    duration: "1h 27m",
+  },
+  {
+    id: 39,
+    title: "Faz de Conta que Acontece",
+    year: "2008",
+    genres: "Comédia, Família",
+    description:
+      "Skeeter Bronson descobre que as histórias que conta aos seus sobrinhos se tornam realidade. Para aproveitar o misterioso fenômeno, Skeeter acaba cometendo vários erros, e as contribuições das crianças viram sua vida de cabeça para baixo.",
+    role: "Skeeter Bronson",
+    image: "assets/faz de conta.webp",
+    banner: "assets/faz de conta.webp",
+    rating: "3.8",
+    duration: "1h 39m",
+  },
+  {
+    id: 40,
+    title: "À Prova de Balas",
+    year: "1996",
+    genres: "Comédia, Ação",
+    description:
+      "Um criminoso nada brilhante, Archie Moses, trabalha para o narcotraficante Frank Colton e permanece alheio ao fato de que um de seus melhores amigos é, na verdade, um policial disfarçado, chamado Jack Carter. Depois que Moses atira em Carter acidentalmente, o policial tenta se recuperar e, em seguida, procura trazer o bandido para depor contra Colton.",
+    role: "Archie Moses",
+    image: "assets/bullet.png",
+    banner: "assets/bullet.png",
+    rating: "3.8",
+    duration: "1h 24m",
+  },
+  {
+    id: 40,
+    title: "Afinado no Amor",
+    year: "1998",
+    genres: "Comédia, Romance",
+    description:
+      "Robbie Hart é um compositor frustrado que canta em festas de casamento. Em uma certa noite ele conhece Julia Sullivan, uma bela garçonete que se saiu muito bem no seu primeiro dia de trabalho. Os dois estão de casamento marcado com outras pessoas, mas o destino lhes reserva uma surpresa romântica. Linda, a noiva de Robbie, o abandona no altar, enquanto Julia descobre que seu noivo é infiel. Com isso, Robbie decide fazer o possível para conquistar a mulher que ama.",
+    role: "Robie Hart",
+    image: "assets/afinado.jpg",
+    banner: "assets/afinado.jpg",
+    rating: "3.9",
+    duration: "1h 35m",
+  },
+  {
+    id: 41,
+    title: "Ir ao Mar",
+    year: "1989",
+    genres: "Comédia",
+    description:
+      "Shecky Moskowitz, um comediante esforçado, consegue um emprego como garçom no cruzeiro onde a competição de Miss Universo é realizada. Lá, ele vive nas sombras do humorista oficial do navio, Dickie Diamond, que fica com todas as garotas e sequer deixa Shecky abrir as suas apresentações. No entanto, quando Dickie fica trancado no banheiro antes de um show, Shecky tem sua grande oportunidade de se apresentar ao mundo do entretenimento e às mulheres a bordo.",
+    role: "Shecky Moskowitz",
+    image: "assets/ir ao mar.jpg",
+    banner: "assets/ir ao mar.jpg",
+    rating: "2.9",
+    duration: "1h 39m",
+  },
+  {
+    id: 42,
+    title: "Os Cabeça de Vento",
+    year: "1994",
+    genres: "Comédia",
+    description:
+      "Para conseguir o sucesso que tanto desejam, músicos de uma banda de rock ocupam a principal rádio da cidade, exigindo que sua música seja tocada. Mas o plano não acontece como previsto, a polícia acaba envolvida e a situação fica fora de controle.",
+    role: "Pip",
+    image: "assets/airheads.png",
+    banner: "assets/airheads.png",
+    rating: "3.2",
+    duration: "1h 32m",
   },
 ];
 
 // ========== SISTEMA DE MODAL ==========
-function initMovieModal() {
-  const modal = document.getElementById("movie-modal");
-  if (!modal) {
-    console.error("Modal não encontrado!");
-    return null;
-  }
-
-  const closeButton = modal.querySelector(".modal-close");
-  const modalTitle = modal.querySelector(".modal-title");
-  const modalYear = modal.querySelector(".modal-year");
-  const modalGenres = modal.querySelector(".modal-genres");
-  const modalDescription = modal.querySelector(".modal-description");
-  const modalRole = modal.querySelector(".modal-role span");
-  const modalBanner = modal.querySelector(".modal-banner");
-  const modalMeta = modal.querySelector(".modal-meta");
-
-  // Fechar modal
-  function closeModal() {
-    modal.classList.remove("active");
-    document.body.style.overflow = "";
-  }
-
-  // Configurar event listeners para fechar
-  closeButton.addEventListener("click", closeModal);
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      closeModal();
-    }
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("active")) {
-      closeModal();
-    }
-  });
-
-  // Função para abrir o modal - VERSÃO CORRIGIDA
-  function openModal(movieId) {
-    const id = parseInt(movieId);
-    console.log("Tentando abrir modal para o ID:", id);
-
-    const movieData = filmesData.find((movie) => movie.id === id);
-
-    if (!movieData) {
-      console.error("Filme não encontrado para o ID:", id);
-      // Usar o primeiro filme como fallback
-      openModal(1);
-      return;
-    }
-
-    console.log("Dados do filme encontrado:", movieData.title);
-
-    // Preencher o modal com os dados do filme
-    modalTitle.textContent = movieData.title;
-    modalYear.textContent = movieData.year;
-    modalGenres.textContent = movieData.genres;
-    modalDescription.textContent = movieData.description;
-    modalRole.textContent = movieData.role;
-
-    // SOLUÇÃO DEFINITIVA PARA O BANNER:
-    // 1. Primeiro garantir que temos um placeholder
-    // 2. Depois tentar carregar a imagem
-
-    // Configurar placeholder primeiro
-    modalBanner.src =
-      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400' viewBox='0 0 800 400'%3E%3Crect width='800' height='400' fill='%23222'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='%23fff'%3ECarregando...%3C/text%3E%3C/svg%3E";
-    modalBanner.alt = `Banner de ${movieData.title}`;
-
-    // Tentar carregar a imagem
-    const img = new Image();
-    img.onload = function () {
-      console.log(
-        "Imagem carregada com sucesso:",
-        movieData.banner || movieData.image
-      );
-      modalBanner.src = movieData.banner || movieData.image;
-    };
-    img.onerror = function () {
-      console.error(
-        "Erro ao carregar imagem:",
-        movieData.banner || movieData.image
-      );
-      // Manter o placeholder se der erro
-    };
-    img.src = movieData.banner || movieData.image;
-
-    // Limpar informações anteriores
-    clearAdditionalInfo();
-
-    // Adicionar informações extras
-    if (movieData.rating) {
-      addRatingInfo(movieData.rating);
-    }
-
-    if (movieData.duration) {
-      addDurationInfo(movieData.duration);
-    }
-
-    // Abrir modal
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden";
-  }
-
-  function clearAdditionalInfo() {
-    const oldRating = modalMeta.querySelector(".modal-rating");
-    const oldDuration = modalMeta.querySelector(".modal-duration");
-    if (oldRating) oldRating.remove();
-    if (oldDuration) oldDuration.remove();
-  }
-
-  function addRatingInfo(rating) {
-    const ratingElement = document.createElement("span");
-    ratingElement.className = "modal-rating";
-    ratingElement.innerHTML = `<i class="fas fa-star"></i> ${rating}`;
-    modalMeta.appendChild(ratingElement);
-  }
-
-  function addDurationInfo(duration) {
-    const durationElement = document.createElement("span");
-    durationElement.className = "modal-duration";
-    durationElement.innerHTML = `<i class="fas fa-clock"></i> ${duration}`;
-    modalMeta.appendChild(durationElement);
-  }
-
-  return {
-    open: openModal,
-    close: closeModal,
-  };
-}
+import "./modal.js";
 
 // ========== CONFIGURAÇÃO DOS CARDS ==========
 function setupCarouselItems(movieModal) {
@@ -480,15 +598,19 @@ function setupCarouselItems(movieModal) {
 
   console.log(`Encontrados ${carouselItems.length} itens do carrossel`);
 
-  carouselItems.forEach((item, index) => {
-    let movieId = item.getAttribute("data-id");
+  carouselItems.forEach((item) => {
+    const img = item.querySelector("img");
+    if (!img || !img.alt) {
+      console.warn("Item sem imagem ou alt, ignorado.");
+      return;
+    }
 
-    // Se não tem data-id, tentar encontrar de outra forma
-    if (!movieId) {
-      // Tentar encontrar pelo índice ou outro atributo
-      movieId = index + 1; // IDs começando em 1
-      item.setAttribute("data-id", movieId);
-      console.warn(`Item sem data-id, atribuído ID: ${movieId}`);
+    const title = img.alt.trim();
+    const filme = filmesData.find((f) => f.title === title);
+
+    if (!filme) {
+      console.warn("Filme não encontrado para título:", title);
+      return;
     }
 
     // Remover event listeners antigos
@@ -496,22 +618,19 @@ function setupCarouselItems(movieModal) {
     item.parentNode.replaceChild(newItem, item);
 
     // Adicionar evento de clique
-    newItem.addEventListener("click", function () {
-      const id = this.getAttribute("data-id");
-      console.log("Clicado no card com ID:", id);
-      movieModal.open(id);
+    newItem.addEventListener("click", () => {
+      window.movieModal.open(filme);
     });
 
     // Tornar acessível por teclado
     newItem.setAttribute("tabindex", "0");
     newItem.setAttribute("role", "button");
-    newItem.setAttribute("aria-label", "Ver detalhes do filme");
+    newItem.setAttribute("aria-label", `Ver detalhes de ${filme.title}`);
 
     newItem.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        const id = newItem.getAttribute("data-id");
-        movieModal.open(id);
+        window.movieModal.open(filme);
       }
     });
 
@@ -545,7 +664,7 @@ function handleHeaderScroll() {
   });
 }
 
-function setupHeroButtons(movieModal) {
+function setupHeroButtons() {
   const playButton = document.querySelector(".btn-play");
   const infoButton = document.querySelector(".btn-more");
 
@@ -557,7 +676,8 @@ function setupHeroButtons(movieModal) {
 
   if (infoButton) {
     infoButton.addEventListener("click", () => {
-      movieModal.open("1"); // Abre o primeiro filme (Jóias Brutas)
+      const destaque = filmesData.find((f) => f.title === "Jóias Brutas");
+      if (destaque) window.movieModal.open(destaque);
     });
   }
 }
@@ -577,33 +697,15 @@ function setupMobileMenu() {
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM carregado, inicializando...");
 
-  // Inicializar modal
-  const movieModal = initMovieModal();
-
-  if (!movieModal) {
-    console.error("Falha crítica: não foi possível inicializar o modal");
+  if (!window.movieModal) {
+    console.error("Falha crítica: movieModal não está disponível");
     return;
   }
 
-  // Configurar itens do carrossel
-  setupCarouselItems(movieModal);
-
-  // Configurar comportamento do header no scroll
+  setupCarouselItems(window.movieModal);
   handleHeaderScroll();
-
-  // Configurar botões da seção hero
-  setupHeroButtons(movieModal);
-
-  // Configurar menu mobile
+  setupHeroButtons();
   setupMobileMenu();
 
   console.log("Inicialização concluída com sucesso!");
 });
-
-// Função global para debug
-window.debugModal = function (movieId = 1) {
-  const movieModal = initMovieModal();
-  if (movieModal) {
-    movieModal.open(movieId.toString());
-  }
-};

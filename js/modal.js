@@ -1,6 +1,3 @@
-// modal.js
-import { filmesData } from "./script.js";
-
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("movie-modal");
   if (!modal) return;
@@ -20,7 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function openMovieModal(filme) {
-    if (!filme) return;
+    if (!filme) {
+      console.warn("Filme inválido ou indefinido.");
+      return;
+    }
 
     modalTitle.textContent = filme.title;
     modalDescription.textContent = filme.description;
@@ -75,15 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
       closeMovieModal();
   });
 
-  // Botão "Mais Informações" do destaque
-  const infoBtn = document.querySelector(".btn-more");
-  if (infoBtn) {
-    infoBtn.addEventListener("click", () => {
-      const destaque = filmesData.find((f) => f.destaque);
-      if (destaque) openMovieModal(destaque);
-    });
-  }
+  // Expor globalmente
+  window.movieModal = {
+    open: openMovieModal,
+    close: closeMovieModal,
+  };
 
-  window.movieModal = { open: openMovieModal, close: closeMovieModal };
   console.log("Modal configurado com sucesso!");
 });
