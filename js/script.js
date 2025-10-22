@@ -1,46 +1,9 @@
+import "./modal.js";
+
 // ========== DADOS DOS FILMES ==========
 export const filmesData = [
   {
     id: 1,
-    title: "Como Se Fosse a Primeira Vez",
-    year: "2004",
-    genres: "Comédia, Romance",
-    description:
-      "Um mulherengo que não acredita no amor se apaixona por uma mulher com amnésia de curto prazo que esquece tudo cada manhã ao acordar.",
-    role: "Henry Roth",
-    image: "assets/50 first dates.png",
-    banner: "assets/50 first dates.png",
-    rating: "4.3",
-    duration: "1h 39m",
-  },
-  {
-    id: 2,
-    title: "Esposa de Mentirinha",
-    year: "2011",
-    genres: "Comédia, Romance",
-    description:
-      "Um cirurgião plástico convence sua assistente a fingir ser sua esposa para enganar sua jovem namorada, mas acaba se apaixonando por ela.",
-    role: "Dr. Daniel 'Danny' Maccabee",
-    image: "assets/justgowithit.jpg",
-    banner: "assets/justgowithit.jpg",
-    rating: "4.2",
-    duration: "1h 56m",
-  },
-  {
-    id: 3,
-    title: "Arremessando Alto",
-    year: "2022",
-    genres: "Drama, Esporte",
-    description:
-      "Um caça-talentos de basquete decide levar um fenômeno amador espanhol para os EUA e transformá-lo em uma estrela da NBA.",
-    role: "Stanley Sugarman",
-    image: "assets/arremessando_alto.jpg",
-    banner: "assets/arremessando_alto-banner.jpg",
-    rating: "3.9",
-    duration: "1h 44m",
-  },
-  {
-    id: 4,
     title: "Jóias Brutas",
     year: "2019",
     genres: "Drama, Suspense",
@@ -53,7 +16,46 @@ export const filmesData = [
     duration: "2h 15m",
   },
   {
-    id: 5,
+    id: 6,
+    title: "Como Se Fosse a Primeira Vez",
+    year: "2004",
+    genres: "Comédia, Romance",
+    description:
+      "Um mulherengo que não acredita no amor se apaixona por uma mulher com amnésia de curto prazo que esquece tudo cada manhã ao acordar.",
+    role: "Henry Roth",
+    image: "assets/50 first dates.png",
+    banner: "assets/50 first dates.png",
+    rating: "4.3",
+    duration: "1h 39m",
+  },
+  {
+    id: 4,
+    title: "Esposa de Mentirinha",
+    year: "2011",
+    genres: "Comédia, Romance",
+    description:
+      "Um cirurgião plástico convence sua assistente a fingir ser sua esposa para enganar sua jovem namorada, mas acaba se apaixonando por ela.",
+    role: "Dr. Daniel 'Danny' Maccabee",
+    image: "assets/justgowithit.jpg",
+    banner: "assets/justgowithit.jpg",
+    rating: "4.2",
+    duration: "1h 56m",
+  },
+  {
+    id: 8,
+    title: "Arremessando Alto",
+    year: "2022",
+    genres: "Drama, Esporte",
+    description:
+      "Um caça-talentos de basquete decide levar um fenômeno amador espanhol para os EUA e transformá-lo em uma estrela da NBA.",
+    role: "Stanley Sugarman",
+    image: "assets/arremessando_alto.jpg",
+    banner: "assets/arremessando_alto-banner.jpg",
+    rating: "3.9",
+    duration: "1h 44m",
+  },
+  {
+    id: 14,
     title: "Happy Gilmore",
     year: "1996",
     genres: "Comédia, Esporte",
@@ -66,7 +68,7 @@ export const filmesData = [
     duration: "1h 32m",
   },
   {
-    id: 6,
+    id: 2,
     title: "Gente Grande",
     year: "2010",
     genres: "Comédia",
@@ -92,7 +94,7 @@ export const filmesData = [
     duration: "1h 53m",
   },
   {
-    id: 8,
+    id: 3,
     title: "Click",
     year: "2006",
     genres: "Comédia, Drama, Fantasia",
@@ -170,7 +172,7 @@ export const filmesData = [
     duration: "1h 32m",
   },
   {
-    id: 14,
+    id: 5,
     title: "O Paizão",
     year: "1999",
     genres: "Comédia",
@@ -207,19 +209,6 @@ export const filmesData = [
     banner: "assets/sandy-wexler-banner.jpg",
     rating: "3.8",
     duration: "2h 14m",
-  },
-  {
-    id: 17,
-    title: "Diamantes Brutos",
-    year: "2019",
-    genres: "Drama, Suspense",
-    description:
-      "Um joalheiro de Nova York aposta alto em uma joia rara, enfrentando problemas com a lei, dívidas e mafiosos.",
-    role: "Howard Ratner",
-    image: "assets/uncutgems 2.jpg",
-    banner: "assets/uncutgems 2.jpg",
-    rating: "4.5",
-    duration: "2h 15m",
   },
   {
     id: 18,
@@ -300,19 +289,6 @@ export const filmesData = [
     duration: "1h 46m",
   },
   {
-    id: 24,
-    title: "Você Não Mexe com o Zohan",
-    year: "2008",
-    genres: "Comédia, Ação",
-    description:
-      "Um agente israelense finge a própria morte para realizar seu sonho de ser cabeleireiro em Nova York e enfrenta confusões hilárias.",
-    role: "Zohan Dvir",
-    image: "assets/you-dont-mess-with-the-zohan.jpg",
-    banner: "assets/you-dont-mess-with-the-zohan-banner.jpg",
-    rating: "3.9",
-    duration: "1h 53m",
-  },
-  {
     id: 25,
     title: "Gente Grande 2",
     year: "2013",
@@ -339,19 +315,6 @@ export const filmesData = [
     duration: "1h 49m",
   },
   {
-    id: 27,
-    title: "Uma Noite no Museu 2",
-    year: "2009",
-    genres: "Aventura, Comédia, Família",
-    description:
-      "Larry Daley descobre que as exposições do Museu de História Natural foram transferidas para Londres, e precisa salvar as peças que ganham vida à noite.",
-    role: "Larry Daley",
-    image: "assets/night-at-the-museum-2.jpg",
-    banner: "assets/night-at-the-museum-2-banner.jpg",
-    rating: "4.1",
-    duration: "1h 45m",
-  },
-  {
     id: 28,
     title: "Funny People",
     year: "2009",
@@ -363,19 +326,6 @@ export const filmesData = [
     banner: "assets/funny-people-banner.jpg",
     rating: "4.0",
     duration: "2h 26m",
-  },
-  {
-    id: 29,
-    title: "O Paizão",
-    year: "1999",
-    genres: "Comédia",
-    description:
-      "Um preguiçoso que cria um filho para impressionar sua namorada acaba se apegando à criança e aprendendo sobre responsabilidade.",
-    role: "Sonny Koufax",
-    image: "assets/bigddaddy.png",
-    banner: "assets/bigddaddy-banner.jpg",
-    rating: "4.0",
-    duration: "1h 33m",
   },
   {
     id: 30,
@@ -392,7 +342,7 @@ export const filmesData = [
   },
 ];
 
-// ========== SISTEMA DE MODAL SIMPLIFICADO E FUNCIONAL ==========
+// ========== SISTEMA DE MODAL ==========
 function initMovieModal() {
   const modal = document.getElementById("movie-modal");
   if (!modal) {
