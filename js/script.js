@@ -794,6 +794,26 @@ function setupMobileMenu() {
   }
 }
 
+// ========== INTRO ==========
+window.addEventListener("load", () => {
+  const videoContainer = document.getElementById("video-container");
+  const video = document.getElementById("introVideo");
+
+  video.play().catch(() => {
+    console.log("O autoplay falhou. Talvez o navegador bloqueou som.");
+  });
+
+  video.addEventListener("ended", () => {
+    // Reduz opacidade suavemente
+    videoContainer.style.opacity = 0;
+
+    // Remove o container depois da transição (5s)
+    setTimeout(() => {
+      videoContainer.style.display = "none";
+    }, 500);
+  });
+});
+
 // ========== INICIALIZAÇÃO ==========
 document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM carregado, inicializando...");
