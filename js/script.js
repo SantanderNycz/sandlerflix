@@ -674,6 +674,81 @@ function setupCarouselItems(movieModal) {
   });
 }
 
+// ========== CAMPO DE PESQUISA ==========
+
+function setupSearch() {
+  const searchInput = document.getElementById("searchInput");
+  const mainContent = document.querySelector(".main-content");
+  const allSections = Array.from(
+    document.querySelectorAll(".carousel-section")
+  );
+  const allItems = Array.from(document.querySelectorAll(".carousel-item"));
+
+  let searchSection = null; // vai guardar a seção criada dinamicamente
+
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase().trim();
+    const isSearching = query.length > 0;
+
+    if (isSearching) {
+      // Esconde todas as seções originais
+      allSections.forEach((section) => {
+        section.style.display = "none";
+      });
+
+      // Remove seção de pesquisa anterior se existir
+      if (searchSection) {
+        searchSection.remove();
+      }
+
+      // Cria nova seção para resultados
+      searchSection = document.createElement("section");
+      searchSection.classList.add("carousel-section");
+
+      const title = document.createElement("h3");
+      title.textContent = `Resultados para "${query}"`;
+      searchSection.appendChild(title);
+
+      const carousel = document.createElement("div");
+      carousel.classList.add("carousel");
+      const container = document.createElement("div");
+      container.classList.add("carousel-container");
+
+      const shownTitles = new Set();
+
+      allItems.forEach((item) => {
+        const img = item.querySelector("img");
+        if (!img) return;
+        const itemTitle = img.alt.toLowerCase();
+
+        if (itemTitle.includes(query) && !shownTitles.has(itemTitle)) {
+          const clone = item.cloneNode(true); // clona o card
+          clone.style.display = "block";
+          container.appendChild(clone);
+          shownTitles.add(itemTitle);
+        }
+      });
+
+      carousel.appendChild(container);
+      searchSection.appendChild(carousel);
+
+      // Adiciona a nova seção ao main
+      mainContent.prepend(searchSection);
+    } else {
+      // Se não estiver pesquisando, remove seção de resultados e mostra seções originais
+      if (searchSection) {
+        searchSection.remove();
+        searchSection = null;
+      }
+      allSections.forEach((section) => {
+        section.style.display = "block";
+      });
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", setupSearch);
+
 // ========== OUTRAS FUNÇÕES ==========
 function handleHeaderScroll() {
   const header = document.querySelector(".header");
