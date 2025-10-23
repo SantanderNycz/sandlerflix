@@ -1,0 +1,28 @@
+{
+  "pt": {
+    "hero-description": "Um joalheiro de Nova York tenta encontrar um jeito de pagar seus credores e fazer as pazes com sua família. Mas ele não resiste quando vê uma chance de faturar alto e acaba se envolvendo em uma espiral de riscos e dinheiro.",
+    "btn-play": "Assistir",
+    "btn-more": "Mais Informações",
+    "section-popular": "Populares na Sandlerflix",
+    "section-comedy": "Comédias",
+    "section-drama": "Dramas",
+    "section-animation": "Animações",
+    "section-action": "Ação e Aventura",
+    "section-classics": "Clássicos do Adam Sandler",
+    "section-unrated": "Não consigo defender",
+    "search-placeholder": "Títulos, pessoas..."
+  },
+  "en": {
+    "hero-description": "A New York jeweler tries to find a way to pay his creditors and make peace with his family. But he can’t resist when he sees a chance to make big money and ends up in a spiral of risks and cash.",
+    "btn-play": "Watch",
+    "btn-more": "More Info",
+    "section-popular": "Popular on Sandlerflix",
+    "section-comedy": "Comedies",
+    "section-drama": "Dramas",
+    "section-animation": "Animations",
+    "section-action": "Action & Adventure",
+    "section-classics": "Adam Sandler Classics",
+    "section-unrated": "I Can't Defend",
+    "search-placeholder": "Titles, people..."
+  }
+}

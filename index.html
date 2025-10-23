@@ -20,7 +20,6 @@
         </video>
     </div>
 
-
     <!-- Header -->
     <header class="header">
         <div class="header-container">
@@ -46,19 +45,23 @@
             <div class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </div>
+            <select id="languageSwitch">
+                <option value="pt">Português</option>
+                <option value="en">English</option>
+            </select>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h2 class="hero-title">Jóias Brutas</h2>
-            <p class="hero-description">
+            <h2 class="hero-title" data-translate="hero-title">Jóias Brutas</h2>
+            <p class="hero-description" data-translate="hero-description">
                 Um joalheiro de Nova York tenta encontrar um jeito de pagar seus credores e fazer as pazes com sua família. Mas ele não resiste quando vê uma chance de faturar alto e acaba se envolvendo em uma espiral de riscos e dinheiro.
             </p>
             <div class="hero-buttons">
-                <button class="btn btn-play"><i class="fas fa-play"></i> Assistir</button>
-                <button class="btn btn-more"><i class="fas fa-info-circle"></i> Mais Informações</button>
+                <button class="btn btn-play" data-translate="btn-play"><i class="fas fa-play"></i> Assistir</button>
+                <button class="btn btn-more" data-translate="btn-more"><i class="fas fa-info-circle"></i> Mais Informações</button>
             </div>
         </div>
         <div class="hero-shadow"></div>
@@ -68,30 +71,30 @@
     <main class="main-content">
         <!-- Populares na Sandleflix -->
         <section class="carousel-section">
-            <h3 class="section-title">Populares na Sandlerflix</h3>
+            <h3 class="section-title" data-translate="section-popular">Populares na Sandlerflix</h3>
             <div class="carousel">
                 <button class="carousel-control left">‹</button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/uncutgems 2.jpg" alt="Jóias Brutas">
+                        <img src="assets/uncutgems 2.jpg" alt="Jóias Brutas" data-title="Uncut Gems">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/grownups.jpg" alt="Gente Grande">
+                        <img src="assets/grownups.jpg" alt="Gente Grande" data-title="Grown Ups">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/click.jpg" alt="Click">
+                        <img src="assets/click.jpg" alt="Click" data-title="Click">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/justgowithit.jpg" alt="Esposa de Mentirinha">
+                        <img src="assets/justgowithit.jpg" alt="Esposa de Mentirinha" data-title="Just Go with It">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/bigddaddy.png" alt="O Paizão">
+                        <img src="assets/bigddaddy.png" alt="O Paizão" data-title="Big Daddy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/50 first dates.png" alt="Como Se Fosse a Primeira Vez">
+                        <img src="assets/50 first dates.png" alt="Como Se Fosse a Primeira Vez" data-title="50 First Dates">
                     </div>
                     <div class="carousel-item">
-                        <img src="./assets/um maluco no golfe 2.jpg" alt="Happy Gilmore 2">
+                        <img src="./assets/um maluco no golfe 2.jpg" data-title="Happy Gilmore 2" alt="Um Maluco no Golfe 2" data-title="">
                     </div>
                 </div>
                 <button class="carousel-control right">›</button>
@@ -100,63 +103,63 @@
 
         <!-- Comédias -->
         <section class="carousel-section">
-            <h3 class="section-title">Comédias</h3>
+            <h3 class="section-title" data-translate="section-comedy">Comédias</h3>
             <div class="carousel">
                 <button class="carousel-control left">‹</button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="/assets/mr deeds.jpg" alt="A herança de Mr Deeds" loading="lazy" class="carousel-img">
+                        <img src="/assets/mr deeds.jpg" data-title="Mr. Deeds" alt="A herança de Mr Deeds" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/pixels.jpg" alt="Pixels" loading="lazy" class="carousel-img">
+                        <img src="/assets/pixels.jpg" data-title="Pixels" alt="Pixels" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/misterio no mediterraneo 1.jpg" alt="Mistério no Mediterrâneo" loading="lazy" class="carousel-img">
+                        <img src="/assets/misterio no mediterraneo 1.jpg" data-title="Murder Mystery" alt="Mistério no Mediterrâneo" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/golpe baixo.jpg" alt="Golpe Baixo" loading="lazy" class="carousel-img">
+                        <img src="/assets/golpe baixo.jpg" data-title="The Longest Yard" alt="Golpe Baixo" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/misterio no mediterraneo 2.jpg" alt="Mistério no Mediterrâneo 2" loading="lazy" class="carousel-img">
+                        <img src="/assets/misterio no mediterraneo 2.jpg" data-title="Murder Mystery 2" alt="Mistério no Mediterrâneo 2" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/little nicky.jpg" alt="Little Nicky" loading="lazy" class="carousel-img">
+                        <img src="/assets/little nicky.jpg" data-title="Little Nicky" alt="Little Nicky" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/um maluco no golfe.jpg" loading="lazy" class="carousel-img" alt="Happy Gilmore">
+                        <img src="/assets/um maluco no golfe.jpg" loading="lazy" class="carousel-img" data-title="Happy Gilmore" alt="Um Maluco no Golfe">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/um maluco no golfe 2.jpg" alt="Happy Gilmore 2" loading="lazy" class="carousel-img">
+                        <img src="/assets/um maluco no golfe 2.jpg" data-title="Happy Gilmore 2" alt="Um Maluco no Golfe 2" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/zohan.jpg" alt="Zohan: Um Agente Bom de Corte">
+                        <img src="/assets/zohan.jpg" data-title="You Don't Mess with the Zohan" alt="Zohan: Um Agente Bom de Corte">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/hubie.jpg" alt="Hubie Halloween" loading="lazy" class="carousel-img">
+                        <img src="/assets/hubie.jpg" data-title="Hubie Halloween" alt="Hubie Halloween" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/gemea.jpg" alt="Cada Um Tem a Gêmea Que Merece" loading="lazy" class="carousel-img">
+                        <img src="/assets/gemea.jpg" data-title="Jack and Jill" alt="Cada Um Tem a Gêmea Que Merece" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/tratamento.jpg" alt="Tratamento de Choque" loading="lazy" class="carousel-img">
+                        <img src="/assets/tratamento.jpg" data-title="Anger Management" alt="Tratamento de Choque" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/marido e larry.jpg" alt="Eu os Declaro Marido e… Larry" loading="lazy" class="carousel-img">
+                        <img src="/assets/marido e larry.jpg" data-title="I Now Pronounce You Chuck & Larry" alt="Eu os Declaro Marido e… Larry" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/esse é o meu garoto.jpg" alt="Esse É O Meu Garoto" loading="lazy" class="carousel-img">
+                        <img src="/assets/esse é o meu garoto.jpg" data-title="That's My Boy" alt="Esse É O Meu Garoto" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/os 6 ridiculos.jpg" alt="Os 6 Ridículos" loading="lazy" class="carousel-img">
+                        <img src="/assets/os 6 ridiculos.jpg" data-title="The Ridiculous 6" alt="Os 6 Ridículos" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/grownups 2.jpg" alt="Gente Grande 2" loading="lazy" class="carousel-img">
+                        <img src="/assets/grownups 2.jpg" data-title="Grown Ups 2" alt="Gente Grande 2" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/juntos e misturados.jpg" alt="Juntos e Misturados" loading="lazy" class="carousel-img">
+                        <img src="/assets/juntos e misturados.jpg" data-title="Blended" alt="Juntos e Misturados" loading="lazy" class="carousel-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="/assets/la vem os pais.jpg" alt="Lá Vem os Pais" loading="lazy" class="carousel-img">
+                        <img src="/assets/la vem os pais.jpg" data-title="The Week Of" alt="Lá Vem os Pais" loading="lazy" class="carousel-img">
                     </div>
                 </div>
                 <button class="carousel-control right">›</button>
@@ -165,39 +168,39 @@
 
         <!-- Dramas -->
         <section class="carousel-section">
-            <h3 class="section-title">Dramas</h3>
+            <h3 class="section-title" data-translate="section-drama">Dramas</h3>
             <div class="carousel">
                 <button class="carousel-control left">‹</button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/uncutgems 2.jpg" alt="Jóias Brutas"">
-                    </div>
-                    <div class=" carousel-item">
-                        <img src="assets/cobbler.jpg" alt="Trocando os Pés">
+                        <img src="assets/uncutgems 2.jpg" data-title="Uncut Gems" alt="Jóias Brutas">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/meyerowitz.png" alt="Histórias de Meyerowitz">
+                        <img src="assets/cobbler.jpg" data-title="The Cobbler" alt="Trocando os Pés">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/hustle.jpg" alt="Arremessando Alto">
+                        <img src="assets/meyerowitz.png" data-title="The Meyerowitz Stories" alt="Histórias de Meyerowitz">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/spaceman.jpg" alt="O Astronauta">
+                        <img src="assets/hustle.jpg" data-title="Hustle" alt="Arremessando Alto">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/rainoverme.jpg" alt="Reine Sobre Mim">
+                        <img src="assets/spaceman.jpg" data-title="Spaceman" alt="O Astronauta">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/embriagado.jpg" alt="Embriagado de Amor">
+                        <img src="assets/rainoverme.jpg" data-title="Reign Over Me" alt="Reine Sobre Mim">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/espangles.jpg" alt="Espanglês">
+                        <img src="assets/embriagado.jpg" data-title="Punch-Drunk Love" alt="Embriagado de Amor">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ta rindo 1.jpg" alt="Tá rindo de quê">
+                        <img src="assets/espangles.jpg" data-title="Spanglish" alt="Espanglês">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/sandy 1.png" alt="Sandy Wexler">
+                        <img src="assets/ta rindo 1.jpg" data-title="Funny People" alt="Tá rindo de quê">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/sandy 1.png" data-title="Sandy Wexler" alt="Sandy Wexler">
                     </div>
                 </div>
                 <button class="carousel-control right">›</button>
@@ -206,30 +209,30 @@
 
         <!-- Animações -->
         <section class="carousel-section">
-            <h3 class="section-title">Animações</h3>
+            <h3 class="section-title" data-translate="section-animation">Animações</h3>
             <div class="carousel">
                 <button class="carousel-control left">‹</button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/leo.jpg" alt="Leo">
+                        <img src="assets/leo.jpg" data-title="Leo" alt="Leo">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/eight crazy nights.jpg" alt="Oito Noites Loucas">
+                        <img src="assets/eight crazy nights.jpg" data-title="Eight Crazy Nights" alt="Oito Noites Loucas">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ht1.jpg" alt="Hotel Transilvânia">
+                        <img src="assets/ht1.jpg" data-title="Hotel Transylvania" alt="Hotel Transilvânia">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ht2.jpg" alt="Hotel Transilvânia 2">
+                        <img src="assets/ht2.jpg" data-title="Hotel Transylvania 2" alt="Hotel Transilvânia 2">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ht3.jpg" alt="Hotel Transilvânia 3">
+                        <img src="assets/ht3.jpg" data-title="Hotel Transylvania 3" alt="Hotel Transilvânia 3">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ht4.jpg" alt="Hotel Transilvânia 4">
+                        <img src="assets/ht4.jpg" data-title="Hotel Transylvania 4" alt="Hotel Transilvânia 4">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/monica.png" alt="Turma da Monica">
+                        <img src="assets/monica.png" data-title="Monica's Gang" alt="Turma da Monica">
                     </div>
                 </div>
                 <button class="carousel-control right">›</button>
@@ -238,27 +241,27 @@
 
         <!-- Ação e Aventura-->
         <section class="carousel-section">
-            <h3 class="section-title">Ação e Aventura</h3>
+            <h3 class="section-title" data-translate="section-action">Ação e Aventura</h3>
             <div class="carousel">
                 <button class="carousel-control left">‹</button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/misterio no mediterraneo 1.jpg" alt="Mistério no Mediterrâneo">
+                        <img src="assets/misterio no mediterraneo 1.jpg" data-title="Murder Mistery" alt="Mistério no Mediterrâneo">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/misterio no mediterraneo 2.jpg" alt="Mistério no Mediterrâneo 2">
+                        <img src="assets/misterio no mediterraneo 2.jpg" data-title="Murder Mistery 2" alt="Mistério no Mediterrâneo 2">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/bullet.png" alt="À Prova de Balas">
+                        <img src="assets/bullet.png" data-title="Bulletproof" alt="À Prova de Balas">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/faz de conta.webp" alt="Faz de Conta que Acontece">
+                        <img src="assets/faz de conta.webp" data-title="Bedtime Stories" alt="Faz de Conta que Acontece">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/zerando.jpg" alt="Zerando a Vida">
+                        <img src="assets/zerando.jpg" data-title="The Do-Over" alt="Zerando a Vida">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/spaceman.jpg" alt="O Astronauta">
+                        <img src="assets/spaceman.jpg" data-title="Spaceman" alt="O Astronauta">
                     </div>
                 </div>
                 <button class="carousel-control right">›</button>
@@ -267,42 +270,42 @@
 
         <!-- Clássicos do Adam Sandler -->
         <section class="carousel-section">
-            <h3 class="section-title">Clássicos do Adam Sandler</h3>
+            <h3 class="section-title" data-translate="section-classics">Clássicos do Adam Sandler</h3>
             <div class="carousel">
                 <button class="carousel-control left">‹</button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/little nicky.jpg" alt="Little Nicky">
+                        <img src="assets/little nicky.jpg" data-title="Little Nicky" alt="Little Nicky">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/click.jpg" alt="Click">
+                        <img src="assets/click.jpg" data-title="Click" alt="Click">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/bigddaddy.png" alt="O Paizão">
+                        <img src="assets/bigddaddy.png" data-title="Big Daddy" alt="O Paizão">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/50 first dates.png" alt="Como Se Fosse a Primeira Vez">
+                        <img src="assets/50 first dates.png" data-title="50 First Dates" alt="Como Se Fosse a Primeira Vez">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/mr deeds.jpg" alt="A herança de Mr Deeds">
+                        <img src="assets/mr deeds.jpg" data-title="Mr. Deeds" alt="A herança de Mr Deeds">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/grownups.jpg" alt="Gente Grande">
+                        <img src="assets/grownups.jpg" data-title="Grown Ups" alt="Gente Grande">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/um maluco no golfe.jpg" alt="Happy Gilmore">
+                        <img src="assets/um maluco no golfe.jpg" data-title="Happy Gilmore" alt="Um Maluco no Golfe">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/waterboy.webp" alt="O Rei da Água">
+                        <img src="assets/waterboy.webp" data-title="The Waterboy" alt="O Rei da Água">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/afinado.jpg" alt="Afinado no Amor">
+                        <img src="assets/afinado.jpg" data-title="The Wedding Singer" alt="Afinado no Amor">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ir ao mar.jpg" alt="Ir ao Mar">
+                        <img src="assets/ir ao mar.jpg" data-title="Going Overboard" alt="Ir ao Mar">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/airheads.png" alt="Os Cabeça de Vento">
+                        <img src="assets/airheads.png" data-title="Airheads" alt="Os Cabeça de Vento">
                     </div>
                 </div>
                 <button class="carousel-control right">›</button>
@@ -311,24 +314,24 @@
 
         <!-- Filmes que não consigo defender -->
         <section class="carousel-section">
-            <h3 class="section-title">Não consigo defender</h3>
+            <h3 class="section-title" data-translate="section-unrated">Não consigo defender</h3>
             <div class="carousel">
                 <button class="carousel-control left">‹</button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/esse é o meu garoto.jpg" alt="Esse É O Meu Garoto">
+                        <img src="assets/esse é o meu garoto.jpg" data-title="That's My Boy" alt="Esse É O Meu Garoto">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/gemea.jpg" alt="Cada Um Tem a Gêmea Que Merece">
+                        <img src="assets/gemea.jpg" data-title="Jack and Jill" alt="Cada Um Tem a Gêmea Que Merece">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/hubie.jpg" alt="Hubie Halloween">
+                        <img src="assets/hubie.jpg" data-title="Hubie Halloween" alt="Hubie Halloween">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/pixels.jpg" alt="Pixels">
+                        <img src="assets/pixels.jpg" data-title="Pixels" alt="Pixels">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/os 6 ridiculos.jpg" alt="Os 6 Ridículos">
+                        <img src="assets/os 6 ridiculos.jpg" data-title="The Ridiculous 6" alt="Os 6 Ridículos">
                     </div>
                 </div>
                 <button class="carousel-control right">›</button>

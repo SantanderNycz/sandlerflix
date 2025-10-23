@@ -63,6 +63,28 @@ button {
   object-fit: cover;
 }
 
+#languageSwitch {
+  margin-bottom: 6px;
+  padding: 8px 14px;
+  background-color: #111;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: 0.3s;
+}
+
+#languageSwitch:hover {
+  border-color: #fff;
+}
+
+#languageSwitch option {
+  background-color: #111;
+  color: #fff;
+}
+
 /* Header Styles */
 .header {
   position: relative;
