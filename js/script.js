@@ -211,6 +211,12 @@ document.addEventListener("DOMContentLoaded", () => {
       currentLang = e.target.value;
       localStorage.setItem("lang", currentLang);
       aplicarTraducao(currentLang);
+
+      // Dispara evento customizado para HeroRotator
+      document.dispatchEvent(
+        new CustomEvent("languageChange", { detail: { lang: currentLang } })
+      );
+
       carregarFilmes(currentLang);
     });
   }
