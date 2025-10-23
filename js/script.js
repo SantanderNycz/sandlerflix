@@ -77,16 +77,14 @@ function setupSearch() {
   const allSections = Array.from(
     document.querySelectorAll(".carousel-section")
   );
-  const allItems = Array.from(document.querySelectorAll(".carousel-item"));
   let searchSection = null;
 
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase().trim();
+
+    // Limpar busca
     if (query.length === 0) {
-      if (searchSection) {
-        searchSection.remove();
-        searchSection = null;
-      }
+      if (searchSection) searchSection.remove();
       allSections.forEach((s) => (s.style.display = "block"));
       return;
     }
@@ -96,26 +94,35 @@ function setupSearch() {
 
     searchSection = document.createElement("section");
     searchSection.classList.add("carousel-section");
-    const title = document.createElement("h3");
-    title.textContent = `Resultados para "${query}"`;
-    searchSection.appendChild(title);
+
+    const titleEl = document.createElement("h3");
+    titleEl.textContent = `Resultados para "${query}"`;
+    searchSection.appendChild(titleEl);
 
     const carousel = document.createElement("div");
     carousel.classList.add("carousel");
     const container = document.createElement("div");
     container.classList.add("carousel-container");
 
-    const shownTitles = new Set();
-    allItems.forEach((item) => {
-      const img = item.querySelector("img");
-      if (!img) return;
-      const t = img.alt.toLowerCase();
-      if (t.includes(query) && !shownTitles.has(t)) {
-        const clone = item.cloneNode(true);
-        clone.style.display = "block";
-        container.appendChild(clone);
-        shownTitles.add(t);
-      }
+    // Filtrar filmes pelo title (JSON) traduzido
+    const filmesFiltrados = filmesData.filter((f) =>
+      f.title.toLowerCase().includes(query)
+    );
+
+    filmesFiltrados.forEach((filme) => {
+      const card = document.createElement("div");
+      card.classList.add("carousel-item");
+      card.dataset.title = filme.id;
+
+      const img = document.createElement("img");
+      img.src = filme.image;
+      img.alt = filme.title;
+
+      card.appendChild(img);
+      container.appendChild(card);
+
+      // Adicionar evento de clique para abrir modal
+      card.addEventListener("click", () => window.movieModal.open(filme));
     });
 
     carousel.appendChild(container);
