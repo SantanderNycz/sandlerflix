@@ -154,10 +154,10 @@ function setupHeroButtons() {
   const infoButton = document.querySelector(".btn-more");
   const destaque = filmesData[0];
 
-  if (playButton)
-    playButton.addEventListener("click", () =>
-      alert("Funcionalidade de reprodução será implementada!")
-    );
+  // if (playButton)
+  //   playButton.addEventListener("click", () =>
+  //     alert("Funcionalidade de reprodução será implementada!")
+  //   );
   if (infoButton)
     infoButton.addEventListener("click", () => {
       const destaque = filmesData.find((f) => f.title === "Jóias Brutas");
