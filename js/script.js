@@ -168,8 +168,18 @@ function setupMobileMenu() {
 // =================== INTRO VIDEO ===================
 window.addEventListener("load", () => {
   const video = document.getElementById("introVideo");
+  const audio = document.getElementById("tudumAudio");
   const container = document.getElementById("video-container");
-  video.play().catch(() => console.log("Autoplay falhou."));
+
+  // Tenta tocar o vídeo
+  video.play().catch(() => console.log("Autoplay do vídeo falhou."));
+
+  // Toca o áudio junto com o vídeo
+  setTimeout(() => {
+    audio.play().catch(() => console.log("Autoplay do áudio falhou."));
+  }, 1400);
+
+  // Quando o vídeo termina, esconde o container
   video.addEventListener("ended", () => {
     container.style.opacity = 0;
     setTimeout(() => {
