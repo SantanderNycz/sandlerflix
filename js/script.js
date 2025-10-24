@@ -46,6 +46,7 @@ function setupCarouselItems(movieModal) {
     const newItem = item.cloneNode(true);
     item.parentNode.replaceChild(newItem, item);
 
+    // Clique abre modal
     newItem.addEventListener("click", () => movieModal.open(filme));
     newItem.setAttribute("tabindex", "0");
     newItem.setAttribute("role", "button");
@@ -57,6 +58,7 @@ function setupCarouselItems(movieModal) {
       }
     });
 
+    // Efeito hover
     newItem.style.cursor = "pointer";
     newItem.style.transition = "transform 0.2s ease";
     newItem.addEventListener(
@@ -67,6 +69,11 @@ function setupCarouselItems(movieModal) {
       "mouseleave",
       () => (newItem.style.transform = "scale(1)")
     );
+
+    // **Mini player ao clicar no card**
+    newItem.addEventListener("dblclick", () => {
+      if (filme.link) openTrailer(filme.link);
+    });
   });
 }
 
@@ -145,6 +152,8 @@ function handleHeaderScroll() {
 function setupHeroButtons() {
   const playButton = document.querySelector(".btn-play");
   const infoButton = document.querySelector(".btn-more");
+  const destaque = filmesData[0];
+
   if (playButton)
     playButton.addEventListener("click", () =>
       alert("Funcionalidade de reprodução será implementada!")
@@ -188,7 +197,41 @@ window.addEventListener("load", () => {
   });
 });
 
-// =================== TRADUÇÃO ===================
+// =================== MINI PLAYER ===================
+const overlay = document.getElementById("trailerOverlay");
+const trailerIframe = document.getElementById("trailerIframe");
+const closeBtn = document.getElementById("closeTrailer");
+
+// Função para abrir o trailer do YouTube
+function openTrailer(youtubeUrl) {
+  const autoplayUrl = youtubeUrl.includes("?")
+    ? youtubeUrl + "&autoplay=1"
+    : youtubeUrl + "?autoplay=1";
+
+  trailerIframe.src = autoplayUrl;
+  overlay.style.display = "flex";
+}
+
+// Fecha o overlay e para o vídeo
+function closeTrailer() {
+  trailerIframe.src = "";
+  overlay.style.display = "none";
+}
+
+closeBtn.addEventListener("click", closeTrailer);
+overlay.addEventListener("click", (e) => {
+  if (e.target === overlay) closeTrailer();
+});
+
+document.querySelectorAll(".btn-play").forEach((button) => {
+  button.addEventListener("click", () => {
+    openTrailer(
+      "https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4"
+    );
+  });
+});
+
+// ==================== TRADUÇÃO =====================
 let translations = {};
 
 async function carregarTraducao(lang = "pt") {
@@ -220,6 +263,25 @@ function aplicarTraducao(lang = "pt") {
 document.addEventListener("DOMContentLoaded", () => {
   carregarTraducao(currentLang);
   carregarFilmes(currentLang);
+
+  // Botão 'Assistir' no modal
+  const modalPlayBtn = document.querySelector(".btn-modal-play");
+
+  if (modalPlayBtn && window.movieModal) {
+    const originalOpen = window.movieModal.open;
+    window.movieModal.open = function (filme) {
+      originalOpen(filme);
+
+      if (filme.link) {
+        modalPlayBtn.onclick = () => {
+          window.movieModal.close();
+          openTrailer(filme.link);
+        };
+      } else {
+        modalPlayBtn.onclick = null;
+      }
+    };
+  }
 
   const languageSwitch = document.getElementById("languageSwitch");
   if (languageSwitch) {
