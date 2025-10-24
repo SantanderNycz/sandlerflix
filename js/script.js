@@ -149,6 +149,20 @@ function handleHeaderScroll() {
   });
 }
 
+const navLinks = document.querySelectorAll(".main-nav a");
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault(); // opcional, se não quiser que o link navegue
+
+    // Remove a classe active de todos
+    navLinks.forEach((l) => l.classList.remove("active"));
+
+    // Adiciona active ao clicado
+    link.classList.add("active");
+  });
+});
+
 function setupHeroButtons() {
   const playButton = document.querySelector(".btn-play");
   const infoButton = document.querySelector(".btn-more");
