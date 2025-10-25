@@ -79,13 +79,16 @@ class Carousel {
   }
 
   enableSwipe() {
-    let startX, endX;
+    let startX = 0;
+    let endX = 0;
+    let isDragging = false;
     const swipeThreshold = 50;
 
     this.container.addEventListener(
       "touchstart",
       (e) => {
         startX = e.touches[0].clientX;
+        isDragging = true;
       },
       { passive: true }
     );
@@ -93,44 +96,80 @@ class Carousel {
     this.container.addEventListener(
       "touchmove",
       (e) => {
+        if (!isDragging) return;
         endX = e.touches[0].clientX;
       },
       { passive: true }
     );
 
     this.container.addEventListener("touchend", () => {
+      if (!isDragging) return;
+
       const diffX = startX - endX;
 
       if (Math.abs(diffX) > swipeThreshold) {
         if (diffX > 0) {
+          // Swipe para a esquerda = avançar
           this.scrollRight();
         } else {
+          // Swipe para a direita = voltar
           this.scrollLeft();
         }
       }
+
+      isDragging = false;
+      startX = 0;
+      endX = 0;
+    });
+
+    // Cancelar o swipe se o toque for cancelado
+    this.container.addEventListener("touchcancel", () => {
+      isDragging = false;
+      startX = 0;
+      endX = 0;
     });
   }
 
   scrollLeft() {
     if (this.isAnimating) return;
 
+    const isMobile = window.innerWidth < 1200;
     const scrollDistance = this.itemsToScroll * (this.itemWidth + this.gap);
-    this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
+
+    if (isMobile) {
+      // Mobile: ScrollLeft aumenta a posição (menos negativo)
+      this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
+    } else {
+      // Desktop: ScrollLeft aumenta a posição (menos negativo)
+      this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
+    }
+
     this.updatePosition();
   }
 
   scrollRight() {
     if (this.isAnimating) return;
 
+    const isMobile = window.innerWidth < 1200;
     const scrollDistance = this.itemsToScroll * (this.itemWidth + this.gap);
     const containerWidth = this.container.offsetWidth;
     const totalContentWidth = this.items.length * (this.itemWidth + this.gap);
     const maxScroll = -(totalContentWidth - containerWidth);
 
-    this.currentPosition = Math.max(
-      this.currentPosition - scrollDistance,
-      maxScroll
-    );
+    if (isMobile) {
+      // Mobile: ScrollRight diminui a posição (mais negativo)
+      this.currentPosition = Math.max(
+        this.currentPosition - scrollDistance,
+        maxScroll
+      );
+    } else {
+      // Desktop: ScrollRight diminui a posição (mais negativo)
+      this.currentPosition = Math.max(
+        this.currentPosition - scrollDistance,
+        maxScroll
+      );
+    }
+
     this.updatePosition();
   }
 
@@ -146,7 +185,15 @@ class Carousel {
       }, 500);
     }
 
+    // Sempre usa o valor direto (sem inverter)
     this.container.style.transform = `translateX(${this.currentPosition}px)`;
+
+    // Forçar reflow para garantir que a transição seja aplicada
+    if (instant) {
+      this.container.offsetHeight;
+      this.container.style.transition = "transform 0.5s ease-in-out";
+    }
+
     this.updateControls();
   }
 
