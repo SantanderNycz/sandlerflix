@@ -737,6 +737,10 @@ button {
 
 /* Ajustes responsivos para o carrossel */
 @media (max-width: 1200px) {
+  .logo {
+    width: 140px;
+  }
+
   /* OCULTAR SETAS EM TELAS MENORES QUE 1200px */
   .carousel-control {
     display: none !important;
@@ -765,6 +769,10 @@ button {
 }
 
 @media (max-width: 992px) {
+  .logo {
+    width: 140px;
+  }
+
   .carousel-item {
     width: calc((100% - 24px) / 4);
   }
@@ -793,6 +801,10 @@ button {
 }
 
 @media (max-width: 768px) {
+  .logo {
+    width: 140px;
+  }
+
   .main-nav {
     display: none;
   }
@@ -842,9 +854,18 @@ button {
   .modal-content {
     width: 90%;
   }
+
+  .footer {
+    margin-top: 0;
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 576px) {
+  .logo {
+    width: 140px;
+  }
+
   .search-box {
     display: none;
   }
@@ -889,8 +910,13 @@ button {
     margin-bottom: 15px;
   }
 
+  .footer {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
   .footer-links ul {
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
   }
 }
