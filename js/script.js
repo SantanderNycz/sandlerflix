@@ -194,6 +194,15 @@ window.addEventListener("load", () => {
   const audio = document.getElementById("tudumAudio");
   const container = document.getElementById("video-container");
 
+  const isMobile = window.innerWidth < 1200;
+  const videoSource = video.querySelector("source");
+
+  if (isMobile && video.dataset.mobileSrc) {
+    // Troca para o vídeo mobile
+    videoSource.src = video.dataset.mobileSrc;
+    video.load();
+  }
+
   // Tenta tocar o vídeo
   video.play().catch(() => console.log("Autoplay do vídeo falhou."));
 
@@ -283,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (modalPlayBtn && window.movieModal) {
     const originalOpen = window.movieModal.open;
-    window.movieModal.open = function (filme) {
+    window.movieModal.open = (filme) => {
       originalOpen(filme);
 
       if (filme.link) {
