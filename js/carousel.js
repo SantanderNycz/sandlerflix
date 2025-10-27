@@ -74,7 +74,6 @@ class Carousel {
       this.controls.right.addEventListener("click", () => this.scrollRight());
     }
 
-    // Swipe para dispositivos móveis
     this.enableSwipe();
   }
 
@@ -105,14 +104,13 @@ class Carousel {
     this.container.addEventListener("touchend", () => {
       if (!isDragging) return;
 
+      // Calcula a diferença: positivo = swipe para esquerda, negativo = swipe para direita
       const diffX = startX - endX;
 
       if (Math.abs(diffX) > swipeThreshold) {
         if (diffX > 0) {
-          // Swipe para a esquerda = avançar
           this.scrollRight();
         } else {
-          // Swipe para a direita = voltar
           this.scrollLeft();
         }
       }
@@ -133,16 +131,9 @@ class Carousel {
   scrollLeft() {
     if (this.isAnimating) return;
 
-    const isMobile = window.innerWidth < 1200;
     const scrollDistance = this.itemsToScroll * (this.itemWidth + this.gap);
 
-    if (isMobile) {
-      // Mobile: ScrollLeft aumenta a posição (menos negativo)
-      this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
-    } else {
-      // Desktop: ScrollLeft aumenta a posição (menos negativo)
-      this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
-    }
+    this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
 
     this.updatePosition();
   }
@@ -150,25 +141,15 @@ class Carousel {
   scrollRight() {
     if (this.isAnimating) return;
 
-    const isMobile = window.innerWidth < 1200;
     const scrollDistance = this.itemsToScroll * (this.itemWidth + this.gap);
     const containerWidth = this.container.offsetWidth;
     const totalContentWidth = this.items.length * (this.itemWidth + this.gap);
     const maxScroll = -(totalContentWidth - containerWidth);
 
-    if (isMobile) {
-      // Mobile: ScrollRight diminui a posição (mais negativo)
-      this.currentPosition = Math.max(
-        this.currentPosition - scrollDistance,
-        maxScroll
-      );
-    } else {
-      // Desktop: ScrollRight diminui a posição (mais negativo)
-      this.currentPosition = Math.max(
-        this.currentPosition - scrollDistance,
-        maxScroll
-      );
-    }
+    this.currentPosition = Math.max(
+      this.currentPosition - scrollDistance,
+      maxScroll
+    );
 
     this.updatePosition();
   }
@@ -185,7 +166,6 @@ class Carousel {
       }, 500);
     }
 
-    // Sempre usa o valor direto (sem inverter)
     this.container.style.transform = `translateX(${this.currentPosition}px)`;
 
     // Forçar reflow para garantir que a transição seja aplicada
@@ -218,7 +198,6 @@ class Carousel {
   }
 }
 
-// Inicializar todos os carrosséis quando o DOM estiver carregado
 document.addEventListener("DOMContentLoaded", () => {
   const carousels = document.querySelectorAll(".carousel");
 
