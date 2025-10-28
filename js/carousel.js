@@ -59,8 +59,17 @@ class Carousel {
     }
 
     // Calcular a largura de um item
-    if (this.items[0]) {
-      this.itemWidth = this.items[0].offsetWidth;
+    if (this.items.length > 0) {
+      // Largura total do container - (espaço entre itens * (número de itens visíveis - 1))
+      // Dividido pelo número de itens visíveis
+      const containerWidth = this.carousel.offsetWidth;
+      const totalGap = this.gap * (this.visibleItems - 1);
+      this.itemWidth = (containerWidth - totalGap) / this.visibleItems;
+
+      // Aplicar a largura calculada a todos os itens para garantir consistência
+      this.items.forEach((item) => {
+        item.style.width = `${this.itemWidth}px`;
+      });
     }
   }
 
@@ -80,6 +89,8 @@ class Carousel {
   enableSwipe() {
     let startX = 0;
     let endX = 0;
+    let startY = 0; // Adicionado
+    let endY = 0; // Adicionado
     let isDragging = false;
     const swipeThreshold = 50;
 
@@ -87,6 +98,7 @@ class Carousel {
       "touchstart",
       (e) => {
         startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY; // Adicionado para rastrear o eixo Y
         isDragging = true;
       },
       { passive: true }
@@ -97,12 +109,25 @@ class Carousel {
       (e) => {
         if (!isDragging) return;
         endX = e.touches[0].clientX;
+        endY = e.touches[0].clientY; // Adicionado para rastrear o eixo Y
+
+        const diffX = Math.abs(startX - endX);
+        const diffY = Math.abs(startY - endY);
+
+        // Se o movimento horizontal for significativamente maior que o vertical,
+        // impede o scroll da página (comportamento padrão)
+        if (diffX > diffY) {
+          e.preventDefault();
+        }
       },
-      { passive: true }
+      { passive: false } // Alterado para false para permitir preventDefault
     );
 
     this.container.addEventListener("touchend", () => {
       if (!isDragging) return;
+
+      // Apenas para garantir que o endY está definido, embora não seja estritamente necessário no touchend
+      // A lógica de preventDefault já foi tratada no touchmove
 
       // Calcula a diferença: positivo = swipe para esquerda, negativo = swipe para direita
       const diffX = startX - endX;
