@@ -609,5 +609,18 @@
     "link": "https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4",
     "rating": "4.0",
     "duration": "1h 30m"
+  },
+  {
+    "id": "Billy Madison",
+    "title": "Billy Madison",
+    "year": "1995",
+    "genres": "Comédia",
+    "description": "Billy é o filho irresponsável de Brian Madison, magnata de uma cadeia de hotéis. Ele tem 27 anos e só pensa em beber cerveja, ler revistas masculinas e se divertir com seus amigos tolos. O jovem espera herdar a fortuna da família, mas fica chocado ao saber que o pai determinou que ele não leva nada, a menos que conclua o segundo grau em 24 semanas. É uma missão bem difícil, já que Bill nunca passou da primeira série. Determinado a provar ao pai que é capaz, ele se matricula em uma escola.",
+    "role": "Billy Madison",
+    "image": "assets/billy.jpg",
+    "banner": "assets/billy.jpg",
+    "link": "https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4",
+    "rating": "4.0",
+    "duration": "1h 29m"
   }
 ]
