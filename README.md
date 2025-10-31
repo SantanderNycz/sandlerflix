@@ -1,6 +1,6 @@
 # Sandlerflix 🎬
 
-Uma página de streaming temática inspirada no estilo Netflix, com carrossel interativo, intro em vídeo, modal de detalhes dos filmes, busca dinâmica e tradução. Projeto pessoal de front-end criado por **Leonardo (Nycz)**.
+Uma página de streaming temática inspirada no estilo Netflix, baseado apenas na carreira cinematográfica de um dos melhores atores de todos os tempos. O projeto conta com carrossel interativo, intro em vídeo, modal de detalhes dos filmes, busca dinâmica e tradução. Projeto pessoal de front-end criado por **Leonardo (Nycz)**.
 
 ---
 
