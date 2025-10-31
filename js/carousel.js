@@ -89,16 +89,16 @@ class Carousel {
   enableSwipe() {
     let startX = 0;
     let endX = 0;
-    let startY = 0; // Adicionado
-    let endY = 0; // Adicionado
+    let startY = 0;
+    let endY = 0;
     let isDragging = false;
-    const swipeThreshold = 50;
+    const swipeThreshold = 30;
 
     this.container.addEventListener(
       "touchstart",
       (e) => {
         startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY; // Adicionado para rastrear o eixo Y
+        startY = e.touches[0].clientY;
         isDragging = true;
       },
       { passive: true }
@@ -109,13 +109,12 @@ class Carousel {
       (e) => {
         if (!isDragging) return;
         endX = e.touches[0].clientX;
-        endY = e.touches[0].clientY; // Adicionado para rastrear o eixo Y
+        endY = e.touches[0].clientY;
 
         const diffX = Math.abs(startX - endX);
         const diffY = Math.abs(startY - endY);
 
-        // Se o movimento horizontal for significativamente maior que o vertical,
-        // impede o scroll da página (comportamento padrão)
+        // Se o movimento horizontal for significativamente maior que o vertical,impede o scroll da página (comportamento padrão)
         if (diffX > diffY) {
           e.preventDefault();
         }
@@ -125,9 +124,6 @@ class Carousel {
 
     this.container.addEventListener("touchend", () => {
       if (!isDragging) return;
-
-      // Apenas para garantir que o endY está definido, embora não seja estritamente necessário no touchend
-      // A lógica de preventDefault já foi tratada no touchmove
 
       // Calcula a diferença: positivo = swipe para esquerda, negativo = swipe para direita
       const diffX = startX - endX;
@@ -171,10 +167,14 @@ class Carousel {
     const totalContentWidth = this.items.length * (this.itemWidth + this.gap);
     const maxScroll = -(totalContentWidth - containerWidth);
 
-    this.currentPosition = Math.max(
-      this.currentPosition - scrollDistance,
-      maxScroll
-    );
+    if (this.currentPosition <= maxScroll) {
+      this.currentPosition = 0; // volta ao início
+    } else {
+      this.currentPosition = Math.max(
+        this.currentPosition - scrollDistance,
+        maxScroll
+      );
+    }
 
     this.updatePosition();
   }
@@ -183,7 +183,8 @@ class Carousel {
     if (instant) {
       this.container.style.transition = "none";
     } else {
-      this.container.style.transition = "transform 0.5s ease-in-out";
+      this.container.style.transition =
+        "transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)";
       this.isAnimating = true;
 
       setTimeout(() => {
