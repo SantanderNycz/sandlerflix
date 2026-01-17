@@ -41,6 +41,7 @@ Uma página de streaming temática inspirada no estilo Netflix, baseado apenas n
 
 ## 🛠️ Estrutura do projeto
 
+```
 /
 ├── public/
 │ ├── index.html
@@ -60,6 +61,7 @@ Uma página de streaming temática inspirada no estilo Netflix, baseado apenas n
 │ ├── responsive.css
 │ └── …
 └── README.md
+```
 
 - **data/**: contém os arquivos estáticos JSON com dados dos filmes e traduções.
 - **src/**: lógicas de carrossel, modal, controle de idioma, busca etc.
@@ -117,3 +119,4 @@ Melhorar acessibilidade (foco, roles, descrições aria-\*, navegação por tecl
 Animações mais suaves com GSAP ou Web Animations API.
 
 Armazenamento remoto dos dados (API) em vez de JSON estáticos.
+
