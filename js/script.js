@@ -1,6 +1,65 @@
 import "./modal.js";
 export let filmesData = [];
 
+// =================== INTRO VIDEO ===================
+window.addEventListener("load", () => {
+  const video = document.getElementById("introVideo");
+  const audio = document.getElementById("tudumAudio");
+  const container = document.getElementById("video-container");
+
+  if (!container || !video) {
+    console.warn("Elementos da intro não encontrados");
+    return;
+  }
+
+  // Bloquea o scroll durante a intro
+  document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";
+  document.body.style.width = "100%";
+
+  const isMobile = window.innerWidth < 1200;
+  const videoSource = video.querySelector("source");
+
+  if (isMobile && video.dataset.mobileSrc) {
+    videoSource.src = video.dataset.mobileSrc;
+    video.load();
+  }
+
+  // Tenta tocar o vídeo
+  video.play().catch(() => console.log("Autoplay do vídeo falhou."));
+
+  // Toca o áudio junto com o vídeo
+  setTimeout(() => {
+    audio?.play().catch(() => console.log("Autoplay do áudio falhou."));
+  }, 1400);
+
+  function hideIntro() {
+    container.style.transition = "opacity 0.5s ease";
+    container.style.opacity = "0";
+
+    setTimeout(() => {
+      container.style.display = "none";
+
+      // Restaurar scroll - para Safari
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+
+      // Forçar reflow no safari
+      void document.body.offsetHeight;
+    }, 500);
+  }
+
+  // Quando o vídeo termina, esconde o container
+  video.addEventListener("ended", hideIntro);
+
+  // timeout de segurança
+  setTimeout(hideIntro, 7000);
+
+  // Pular video no click
+  container.addEventListener("click", hideIntro);
+});
+
 // =================== CARREGAR FILMES ===================
 let currentLang = localStorage.getItem("lang") || "pt";
 
@@ -63,11 +122,11 @@ function setupCarouselItems(movieModal) {
     newItem.style.transition = "transform 0.2s ease";
     newItem.addEventListener(
       "mouseenter",
-      () => (newItem.style.transform = "scale(1.05)")
+      () => (newItem.style.transform = "scale(1.05)"),
     );
     newItem.addEventListener(
       "mouseleave",
-      () => (newItem.style.transform = "scale(1)")
+      () => (newItem.style.transform = "scale(1)"),
     );
 
     // **Mini player ao clicar no card**
@@ -82,7 +141,7 @@ function setupSearch() {
   const searchInput = document.getElementById("searchInput");
   const mainContent = document.querySelector(".main-content");
   const allSections = Array.from(
-    document.querySelectorAll(".carousel-section")
+    document.querySelectorAll(".carousel-section"),
   );
   let searchSection = null;
 
@@ -113,7 +172,7 @@ function setupSearch() {
 
     // Filtrar filmes pelo title (JSON) traduzido
     const filmesFiltrados = filmesData.filter((f) =>
-      f.title.toLowerCase().includes(query)
+      f.title.toLowerCase().includes(query),
     );
 
     filmesFiltrados.forEach((filme) => {
@@ -184,41 +243,9 @@ function setupMobileMenu() {
   const mainNav = document.querySelector(".main-nav");
   if (mobileMenuBtn && mainNav)
     mobileMenuBtn.addEventListener("click", () =>
-      mainNav.classList.toggle("active")
+      mainNav.classList.toggle("active"),
     );
 }
-
-// =================== INTRO VIDEO ===================
-window.addEventListener("load", () => {
-  const video = document.getElementById("introVideo");
-  const audio = document.getElementById("tudumAudio");
-  const container = document.getElementById("video-container");
-
-  const isMobile = window.innerWidth < 1200;
-  const videoSource = video.querySelector("source");
-
-  if (isMobile && video.dataset.mobileSrc) {
-    // Troca para o vídeo mobile
-    videoSource.src = video.dataset.mobileSrc;
-    video.load();
-  }
-
-  // Tenta tocar o vídeo
-  video.play().catch(() => console.log("Autoplay do vídeo falhou."));
-
-  // Toca o áudio junto com o vídeo
-  setTimeout(() => {
-    audio.play().catch(() => console.log("Autoplay do áudio falhou."));
-  }, 1400);
-
-  // Quando o vídeo termina, esconde o container
-  video.addEventListener("ended", () => {
-    container.style.opacity = 0;
-    setTimeout(() => {
-      container.style.display = "none";
-    }, 500);
-  });
-});
 
 // =================== MINI PLAYER ===================
 const overlay = document.getElementById("trailerOverlay");
@@ -249,7 +276,7 @@ overlay.addEventListener("click", (e) => {
 document.querySelectorAll(".btn-play").forEach((button) => {
   button.addEventListener("click", () => {
     openTrailer(
-      "https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4"
+      "https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4",
     );
   });
 });
@@ -316,7 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Dispara evento customizado para HeroRotator
       document.dispatchEvent(
-        new CustomEvent("languageChange", { detail: { lang: currentLang } })
+        new CustomEvent("languageChange", { detail: { lang: currentLang } }),
       );
 
       carregarFilmes(currentLang);
