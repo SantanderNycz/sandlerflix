@@ -12,7 +12,6 @@ window.addEventListener("load", () => {
     return;
   }
 
-  // Bloquea o scroll durante a intro
   document.body.style.overflow = "hidden";
   document.body.style.position = "fixed";
   document.body.style.width = "100%";
@@ -25,10 +24,8 @@ window.addEventListener("load", () => {
     video.load();
   }
 
-  // Tenta tocar o vídeo
   video.play().catch(() => console.log("Autoplay do vídeo falhou."));
 
-  // Toca o áudio junto com o vídeo
   setTimeout(() => {
     audio?.play().catch(() => console.log("Autoplay do áudio falhou."));
   }, 1400);
@@ -47,26 +44,33 @@ window.addEventListener("load", () => {
 
     setTimeout(() => {
       container.style.display = "none";
-
-      // Restaurar scroll - para Safari
       document.body.style.overflow = "";
       document.body.style.position = "";
       document.body.style.width = "";
-
-      // Forçar reflow no safari
       void document.body.offsetHeight;
     }, 500);
   }
 
-  // Quando o vídeo termina, esconde o container
   video.addEventListener("ended", hideIntro);
-
-  // timeout de segurança
   setTimeout(hideIntro, 7000);
-
-  // Pular video no click
   container.addEventListener("click", hideIntro);
 });
+
+// =================== SKELETON LOADING ===================
+function mostrarSkeletons() {
+  const containers = document.querySelectorAll(".carousel-container");
+  containers.forEach((container) => {
+    for (let i = 0; i < 6; i++) {
+      const skeleton = document.createElement("div");
+      skeleton.classList.add("carousel-item", "skeleton-card");
+      container.appendChild(skeleton);
+    }
+  });
+}
+
+function removerSkeletons() {
+  document.querySelectorAll(".skeleton-card").forEach((el) => el.remove());
+}
 
 // =================== CARREGAR FILMES ===================
 let currentLang = localStorage.getItem("lang") || "pt";
@@ -74,12 +78,16 @@ let currentLang = localStorage.getItem("lang") || "pt";
 async function carregarFilmes(lang = "pt") {
   const file = lang === "pt" ? "./data/filmes.json" : "./data/movies.json";
 
+  mostrarSkeletons();
+
   try {
     const response = await fetch(file);
     filmesData = await response.json();
+    removerSkeletons();
     atualizarFilmesNaTela();
     if (window.movieModal) setupCarouselItems(window.movieModal);
   } catch (err) {
+    removerSkeletons();
     console.error("Erro ao carregar filmes:", err);
   }
 }
@@ -87,14 +95,10 @@ async function carregarFilmes(lang = "pt") {
 // Atualiza títulos e infos dos cards
 function atualizarFilmesNaTela() {
   const cards = document.querySelectorAll(".carousel-item img");
-
   cards.forEach((card) => {
     const movieKey = card.dataset.title;
     const movie = filmesData.find((f) => f.id === movieKey);
-
-    if (movie) {
-      card.alt = movie.title;
-    }
+    if (movie) card.alt = movie.title;
   });
 }
 
@@ -113,11 +117,13 @@ function setupCarouselItems(movieModal) {
     const newItem = item.cloneNode(true);
     item.parentNode.replaceChild(newItem, item);
 
-    // Clique abre modal
-    newItem.addEventListener("click", () => movieModal.open(filme));
     newItem.setAttribute("tabindex", "0");
     newItem.setAttribute("role", "button");
     newItem.setAttribute("aria-label", `Ver detalhes de ${filme.title}`);
+    newItem.style.cursor = "pointer";
+
+    // Clique abre modal
+    newItem.addEventListener("click", () => movieModal.open(filme));
     newItem.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -125,19 +131,34 @@ function setupCarouselItems(movieModal) {
       }
     });
 
-    // Efeito hover
-    newItem.style.cursor = "pointer";
-    newItem.style.transition = "transform 0.2s ease";
-    newItem.addEventListener(
-      "mouseenter",
-      () => (newItem.style.transform = "scale(1.05)"),
-    );
-    newItem.addEventListener(
-      "mouseleave",
-      () => (newItem.style.transform = "scale(1)"),
-    );
+    // Hover overlay
+    const hoverOverlay = document.createElement("div");
+    hoverOverlay.classList.add("card-hover-overlay");
+    hoverOverlay.innerHTML = `
+      <div class="card-hover-content">
+        <button class="card-play-btn" aria-label="Assistir ${filme.title}">
+          <i class="fas fa-play"></i>
+        </button>
+        <div class="card-hover-info">
+          <span class="card-hover-title">${filme.title}</span>
+          <div class="card-hover-meta">
+            ${filme.year ? `<span>${filme.year}</span>` : ""}
+            ${filme.rating ? `<span><i class="fas fa-star"></i> ${filme.rating}</span>` : ""}
+          </div>
+          <div class="card-hover-genres">${filme.genres || ""}</div>
+        </div>
+      </div>
+    `;
+    newItem.appendChild(hoverOverlay);
 
-    // **Mini player ao clicar no card**
+    // Botão play no hover abre trailer diretamente
+    const cardPlayBtn = hoverOverlay.querySelector(".card-play-btn");
+    cardPlayBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (filme.link) openTrailer(filme.link);
+    });
+
+    // Duplo clique também abre trailer
     newItem.addEventListener("dblclick", () => {
       if (filme.link) openTrailer(filme.link);
     });
@@ -148,15 +169,12 @@ function setupCarouselItems(movieModal) {
 function setupSearch() {
   const searchInput = document.getElementById("searchInput");
   const mainContent = document.querySelector(".main-content");
-  const allSections = Array.from(
-    document.querySelectorAll(".carousel-section"),
-  );
+  const allSections = Array.from(document.querySelectorAll(".carousel-section"));
   let searchSection = null;
 
   searchInput.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase().trim();
 
-    // Limpar busca
     if (query.length === 0) {
       if (searchSection) searchSection.remove();
       allSections.forEach((s) => (s.style.display = "block"));
@@ -178,9 +196,8 @@ function setupSearch() {
     const container = document.createElement("div");
     container.classList.add("carousel-container");
 
-    // Filtrar filmes pelo title (JSON) traduzido
     const filmesFiltrados = filmesData.filter((f) =>
-      f.title.toLowerCase().includes(query),
+      f.title.toLowerCase().includes(query)
     );
 
     filmesFiltrados.forEach((filme) => {
@@ -195,7 +212,6 @@ function setupSearch() {
       card.appendChild(img);
       container.appendChild(card);
 
-      // Adicionar evento de clique para abrir modal
       card.addEventListener("click", () => window.movieModal.open(filme));
     });
 
@@ -205,40 +221,27 @@ function setupSearch() {
   });
 }
 
-// =================== HEADER, HERO, MOBILE ===================
+// =================== HEADER ===================
 function handleHeaderScroll() {
   const header = document.querySelector(".header");
   if (!header) return;
-  const scrollThreshold = 50;
   window.addEventListener("scroll", () => {
-    if (window.scrollY > scrollThreshold) header.classList.add("scrolled");
+    if (window.scrollY > 50) header.classList.add("scrolled");
     else header.classList.remove("scrolled");
   });
 }
 
 const navLinks = document.querySelectorAll(".main-nav a");
-
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
-    e.preventDefault(); // opcional, se não quiser que o link navegue
-
-    // Remove a classe active de todos
+    e.preventDefault();
     navLinks.forEach((l) => l.classList.remove("active"));
-
-    // Adiciona active ao clicado
     link.classList.add("active");
   });
 });
 
 function setupHeroButtons() {
-  const playButton = document.querySelector(".btn-play");
   const infoButton = document.querySelector(".btn-more");
-  const destaque = filmesData[0];
-
-  // if (playButton)
-  //   playButton.addEventListener("click", () =>
-  //     alert("Funcionalidade de reprodução será implementada!")
-  //   );
   if (infoButton)
     infoButton.addEventListener("click", () => {
       const destaque = filmesData.find((f) => f.title === "Jóias Brutas");
@@ -251,7 +254,7 @@ function setupMobileMenu() {
   const mainNav = document.querySelector(".main-nav");
   if (mobileMenuBtn && mainNav)
     mobileMenuBtn.addEventListener("click", () =>
-      mainNav.classList.toggle("active"),
+      mainNav.classList.toggle("active")
     );
 }
 
@@ -260,27 +263,25 @@ const overlay = document.getElementById("trailerOverlay");
 const trailerIframe = document.getElementById("trailerIframe");
 const closeBtn = document.getElementById("closeTrailer");
 
-// Função para abrir o trailer do YouTube
 function openTrailer(youtubeUrl) {
   let embedUrl = youtubeUrl;
 
   if (youtubeUrl.includes("watch?v=")) {
     const videoId = new URL(youtubeUrl).searchParams.get("v");
     embedUrl = `https://www.youtube.com/embed/${videoId}`;
-  } else if (youtubeUrl.includes("youtube.br/")) {
-    const videoId = youtubeUrl.split("youtube.be/")[1].split("?")[0];
+  } else if (youtubeUrl.includes("youtu.be/")) {
+    const videoId = youtubeUrl.split("youtu.be/")[1].split("?")[0];
     embedUrl = `https://www.youtube.com/embed/${videoId}`;
   }
 
-  const autoplayUrl = youtubeUrl.includes("?")
-    ? youtubeUrl + "&autoplay=1"
-    : youtubeUrl + "?autoplay=1";
+  const autoplayUrl = embedUrl.includes("?")
+    ? embedUrl + "&autoplay=1"
+    : embedUrl + "?autoplay=1";
 
   trailerIframe.src = autoplayUrl;
   overlay.style.display = "flex";
 }
 
-// Fecha o overlay e para o vídeo
 function closeTrailer() {
   trailerIframe.src = "";
   overlay.style.display = "none";
@@ -293,13 +294,11 @@ overlay.addEventListener("click", (e) => {
 
 document.querySelectorAll(".btn-play").forEach((button) => {
   button.addEventListener("click", () => {
-    openTrailer(
-      "https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4",
-    );
+    openTrailer("https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4");
   });
 });
 
-// ==================== TRADUÇÃO =====================
+// =================== TRADUÇÃO ===================
 let translations = {};
 
 async function carregarTraducao(lang = "pt") {
@@ -317,8 +316,7 @@ function aplicarTraducao(lang = "pt") {
   });
 
   const searchInput = document.getElementById("searchInput");
-  if (searchInput)
-    searchInput.placeholder = translations[lang]["search-placeholder"];
+  if (searchInput) searchInput.placeholder = translations[lang]["search-placeholder"];
   const btnPlay = document.querySelector(".btn-play");
   if (btnPlay) btnPlay.textContent = translations[lang]["btn-play"];
   const btnMore = document.querySelector(".btn-more");
@@ -327,19 +325,16 @@ function aplicarTraducao(lang = "pt") {
   if (heroDesc) heroDesc.textContent = translations[lang]["hero-description"];
 }
 
-// =================== SWITCH IDIOMA ===================
+// =================== INIT ===================
 document.addEventListener("DOMContentLoaded", () => {
   carregarTraducao(currentLang);
   carregarFilmes(currentLang);
 
-  // Botão 'Assistir' no modal
   const modalPlayBtn = document.querySelector(".btn-modal-play");
-
   if (modalPlayBtn && window.movieModal) {
     const originalOpen = window.movieModal.open;
     window.movieModal.open = (filme) => {
       originalOpen(filme);
-
       if (filme.link) {
         modalPlayBtn.onclick = () => {
           window.movieModal.close();
@@ -358,12 +353,9 @@ document.addEventListener("DOMContentLoaded", () => {
       currentLang = e.target.value;
       localStorage.setItem("lang", currentLang);
       aplicarTraducao(currentLang);
-
-      // Dispara evento customizado para HeroRotator
       document.dispatchEvent(
-        new CustomEvent("languageChange", { detail: { lang: currentLang } }),
+        new CustomEvent("languageChange", { detail: { lang: currentLang } })
       );
-
       carregarFilmes(currentLang);
     });
   }
