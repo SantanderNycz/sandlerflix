@@ -33,7 +33,15 @@ window.addEventListener("load", () => {
     audio?.play().catch(() => console.log("Autoplay do áudio falhou."));
   }, 1400);
 
+  let introHidden = false;
+
   function hideIntro() {
+    if (introHidden) return;
+    introHidden = true;
+
+    video.pause();
+    video.currentTime = 0;
+
     container.style.transition = "opacity 0.5s ease";
     container.style.opacity = "0";
 
@@ -254,6 +262,16 @@ const closeBtn = document.getElementById("closeTrailer");
 
 // Função para abrir o trailer do YouTube
 function openTrailer(youtubeUrl) {
+  let embedUrl = youtubeUrl;
+
+  if (youtubeUrl.includes("watch?v=")) {
+    const videoId = new URL(youtubeUrl).searchParams.get("v");
+    embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  } else if (youtubeUrl.includes("youtube.br/")) {
+    const videoId = youtubeUrl.split("youtube.be/")[1].split("?")[0];
+    embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  }
+
   const autoplayUrl = youtubeUrl.includes("?")
     ? youtubeUrl + "&autoplay=1"
     : youtubeUrl + "?autoplay=1";
