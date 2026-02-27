@@ -1,46 +1,67 @@
-// carousel.js - Implementação simplificada e funcional
+// carousel.js
 class Carousel {
   constructor(carouselElement) {
     this.carousel = carouselElement;
     this.container = carouselElement.querySelector(".carousel-container");
-    this.items = Array.from(carouselElement.querySelectorAll(".carousel-item"));
+    this.originalItems = Array.from(
+      carouselElement.querySelectorAll(".carousel-item"),
+    );
     this.controls = {
       left: carouselElement.querySelector(".carousel-control.left"),
       right: carouselElement.querySelector(".carousel-control.right"),
     };
 
-    this.currentPosition = 0;
-    this.itemWidth = 0;
     this.gap = 8;
     this.visibleItems = 6;
     this.itemsToScroll = 3;
     this.isAnimating = false;
+    this.itemWidth = 0;
+    this.currentIndex = 0; // índice relativo aos originais
 
     this.init();
   }
 
   init() {
-    // Calcular a largura dos itens
+    this.cloneItems();
     this.calculateDimensions();
-
-    // Adicionar event listeners
     this.addEventListeners();
 
-    // Atualizar controles
-    this.updateControls();
+    // Esconder setas (controladas por hover no CSS)
+    if (this.controls.left) this.controls.left.classList.remove("disabled");
+    if (this.controls.right) this.controls.right.classList.remove("disabled");
 
-    // Adicionar observador de redimensionamento
     window.addEventListener("resize", () => {
       this.calculateDimensions();
-      this.updatePosition(true);
+      this.goTo(this.currentIndex, false);
     });
   }
 
-  calculateDimensions() {
-    if (this.items.length === 0) return;
+  cloneItems() {
+    const total = this.originalItems.length;
 
-    // Determinar quantos itens são visíveis baseado na largura da tela
+    // Clonar todos os itens para o fim e para o início
+    this.originalItems.forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      this.container.appendChild(clone);
+    });
+
+    [...this.originalItems].reverse().forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      this.container.prepend(clone);
+    });
+
+    // Atualizar lista de items (agora inclui clones)
+    this.items = Array.from(this.container.querySelectorAll(".carousel-item"));
+
+    // Começar no primeiro item original (após os clones do início)
+    this.currentIndex = total;
+  }
+
+  calculateDimensions() {
     const screenWidth = window.innerWidth;
+
     if (screenWidth < 576) {
       this.visibleItems = 2;
       this.itemsToScroll = 1;
@@ -58,27 +79,79 @@ class Carousel {
       this.itemsToScroll = 3;
     }
 
-    // Calcular a largura de um item
-    if (this.items.length > 0) {
-      // Largura total do container - (espaço entre itens * (número de itens visíveis - 1))
-      // Dividido pelo número de itens visíveis
-      const containerWidth = this.carousel.offsetWidth;
-      const totalGap = this.gap * (this.visibleItems - 1);
-      this.itemWidth = (containerWidth - totalGap) / this.visibleItems;
+    const containerWidth = this.carousel.offsetWidth;
+    const totalGap = this.gap * (this.visibleItems - 1);
+    this.itemWidth = (containerWidth - totalGap) / this.visibleItems;
 
-      // Aplicar a largura calculada a todos os itens para garantir consistência
-      this.items.forEach((item) => {
-        item.style.width = `${this.itemWidth}px`;
-      });
+    this.items.forEach((item) => {
+      item.style.width = `${this.itemWidth}px`;
+    });
+  }
+
+  goTo(index, animate = true) {
+    this.container.style.transition = animate
+      ? "transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)"
+      : "none";
+
+    const offset = -(index * (this.itemWidth + this.gap));
+    this.container.style.transform = `translateX(${offset}px)`;
+
+    if (!animate) {
+      // Forçar reflow para aplicar imediatamente
+      void this.container.offsetHeight;
     }
   }
 
+  scrollRight() {
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+
+    this.currentIndex += this.itemsToScroll;
+    this.goTo(this.currentIndex);
+
+    this.container.addEventListener(
+      "transitionend",
+      () => this.onTransitionEnd(),
+      { once: true },
+    );
+  }
+
+  scrollLeft() {
+    if (this.isAnimating) return;
+    this.isAnimating = true;
+
+    this.currentIndex -= this.itemsToScroll;
+    this.goTo(this.currentIndex);
+
+    this.container.addEventListener(
+      "transitionend",
+      () => this.onTransitionEnd(),
+      { once: true },
+    );
+  }
+
+  onTransitionEnd() {
+    const total = this.originalItems.length;
+
+    // Chegou ao fim — saltar silenciosamente para o início
+    if (this.currentIndex >= total * 2) {
+      this.currentIndex = total + (this.currentIndex - total * 2);
+      this.goTo(this.currentIndex, false);
+    }
+
+    // Chegou ao início — saltar silenciosamente para o fim
+    if (this.currentIndex < total) {
+      this.currentIndex = total + this.currentIndex;
+      this.goTo(this.currentIndex, false);
+    }
+
+    this.isAnimating = false;
+  }
+
   addEventListeners() {
-    // Controles de navegação
     if (this.controls.left) {
       this.controls.left.addEventListener("click", () => this.scrollLeft());
     }
-
     if (this.controls.right) {
       this.controls.right.addEventListener("click", () => this.scrollRight());
     }
@@ -88,11 +161,9 @@ class Carousel {
 
   enableSwipe() {
     let startX = 0;
-    let endX = 0;
     let startY = 0;
-    let endY = 0;
+    let endX = 0;
     let isDragging = false;
-    const swipeThreshold = 30;
 
     this.container.addEventListener(
       "touchstart",
@@ -101,7 +172,7 @@ class Carousel {
         startY = e.touches[0].clientY;
         isDragging = true;
       },
-      { passive: true }
+      { passive: true },
     );
 
     this.container.addEventListener(
@@ -109,125 +180,30 @@ class Carousel {
       (e) => {
         if (!isDragging) return;
         endX = e.touches[0].clientX;
-        endY = e.touches[0].clientY;
-
         const diffX = Math.abs(startX - endX);
-        const diffY = Math.abs(startY - endY);
-
-        // Se o movimento horizontal for significativamente maior que o vertical,impede o scroll da página (comportamento padrão)
-        if (diffX > diffY) {
-          e.preventDefault();
-        }
+        const diffY = Math.abs(startY - e.touches[0].clientY);
+        if (diffX > diffY) e.preventDefault();
       },
-      { passive: false } // Alterado para false para permitir preventDefault
+      { passive: false },
     );
 
     this.container.addEventListener("touchend", () => {
       if (!isDragging) return;
-
-      // Calcula a diferença: positivo = swipe para esquerda, negativo = swipe para direita
-      const diffX = startX - endX;
-
-      if (Math.abs(diffX) > swipeThreshold) {
-        if (diffX > 0) {
-          this.scrollRight();
-        } else {
-          this.scrollLeft();
-        }
+      const diff = startX - endX;
+      if (Math.abs(diff) > 30) {
+        diff > 0 ? this.scrollRight() : this.scrollLeft();
       }
-
       isDragging = false;
-      startX = 0;
-      endX = 0;
     });
 
-    // Cancelar o swipe se o toque for cancelado
     this.container.addEventListener("touchcancel", () => {
       isDragging = false;
-      startX = 0;
-      endX = 0;
     });
-  }
-
-  scrollLeft() {
-    if (this.isAnimating) return;
-
-    const scrollDistance = this.itemsToScroll * (this.itemWidth + this.gap);
-
-    this.currentPosition = Math.min(this.currentPosition + scrollDistance, 0);
-
-    this.updatePosition();
-  }
-
-  scrollRight() {
-    if (this.isAnimating) return;
-
-    const scrollDistance = this.itemsToScroll * (this.itemWidth + this.gap);
-    const containerWidth = this.container.offsetWidth;
-    const totalContentWidth = this.items.length * (this.itemWidth + this.gap);
-    const maxScroll = -(totalContentWidth - containerWidth);
-
-    if (this.currentPosition <= maxScroll) {
-      this.currentPosition = 0; // volta ao início
-    } else {
-      this.currentPosition = Math.max(
-        this.currentPosition - scrollDistance,
-        maxScroll
-      );
-    }
-
-    this.updatePosition();
-  }
-
-  updatePosition(instant = false) {
-    if (instant) {
-      this.container.style.transition = "none";
-    } else {
-      this.container.style.transition =
-        "transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1)";
-      this.isAnimating = true;
-
-      setTimeout(() => {
-        this.isAnimating = false;
-      }, 500);
-    }
-
-    this.container.style.transform = `translateX(${this.currentPosition}px)`;
-
-    // Forçar reflow para garantir que a transição seja aplicada
-    if (instant) {
-      this.container.offsetHeight;
-      this.container.style.transition = "transform 0.5s ease-in-out";
-    }
-
-    this.updateControls();
-  }
-
-  updateControls() {
-    const containerWidth = this.container.offsetWidth;
-    const totalContentWidth = this.items.length * (this.itemWidth + this.gap);
-    const maxScroll = -(totalContentWidth - containerWidth);
-
-    if (this.controls.left) {
-      this.controls.left.classList.toggle(
-        "disabled",
-        this.currentPosition >= 0
-      );
-    }
-
-    if (this.controls.right) {
-      this.controls.right.classList.toggle(
-        "disabled",
-        this.currentPosition <= maxScroll
-      );
-    }
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const carousels = document.querySelectorAll(".carousel");
-
-  carousels.forEach((carousel) => {
+  document.querySelectorAll(".carousel").forEach((carousel) => {
     new Carousel(carousel);
   });
 });

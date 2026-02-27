@@ -11,11 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalMeta = modal.querySelector(".modal-meta");
   const closeBtn = modal.querySelector(".modal-close");
 
+  // ===== FECHAR =====
   function closeMovieModal() {
     modal.classList.remove("active");
-    document.body.style.overflow = "";
+    modal.classList.add("closing");
+
+    setTimeout(() => {
+      modal.classList.remove("closing");
+      document.body.style.overflow = "";
+
+      // Para o trailer se estiver a tocar
+      const trailer = modal.querySelector(".modal-trailer");
+      if (trailer) trailer.remove();
+    }, 350);
   }
 
+  // ===== ABRIR =====
   function openMovieModal(filme) {
     if (!filme) {
       console.warn("Filme inválido ou indefinido.");
@@ -24,48 +35,100 @@ document.addEventListener("DOMContentLoaded", () => {
 
     modalTitle.textContent = filme.title;
     modalDescription.textContent = filme.description;
-    modalRole.textContent = filme.role;
+    if (modalRole) modalRole.textContent = filme.role;
     modalYear.textContent = filme.year;
     modalGenres.textContent = filme.genres;
 
-    // Placeholder inicial
-    modalBanner.src =
-      "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Crect width='800' height='400' fill='%23222'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='%23fff'%3ECarregando...%3C/text%3E%3C/svg%3E";
+    // Banner com placeholder
+    modalBanner.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Crect width='800' height='400' fill='%23222'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='%23555'%3ECarregando...%3C/text%3E%3C/svg%3E`;
     modalBanner.alt = `Banner de ${filme.title}`;
+    modalBanner.classList.remove("loaded");
 
-    // Tenta carregar a imagem real
     const img = new Image();
-    img.onload = () => (modalBanner.src = filme.banner || filme.image);
+    img.onload = () => {
+      modalBanner.src = filme.banner || filme.image;
+      modalBanner.classList.add("loaded");
+    };
     img.onerror = () =>
       console.warn("Erro ao carregar imagem", filme.banner || filme.image);
     img.src = filme.banner || filme.image;
 
-    // Limpar informações antigas
-    const oldRating = modalMeta.querySelector(".modal-rating");
-    const oldDuration = modalMeta.querySelector(".modal-duration");
-    if (oldRating) oldRating.remove();
-    if (oldDuration) oldDuration.remove();
+    // Limpar metas antigas
+    modal
+      .querySelectorAll(".modal-rating, .modal-duration")
+      .forEach((el) => el.remove());
 
-    // Adicionar informações extras
     if (filme.rating) {
-      const ratingElement = document.createElement("span");
-      ratingElement.className = "modal-rating";
-      ratingElement.innerHTML = `<i class="fas fa-star"></i> ${filme.rating}`;
-      modalMeta.appendChild(ratingElement);
+      const el = document.createElement("span");
+      el.className = "modal-rating";
+      el.innerHTML = `<i class="fas fa-star"></i> ${filme.rating}`;
+      modalMeta.appendChild(el);
     }
 
     if (filme.duration) {
-      const durationElement = document.createElement("span");
-      durationElement.className = "modal-duration";
-      durationElement.innerHTML = `<i class="fas fa-clock"></i> ${filme.duration}`;
-      modalMeta.appendChild(durationElement);
+      const el = document.createElement("span");
+      el.className = "modal-duration";
+      el.innerHTML = `<i class="fas fa-clock"></i> ${filme.duration}`;
+      modalMeta.appendChild(el);
     }
 
+    // Trailer inline no banner ao hover
+    if (filme.link) {
+      modalBanner.style.cursor = "pointer";
+      modalBanner.title = "Clique para ver o trailer";
+
+      modalBanner.onclick = () => {
+        // Evitar duplicar
+        if (modal.querySelector(".modal-trailer")) return;
+
+        const trailerWrapper = document.createElement("div");
+        trailerWrapper.classList.add("modal-trailer");
+
+        let embedUrl = filme.link;
+        if (filme.link.includes("watch?v=")) {
+          const videoId = new URL(filme.link).searchParams.get("v");
+          embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        } else if (filme.link.includes("youtu.be/")) {
+          const videoId = filme.link.split("youtu.be/")[1].split("?")[0];
+          embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        }
+
+        const autoplay = embedUrl.includes("?")
+          ? embedUrl + "&autoplay=1"
+          : embedUrl + "?autoplay=1";
+
+        trailerWrapper.innerHTML = `
+          <button class="modal-trailer-close" aria-label="Fechar trailer">
+            <i class="fas fa-times"></i>
+          </button>
+          <iframe
+            src="${autoplay}"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen
+          ></iframe>
+        `;
+
+        modalBanner.parentElement.appendChild(trailerWrapper);
+
+        // Fechar trailer inline
+        trailerWrapper
+          .querySelector(".modal-trailer-close")
+          .addEventListener("click", () => {
+            trailerWrapper.remove();
+          });
+      };
+    } else {
+      modalBanner.style.cursor = "default";
+      modalBanner.onclick = null;
+    }
+
+    modal.classList.remove("closing");
     modal.classList.add("active");
     document.body.style.overflow = "hidden";
   }
 
-  // Eventos de fechamento
+  // Eventos de fecho
   closeBtn.addEventListener("click", closeMovieModal);
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeMovieModal();
@@ -75,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
       closeMovieModal();
   });
 
-  // Expor globalmente
   window.movieModal = {
     open: openMovieModal,
     close: closeMovieModal,

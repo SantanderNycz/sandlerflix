@@ -676,6 +676,112 @@ button {
   color: var(--secondary-color);
 }
 
+/* ===== MODAL ANIMAÇÃO ===== */
+#movie-modal {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+#movie-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#movie-modal.closing {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#movie-modal .modal-content {
+  transform: scale(0.92) translateY(20px);
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+  opacity: 0;
+}
+
+#movie-modal.active .modal-content {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+#movie-modal.closing .modal-content {
+  transform: scale(0.92) translateY(20px);
+  opacity: 0;
+}
+
+/* ===== BANNER FADE IN ===== */
+.modal-banner {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.modal-banner.loaded {
+  opacity: 1;
+}
+
+/* ===== TRAILER INLINE ===== */
+.modal-trailer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 10;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-trailer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.modal-trailer-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 11;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.modal-trailer-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== LAZY LOADING ===== */
+.lazy-img {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: #1a1a1a;
+}
+
+.lazy-img.img-loaded {
+  opacity: 1;
+}
+
 /* Footer Styles */
 .footer {
   padding: 50px 4%;
@@ -733,6 +839,85 @@ button {
 
 .footer-info p {
   margin-bottom: 5px;
+}
+
+/* ===== CARDS — SEM PONTAS ===== */
+.carousel-item {
+  position: relative;
+  overflow: hidden; /* Era visible — causava as pontas */
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: calc((100% - 40px) / 6);
+}
+
+.carousel-item:hover {
+  transform: scale(1.15);
+  z-index: 10;
+  border-radius: 6px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  min-height: 225px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+/* ===== SETAS — SEM PONTAS ===== */
+.carousel-control {
+  position: absolute;
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Garante círculo perfeito */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  z-index: 25;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden; /* Corta qualquer conteúdo que saia do círculo */
+}
+
+.carousel-control.left {
+  left: 20px;
+}
+.carousel-control.right {
+  right: 20px;
+}
+
+.carousel-control:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: #000;
+  opacity: 1 !important;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel:hover .carousel-control:not(.disabled) {
+  opacity: 0.75;
+}
+
+.carousel-item {
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.carousel-control {
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 /* ===== CARD HOVER OVERLAY ===== */
@@ -826,12 +1011,7 @@ button {
 
 /* ===== SKELETON LOADING ===== */
 .skeleton-card {
-  background: linear-gradient(
-    90deg,
-    #1a1a1a 25%,
-    #2a2a2a 50%,
-    #1a1a1a 75%
-  );
+  background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
   background-size: 200% 100%;
   animation: shimmer 1.4s infinite;
   border-radius: 6px;
@@ -841,8 +1021,12 @@ button {
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* Ajustes responsivos para o carrossel */

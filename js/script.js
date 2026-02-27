@@ -1,4 +1,5 @@
 import "./modal.js";
+import Carousel from "./carousel.js";
 export let filmesData = [];
 
 // =================== INTRO VIDEO ===================
@@ -102,7 +103,38 @@ function atualizarFilmesNaTela() {
   });
 }
 
+// =================== LAZY LOADING ===================
+function setupLazyLoading() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          const src = img.dataset.src;
+          if (!src) return;
+
+          img.src = src;
+          img.removeAttribute("data-src");
+          img.classList.add("img-loaded");
+          observer.unobserve(img);
+        }
+      });
+    },
+    {
+      rootMargin: "100px", // Começa a carregar 100px antes de aparecer
+      threshold: 0.1,
+    },
+  );
+
+  document.querySelectorAll("img[data-src]").forEach((img) => {
+    observer.observe(img);
+  });
+
+  return observer;
+}
+
 // =================== CARDS ===================
+
 function setupCarouselItems(movieModal) {
   const carouselItems = document.querySelectorAll(".carousel-item");
 
@@ -116,6 +148,13 @@ function setupCarouselItems(movieModal) {
 
     const newItem = item.cloneNode(true);
     item.parentNode.replaceChild(newItem, item);
+
+    const newImg = newItem.querySelector("img");
+    if (newImg) {
+      newImg.dataset.src = newImg.src || newImg.dataset.src;
+      newImg.removeAttribute("src");
+      newImg.classList.add("lazy-img");
+    }
 
     newItem.setAttribute("tabindex", "0");
     newItem.setAttribute("role", "button");
@@ -163,13 +202,16 @@ function setupCarouselItems(movieModal) {
       if (filme.link) openTrailer(filme.link);
     });
   });
+  setupLazyLoading();
 }
 
 // =================== SEARCH ===================
 function setupSearch() {
   const searchInput = document.getElementById("searchInput");
   const mainContent = document.querySelector(".main-content");
-  const allSections = Array.from(document.querySelectorAll(".carousel-section"));
+  const allSections = Array.from(
+    document.querySelectorAll(".carousel-section"),
+  );
   let searchSection = null;
 
   searchInput.addEventListener("input", () => {
@@ -197,7 +239,7 @@ function setupSearch() {
     container.classList.add("carousel-container");
 
     const filmesFiltrados = filmesData.filter((f) =>
-      f.title.toLowerCase().includes(query)
+      f.title.toLowerCase().includes(query),
     );
 
     filmesFiltrados.forEach((filme) => {
@@ -206,8 +248,9 @@ function setupSearch() {
       card.dataset.title = filme.id;
 
       const img = document.createElement("img");
-      img.src = filme.image;
       img.alt = filme.title;
+      img.dataset.src = filme.image;
+      img.classList.add("lazy-img");
 
       card.appendChild(img);
       container.appendChild(card);
@@ -218,6 +261,7 @@ function setupSearch() {
     carousel.appendChild(container);
     searchSection.appendChild(carousel);
     mainContent.prepend(searchSection);
+    setupLazyLoading();
   });
 }
 
@@ -254,7 +298,7 @@ function setupMobileMenu() {
   const mainNav = document.querySelector(".main-nav");
   if (mobileMenuBtn && mainNav)
     mobileMenuBtn.addEventListener("click", () =>
-      mainNav.classList.toggle("active")
+      mainNav.classList.toggle("active"),
     );
 }
 
@@ -294,7 +338,9 @@ overlay.addEventListener("click", (e) => {
 
 document.querySelectorAll(".btn-play").forEach((button) => {
   button.addEventListener("click", () => {
-    openTrailer("https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4");
+    openTrailer(
+      "https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4",
+    );
   });
 });
 
@@ -316,7 +362,8 @@ function aplicarTraducao(lang = "pt") {
   });
 
   const searchInput = document.getElementById("searchInput");
-  if (searchInput) searchInput.placeholder = translations[lang]["search-placeholder"];
+  if (searchInput)
+    searchInput.placeholder = translations[lang]["search-placeholder"];
   const btnPlay = document.querySelector(".btn-play");
   if (btnPlay) btnPlay.textContent = translations[lang]["btn-play"];
   const btnMore = document.querySelector(".btn-more");
@@ -354,7 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("lang", currentLang);
       aplicarTraducao(currentLang);
       document.dispatchEvent(
-        new CustomEvent("languageChange", { detail: { lang: currentLang } })
+        new CustomEvent("languageChange", { detail: { lang: currentLang } }),
       );
       carregarFilmes(currentLang);
     });
