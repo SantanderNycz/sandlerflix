@@ -23,12 +23,15 @@ class Carousel {
 
   init() {
     this.cloneItems();
-    this.calculateDimensions();
-    this.addEventListeners();
 
-    // Esconder setas (controladas por hover no CSS)
-    if (this.controls.left) this.controls.left.classList.remove("disabled");
-    if (this.controls.right) this.controls.right.classList.remove("disabled");
+    // Aguardar o browser calcular as dimensões antes de inicializar
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        this.calculateDimensions();
+        this.goTo(this.currentIndex, false);
+        this.addEventListeners();
+      }, 50);
+    });
 
     window.addEventListener("resize", () => {
       this.calculateDimensions();

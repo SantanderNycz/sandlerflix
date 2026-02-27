@@ -62,7 +62,7 @@ button {
   border: none;
 }
 
-/* VIDEO DE INTRO - RESPONSIVO */
+/* ===== VIDEO DE INTRO ===== */
 #video-container {
   position: fixed;
   top: 0;
@@ -84,6 +84,7 @@ button {
   object-fit: cover;
 }
 
+/* ===== LANGUAGE SWITCH ===== */
 #languageSwitch {
   margin-bottom: 6px;
   padding: 8px 14px;
@@ -106,7 +107,7 @@ button {
   color: #fff;
 }
 
-/* mini player */
+/* ===== MINI PLAYER ===== */
 .overlay {
   display: none;
   position: fixed;
@@ -143,7 +144,7 @@ button {
   cursor: pointer;
 }
 
-/* Header Styles */
+/* ===== HEADER ===== */
 .header {
   position: relative;
   top: 10px;
@@ -279,7 +280,7 @@ button {
   cursor: pointer;
 }
 
-/* HERO SECTION - RESPONSIVO */
+/* ===== HERO ===== */
 .hero {
   position: relative;
   height: 80vh;
@@ -374,31 +375,7 @@ button {
   );
 }
 
-.modal-meta {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 15px;
-  color: var(--secondary-color);
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.modal-rating,
-.modal-duration {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.modal-rating i {
-  color: #ffc107;
-}
-
-.modal-duration i {
-  color: var(--secondary-color);
-}
-
-/* Main Content Styles */
+/* ===== MAIN CONTENT ===== */
 .main-content {
   padding: 0;
   margin-top: 20px;
@@ -407,13 +384,13 @@ button {
 
 .section-title {
   font-size: 1.5rem;
-  margin-bottom: 10px;
+  margin-bottom: -2px;
   font-weight: 500;
   z-index: 1;
   position: relative;
 }
 
-/* Carousel Styles */
+/* ===== CAROUSEL ===== */
 .carousel-section {
   padding: 0 4%;
 }
@@ -444,29 +421,31 @@ button {
   gap: 8px;
   padding: 20px 0;
   width: 100%;
-  transition: transform 0.5s ease-in-out;
   will-change: transform;
   margin: 0;
   touch-action: pan-y pinch-zoom;
 }
 
+/* ===== CAROUSEL ITEM — DECLARAÇÃO ÚNICA ===== */
 .carousel-item {
+  position: relative;
   flex: 0 0 auto;
   width: calc((100% - 40px) / 6);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  border-radius: 2px;
+  border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
-  opacity: 1;
-  visibility: visible;
+  z-index: 1;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    z-index 0s;
 }
 
 .carousel-item:hover {
+  transform: scale(1.15);
   z-index: 10;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
-  border-radius: 4px;
+  overflow: visible;
 }
 
 .carousel-item img {
@@ -474,46 +453,14 @@ button {
   height: auto;
   min-height: 225px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 6px;
   display: block;
-  opacity: 1;
-  visibility: visible;
   transition:
     transform 0.3s ease,
-    box-shadow 0.3s ease,
     filter 0.3s ease;
-  transform-style: preserve-3d;
 }
 
-.carousel-img {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  min-height: 150px;
-}
-
-.carousel-img.loaded {
-  opacity: 1;
-}
-
-.carousel-img:not([src]),
-.carousel-img[src=""] {
-  background: linear-gradient(45deg, #2a2a2a, #3a3a3a, #2a2a2a);
-  background-size: 200% 200%;
-  animation: gradientShift 2s ease infinite;
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
+/* ===== CAROUSEL CONTROLS ===== */
 .carousel-control {
   position: absolute;
   background: rgba(20, 20, 20, 0.85);
@@ -522,6 +469,7 @@ button {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -572,7 +520,143 @@ button {
   padding-left: 2px;
 }
 
-/* MODAL - RESPONSIVO */
+/* ===== CARD HOVER OVERLAY ===== */
+.card-hover-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 60%, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 0 0 6px 6px;
+  pointer-events: none;
+  padding: 12px 10px 10px;
+}
+
+.carousel-item:hover .card-hover-overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.card-hover-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-play-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  padding-left: 3px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.card-play-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.card-hover-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-hover-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  color: #aaa;
+}
+
+.card-hover-meta .fa-star {
+  color: #f5c518;
+}
+
+.card-hover-genres {
+  font-size: 10px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== SKELETON LOADING ===== */
+.skeleton-card {
+  background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+  min-width: 160px;
+  height: 240px;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ===== LAZY LOADING ===== */
+.lazy-img {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: #1a1a1a;
+}
+
+.lazy-img.img-loaded {
+  opacity: 1;
+}
+
+.carousel-img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  min-height: 150px;
+}
+
+.carousel-img.loaded {
+  opacity: 1;
+}
+
+.carousel-img:not([src]),
+.carousel-img[src=""] {
+  background: linear-gradient(45deg, #2a2a2a, #3a3a3a, #2a2a2a);
+  background-size: 200% 200%;
+  animation: gradientShift 2s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== MODAL ===== */
 .modal {
   display: none;
   position: fixed;
@@ -598,10 +682,8 @@ button {
   max-width: 900px;
   border-radius: 6px;
   overflow: hidden;
-  animation: modalFadeIn 0.3s ease;
   transform: translateZ(0);
   backface-visibility: hidden;
-  perspective: 1000px;
   will-change: transform, opacity;
 }
 
@@ -612,17 +694,12 @@ button {
   object-position: center top;
   display: block;
   background-color: #1a1a1a;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.modal-banner.loaded {
+  opacity: 1;
 }
 
 .modal-close {
@@ -676,6 +753,30 @@ button {
   color: var(--secondary-color);
 }
 
+.modal-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  color: var(--secondary-color);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.modal-rating,
+.modal-duration {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.modal-rating i {
+  color: #ffc107;
+}
+
+.modal-duration i {
+  color: var(--secondary-color);
+}
+
 /* ===== MODAL ANIMAÇÃO ===== */
 #movie-modal {
   opacity: 0;
@@ -709,16 +810,6 @@ button {
 #movie-modal.closing .modal-content {
   transform: scale(0.92) translateY(20px);
   opacity: 0;
-}
-
-/* ===== BANNER FADE IN ===== */
-.modal-banner {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.modal-banner.loaded {
-  opacity: 1;
 }
 
 /* ===== TRAILER INLINE ===== */
@@ -771,18 +862,7 @@ button {
   }
 }
 
-/* ===== LAZY LOADING ===== */
-.lazy-img {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  background: #1a1a1a;
-}
-
-.lazy-img.img-loaded {
-  opacity: 1;
-}
-
-/* Footer Styles */
+/* ===== FOOTER ===== */
 .footer {
   padding: 50px 4%;
   background-color: #000;
@@ -790,7 +870,6 @@ button {
 }
 
 .footer-container {
-  max-width: auto;
   margin: 0 auto;
   display: flex;
   gap: 50px;
@@ -841,201 +920,12 @@ button {
   margin-bottom: 5px;
 }
 
-/* ===== CARDS — SEM PONTAS ===== */
-.carousel-item {
-  position: relative;
-  overflow: hidden; /* Era visible — causava as pontas */
-  border-radius: 6px;
-  transition: transform 0.3s ease;
-  z-index: 1;
-  flex: 0 0 auto;
-  width: calc((100% - 40px) / 6);
-}
-
-.carousel-item:hover {
-  transform: scale(1.15);
-  z-index: 10;
-  border-radius: 6px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
-}
-
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  min-height: 225px;
-  object-fit: cover;
-  border-radius: 6px;
-  display: block;
-}
-
-/* ===== SETAS — SEM PONTAS ===== */
-.carousel-control {
-  position: absolute;
-  background: rgba(20, 20, 20, 0.85);
-  backdrop-filter: blur(8px);
-  color: #fff;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%; /* Garante círculo perfeito */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  z-index: 25;
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  top: 50%;
-  transform: translateY(-50%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  overflow: hidden; /* Corta qualquer conteúdo que saia do círculo */
-}
-
-.carousel-control.left {
-  left: 20px;
-}
-.carousel-control.right {
-  right: 20px;
-}
-
-.carousel-control:hover {
-  background: rgba(255, 255, 255, 0.95);
-  color: #000;
-  opacity: 1 !important;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel:hover .carousel-control:not(.disabled) {
-  opacity: 0.75;
-}
-
-.carousel-item {
-  overflow: hidden;
-  border-radius: 6px;
-}
-
-.carousel-control {
-  overflow: hidden;
-  border-radius: 50%;
-}
-
-/* ===== CARD HOVER OVERLAY ===== */
-.carousel-item {
-  position: relative;
-  overflow: visible;
-  transition:
-    transform 0.3s ease,
-    z-index 0s;
-  z-index: 1;
-}
-
-.carousel-item:hover {
-  transform: scale(1.15);
-  z-index: 10;
-}
-
-.card-hover-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 60%, transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  border-radius: 0 0 6px 6px;
-  pointer-events: none;
-  padding: 12px 10px 10px;
-}
-
-.carousel-item:hover .card-hover-overlay {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.card-hover-content {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.card-play-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid white;
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition:
-    background 0.2s ease,
-    transform 0.2s ease;
-  font-size: 13px;
-}
-
-.card-play-btn:hover {
-  background: rgba(255, 255, 255, 0.35);
-  transform: scale(1.1);
-}
-
-.card-hover-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.card-hover-meta {
-  display: flex;
-  gap: 8px;
-  font-size: 11px;
-  color: #aaa;
-}
-
-.card-hover-meta .fa-star {
-  color: #f5c518;
-}
-
-.card-hover-genres {
-  font-size: 10px;
-  color: #888;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ===== SKELETON LOADING ===== */
-.skeleton-card {
-  background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.4s infinite;
-  border-radius: 6px;
-  min-width: 160px;
-  height: 240px;
-  pointer-events: none;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 200% 0;
-  }
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-/* Ajustes responsivos para o carrossel */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
   .logo {
     width: 140px;
   }
 
-  /* OCULTAR SETAS EM TELAS MENORES QUE 1200px */
   .carousel-control {
     display: none !important;
   }
@@ -1153,12 +1043,10 @@ button {
   .hero-title {
     font-size: 2rem;
   }
-
   .hero-description {
     font-size: 1rem;
   }
 
-  /* Modal responsivo */
   .modal {
     padding: 10px;
   }
@@ -1176,7 +1064,6 @@ button {
   .modal-header-content {
     padding: 15px;
   }
-
   .modal-title {
     font-size: 1.5rem;
   }
@@ -1195,7 +1082,6 @@ button {
   .logo {
     width: 100px;
   }
-
   .search-box {
     display: none;
   }
@@ -1250,7 +1136,6 @@ button {
     font-size: 0.9rem;
   }
 
-  /* Modal muito pequeno */
   .modal-content {
     width: 100%;
     margin: 5% auto;
@@ -1259,15 +1144,12 @@ button {
   .modal-banner {
     height: 200px;
   }
-
   .modal-header-content {
     padding: 12px;
   }
-
   .modal-title {
     font-size: 1.3rem;
   }
-
   .modal-description {
     font-size: 0.9rem;
   }
@@ -1297,7 +1179,7 @@ button {
   }
 }
 
-/* Garantir que as setas fiquem acima de tudo (apenas acima de 1200px) */
+/* ===== SETAS ACIMA DE 1200px ===== */
 @media (min-width: 1201px) {
   .carousel-control {
     box-shadow: none;
@@ -1314,7 +1196,7 @@ button {
   }
 }
 
-/* Fallback para navegadores que não suportam mask-image */
+/* ===== FALLBACK MASK-IMAGE ===== */
 @supports not (mask-image: linear-gradient(to right, transparent, black)) {
   .carousel::before,
   .carousel::after {
