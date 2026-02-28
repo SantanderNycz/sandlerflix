@@ -85,13 +85,12 @@ class HeroRotator {
 
   // Filtra os 4 primeiros filmes para o Hero
   heroData() {
-    return filmesData.slice(0, 4).map((f) => {
-      // Aplica tradução se existir
+    return filmesData.slice(0, 5).map((f) => {
       const translatedTitle = f.title; // fallback
       const translatedDescription = f.description; // fallback
 
       if (window.translations && window.translations[this.lang]) {
-        const trans = window.translations[this.lang][f.id]; // cada filme precisa ter chave "id" no JSON
+        const trans = window.translations[this.lang][f.id];
         if (trans) {
           return {
             ...f,

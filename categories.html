@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Sandlerflix — Categorias</title>
+	<link rel="stylesheet" href="./css/style.css" />
+	<link rel="stylesheet" href="./css/categories.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+	<header class="header">
+		<div class="header-container">
+			<div>
+				<a href="./main.html"><img class="logo" src="./assets/logo.png" alt="Sandlerflix"></a>
+			</div>
+			<nav class="main-nav">
+				<ul>
+					<li><a href="./main.html" data-translate="nav-home">Início</a></li>
+					<li><a href="./main.html" data-translate="nav-movies">Filmes</a></li>
+					<li><a href="./categories.html" class="active" data-translate="nav-categories">Categorias</a></li>
+				</ul>
+			</nav>
+			<div class="header-right">
+				<div class="search-box">
+					<i class="fas fa-search"></i>
+					<input type="text" id="searchInput" placeholder="Títulos...">
+				</div>
+			</div>
+			<div class="mobile-menu-btn">
+				<i class="fas fa-bars"></i>
+			</div>
+		</div>
+	</header>
+
+	<main class="categories-main">
+		<div class="categories-header">
+			<h1 class="categories-title">Categorias</h1>
+			<p class="categories-subtitle">Escolhe uma categoria para explorar</p>
+		</div>
+
+		<div class="categories-grid" id="categoriesGrid">
+			<!-- Gerado dinamicamente -->
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div class="footer-container">
+			<div class="footer-links">
+				<ul>
+					<li><a href="./404.html">Sobre</a></li>
+					<li><a href="./404.html">Contato</a></li>
+					<li><a href="./404.html">Termos de Uso</a></li>
+				</ul>
+			</div>
+			<div class="footer-info">
+				<p>Sandlerflix &copy; 2025. Projeto educacional.</p>
+			</div>
+		</div>
+	</footer>
+
+	<script src="./js/categories.js" type="module"></script>
+</body>
+
+</html>

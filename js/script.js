@@ -278,7 +278,11 @@ function handleHeaderScroll() {
 const navLinks = document.querySelectorAll(".main-nav a");
 navLinks.forEach((link) => {
   link.addEventListener("click", (e) => {
-    e.preventDefault();
+    const href = link.getAttribute("href");
+    if (!href || href === "#") {
+      e.preventDefault();
+    }
+
     navLinks.forEach((l) => l.classList.remove("active"));
     link.classList.add("active");
   });
