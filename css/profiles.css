@@ -62,7 +62,7 @@ body {
 }
 
 .profiles-title {
-  font-size: 3.5vw;
+  font-size: 2vw;
   font-weight: 400;
   color: #fff;
   letter-spacing: 2px;
@@ -84,8 +84,8 @@ body {
 }
 
 .profile-avatar {
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   border-radius: 8px;
   overflow: hidden;
   border: 3px solid transparent;
@@ -167,7 +167,7 @@ body {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .profiles-title {
-    font-size: 7vw;
+    font-size: 6vw;
   }
 
   .profile-avatar {

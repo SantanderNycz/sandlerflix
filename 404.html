@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Sandlerflix — Página não encontrada</title>
+	<link rel="stylesheet" href="./css/404.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+	<div class="error-container">
+
+		<div class="error-content">
+			<img src="./assets/logo.png" alt="Sandlerflix" class="error-logo" />
+
+			<div class="error-code">
+				<span>4</span>
+				<div class="error-gif">
+					<img src="./assets/404.webp" alt="Adam Sandler confuso" />
+				</div>
+				<span>4</span>
+			</div>
+
+			<h1 class="error-title">Página perdida... como o Billy Madison na escola.</h1>
+			<p class="error-description">
+				A página que procuras foi embora de férias com o Adam Sandler para o Havai.
+				Tenta voltar para o início.
+			</p>
+
+			<div class="error-buttons">
+				<a href="./index.html" class="btn-home">
+					<i class="fas fa-home"></i> Início
+				</a>
+				<a href="./main.html" class="btn-browse">
+					<i class="fas fa-film"></i> Ver Filmes
+				</a>
+			</div>
+		</div>
+
+		<div class="error-suggestions">
+			<p>Talvez estejas à procura de:</p>
+			<div class="suggestion-links">
+				<a href="./categories.html">Categorias</a>
+				<a href="./main.html#comedias">Comédias</a>
+				<a href="./main.html#dramas">Dramas</a>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		// Redirecionar automaticamente após 10 segundos
+		let countdown = 10;
+		const countdownEl = document.getElementById("countdown");
+
+		const timer = setInterval(() => {
+			countdown--;
+			if (countdownEl) countdownEl.textContent = countdown;
+			if (countdown <= 0) {
+				clearInterval(timer);
+				window.location.href = "./index.html";
+			}
+		}, 1000);
+	</script>
+
+</body>
+
+</html>
