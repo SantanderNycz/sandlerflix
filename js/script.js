@@ -340,14 +340,6 @@ overlay.addEventListener("click", (e) => {
   if (e.target === overlay) closeTrailer();
 });
 
-document.querySelectorAll(".btn-play").forEach((button) => {
-  button.addEventListener("click", () => {
-    openTrailer(
-      "https://www.youtube.com/embed/vTfJp2Ts9X8?si=Q_OijVeIBSVMq7x4",
-    );
-  });
-});
-
 // =================== TRADUÇÃO ===================
 let translations = {};
 

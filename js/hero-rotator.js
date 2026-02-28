@@ -53,6 +53,29 @@ class HeroRotator {
         });
       }
 
+      // Botão "Assistir" abre trailer do filme atual
+      const playButton = this.heroButtons.querySelector(".btn-play");
+      if (playButton) {
+        const newPlayBtn = playButton.cloneNode(true);
+        playButton.parentNode.replaceChild(newPlayBtn, playButton);
+
+        newPlayBtn.addEventListener("click", () => {
+          const filmeAtual = this.heroData()[this.currentIndex];
+          if (filmeAtual?.link) {
+            // importar openTrailer do main.js ou replicar a lógica
+            const url = filmeAtual.link;
+            const trailerOverlay = document.getElementById("trailerOverlay");
+            const trailerIframe = document.getElementById("trailerIframe");
+
+            const autoplay = url.includes("?")
+              ? url + "&autoplay=1"
+              : url + "?autoplay=1";
+            trailerIframe.src = autoplay;
+            trailerOverlay.style.display = "flex";
+          }
+        });
+      }
+
       // Atualiza idioma quando muda
       document.addEventListener("languageChange", (e) => {
         this.lang = e.detail.lang;
