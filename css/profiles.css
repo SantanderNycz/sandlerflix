@@ -7,7 +7,7 @@
 body {
   background-color: #000;
   color: #fff;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Netflix Bold", Helvetica, Arial, sans-serif;
   height: 100vh;
   overflow: hidden;
 }
@@ -55,6 +55,7 @@ body {
 }
 
 .profiles-container {
+  margin-top: -150px;
   display: flex;
   flex-direction: column;
   align-items: center;
