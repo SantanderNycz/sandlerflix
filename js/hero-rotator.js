@@ -20,41 +20,46 @@ class HeroRotator {
   }
 
   init() {
-    // Inicializa a primeira atualização
-    this.updateHeroContent();
+    const tryInit = () => {
+      if (filmesData.length === 0) {
+        setTimeout(tryInit, 100);
+        return;
+      }
 
-    // Rotação automática
-    this.startRotation();
+      this.updateHeroContent(true);
+      this.startRotation();
 
-    // Pausar ao passar o mouse ou focar nos botões
-    this.heroSection.addEventListener("mouseenter", () => this.pauseRotation());
-    this.heroSection.addEventListener("mouseleave", () =>
-      this.resumeRotation()
-    );
-    const buttons = this.heroSection.querySelectorAll("button");
-    buttons.forEach((button) => {
-      button.addEventListener("focus", () => this.pauseRotation());
-      button.addEventListener("blur", () => {
-        if (!this.heroSection.matches(":hover")) this.resumeRotation();
+      this.heroSection.addEventListener("mouseenter", () =>
+        this.pauseRotation(),
+      );
+      this.heroSection.addEventListener("mouseleave", () =>
+        this.resumeRotation(),
+      );
+      const buttons = this.heroSection.querySelectorAll("button");
+      buttons.forEach((button) => {
+        button.addEventListener("focus", () => this.pauseRotation());
+        button.addEventListener("blur", () => {
+          if (!this.heroSection.matches(":hover")) this.resumeRotation();
+        });
       });
-    });
 
-    // Botão "Mais Informações" abre modal do filme atual
-    const infoButton = this.heroButtons.querySelector(".btn-more");
-    if (infoButton) {
-      infoButton.addEventListener("click", () => {
-        const filmeAtual = this.heroData()[this.currentIndex];
-        if (filmeAtual && window.movieModal) {
-          window.movieModal.open(filmeAtual);
-        }
+      const infoButton = this.heroButtons.querySelector(".btn-more");
+      if (infoButton) {
+        infoButton.addEventListener("click", () => {
+          const filmeAtual = this.heroData()[this.currentIndex];
+          if (filmeAtual && window.movieModal) {
+            window.movieModal.open(filmeAtual);
+          }
+        });
+      }
+
+      // Atualiza idioma quando muda
+      document.addEventListener("languageChange", (e) => {
+        this.lang = e.detail.lang;
+        this.updateHeroContent();
       });
-    }
-
-    // Atualiza idioma quando muda
-    document.addEventListener("languageChange", (e) => {
-      this.lang = e.detail.lang;
-      this.updateHeroContent();
-    });
+    };
+    tryInit();
   }
 
   startRotation() {
@@ -106,15 +111,23 @@ class HeroRotator {
     });
   }
 
-  updateHeroContent() {
+  updateHeroContent(isFirst = false) {
     const hero = this.heroData()[this.currentIndex];
     if (!hero) return;
 
-    // Fade out
+    // pro primeiro carregamento
+    if (isFirst) {
+      this.heroTitle.textContent = hero.title;
+      this.heroDescription.textContent = hero.description;
+      this.heroSection.style.backgroundImage = `url('${hero.image}')`;
+      this.heroContent.style.opacity = "1";
+      return;
+    }
+
+    // Rotações seguintes, com fade
     this.heroContent.style.opacity = "0";
 
     setTimeout(() => {
-      // Atualiza conteúdo
       this.heroTitle.textContent = hero.title;
       this.heroDescription.textContent = hero.description;
       this.heroSection.style.backgroundImage = `url('${hero.image}')`;
