@@ -40,9 +40,31 @@ class Carousel {
   }
 
   cloneItems() {
-    const total = this.originalItems.length;
+    let total = this.originalItems.length;
 
-    // Clonar todos os itens para o fim e para o início
+    // 🔥 Garantir quantidade mínima para preencher o carrossel
+    const minimumItems = this.visibleItems + this.itemsToScroll;
+
+    if (total < minimumItems) {
+      const needed = minimumItems - total;
+      const times = Math.ceil(needed / total);
+
+      for (let i = 0; i < times; i++) {
+        this.originalItems.forEach((item) => {
+          const clone = item.cloneNode(true);
+          this.container.appendChild(clone);
+        });
+      }
+
+      // Atualizar lista original
+      this.originalItems = Array.from(
+        this.container.querySelectorAll(".carousel-item"),
+      );
+
+      total = this.originalItems.length;
+    }
+
+    // 🔁 Clonagem infinita normal
     this.originalItems.forEach((item) => {
       const clone = item.cloneNode(true);
       clone.setAttribute("aria-hidden", "true");
@@ -55,10 +77,8 @@ class Carousel {
       this.container.prepend(clone);
     });
 
-    // Atualizar lista de items (agora inclui clones)
     this.items = Array.from(this.container.querySelectorAll(".carousel-item"));
 
-    // Começar no primeiro item original (após os clones do início)
     this.currentIndex = total;
   }
 
