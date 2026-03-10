@@ -345,7 +345,8 @@
 
         <!-- Filmes que não consigo defender -->
         <section class="carousel-section">
-            <h3 class="section-title" data-translate="section-unrated">Não consigo defender</h3>
+
+            <h3 class="section-title" data-translate="section-unrated"><span class="title-bar"></span>Não consigo defender</h3>
             <div class="carousel">
                 <button class="carousel-control left">‹</button>
                 <div class="carousel-container">
@@ -374,17 +375,93 @@
     <div class="modal" id="movie-modal">
         <div class="modal-content">
             <button class="modal-close"><i class="fas fa-times"></i></button>
-            <div class="modal-header">
-                <img src="assets/placeholder-large.jpg" alt="Banner do filme" class="modal-banner">
-                <div class="modal-header-content">
-                    <h2 class="modal-title">Título do Filme</h2>
-                    <div class="modal-meta">
-                        <span class="modal-year">Ano</span>
-                        <span class="modal-genres">Gêneros</span>
+
+            <!-- Fundo desfocado -->
+            <div class="modal-bg-blur"></div>
+
+            <div class="modal-detail-container">
+                <div class="modal-detail-grid">
+
+                    <!-- Coluna principal -->
+                    <div class="modal-detail-main">
+                        <div class="modal-trailer-wrapper">
+                            <iframe class="modal-trailer-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h2 class="modal-detail-title"></h2>
+                        <p class="modal-detail-description"></p>
                     </div>
-                    <p class="modal-description">Descrição completa do filme...</p>
-                    <p class="modal-role">Adam Sandler como: <span>Personagem</span></p>
-                    <button class="btn btn-modal-play"><i class="fas fa-play"></i> Assistir</button>
+
+                    <!-- Sidebar -->
+                    <div class="modal-detail-sidebar">
+                        <div class="modal-detail-card">
+                            <h3 class="modal-detail-card-title">Detalhes do Filme</h3>
+                            <div class="modal-detail-info">
+
+                                <div class="modal-info-item">
+                                    <div class="modal-info-icon rating">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div>
+                                        <p class="modal-info-label">Avaliação</p>
+                                        <p class="modal-info-value">
+                                            <span class="modal-info-rating"></span>
+                                            <span class="modal-info-sub">/ 5.0</span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="modal-info-item">
+                                    <div class="modal-info-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div>
+                                        <p class="modal-info-label">Duração</p>
+                                        <p class="modal-info-value modal-info-duration"></p>
+                                    </div>
+                                </div>
+
+                                <div class="modal-info-item">
+                                    <div class="modal-info-icon">
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                    <div>
+                                        <p class="modal-info-label">Ano</p>
+                                        <p class="modal-info-value modal-info-year"></p>
+                                    </div>
+                                </div>
+
+                                <div class="modal-info-item">
+                                    <div class="modal-info-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <p class="modal-info-label">Adam Sandler como</p>
+                                        <p class="modal-info-value modal-info-role"></p>
+                                    </div>
+                                </div>
+
+                                <div class="modal-info-item">
+                                    <div class="modal-info-icon">
+                                        <i class="fas fa-film"></i>
+                                    </div>
+                                    <div>
+                                        <p class="modal-info-label">Géneros</p>
+                                        <div class="modal-info-genres"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Poster -->
+                        <div class="modal-detail-poster">
+                            <img src="" alt="Poster" />
+                            <div class="modal-detail-poster-overlay">
+                                <span>POSTER OFICIAL</span>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
