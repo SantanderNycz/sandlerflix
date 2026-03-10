@@ -559,12 +559,12 @@ button {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 60%, transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 0 0 6px 6px;
   pointer-events: none;
-  padding: 12px 10px 10px;
+  padding: 20px 10px 10px;
 }
 
 .carousel-item:hover .card-hover-overlay {
@@ -608,6 +608,7 @@ button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: block;
 }
 
 .card-hover-meta {

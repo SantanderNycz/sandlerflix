@@ -174,28 +174,17 @@ function setupCarouselItems(movieModal) {
     const hoverOverlay = document.createElement("div");
     hoverOverlay.classList.add("card-hover-overlay");
     hoverOverlay.innerHTML = `
-      <div class="card-hover-content">
-        <button class="card-play-btn" aria-label="Assistir ${filme.title}">
-          <i class="fas fa-play"></i>
-        </button>
-        <div class="card-hover-info">
-          <span class="card-hover-title">${filme.title}</span>
-          <div class="card-hover-meta">
-            ${filme.year ? `<span>${filme.year}</span>` : ""}
-            ${filme.rating ? `<span><i class="fas fa-star"></i> ${filme.rating}</span>` : ""}
-          </div>
-          <div class="card-hover-genres">${filme.genres || ""}</div>
-        </div>
-      </div>
-    `;
+    <div class="card-hover-content">
+      <span class="card-hover-title">${filme.title}</span>
+    </div>`;
     newItem.appendChild(hoverOverlay);
 
-    // Botão play no hover abre trailer diretamente
-    const cardPlayBtn = hoverOverlay.querySelector(".card-play-btn");
-    cardPlayBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (filme.link) openTrailer(filme.link);
-    });
+    // // Botão play no hover abre trailer diretamente
+    // const cardPlayBtn = hoverOverlay.querySelector(".card-play-btn");
+    // cardPlayBtn.addEventListener("click", (e) => {
+    //   e.stopPropagation();
+    //   if (filme.link) openTrailer(filme.link);
+    // });
 
     // Duplo clique também abre trailer
     newItem.addEventListener("dblclick", () => {
@@ -353,17 +342,27 @@ function aplicarTraducao(lang = "pt") {
   document.querySelectorAll("[data-translate]").forEach((el) => {
     const key = el.dataset.translate;
     if (translations[lang] && translations[lang][key]) {
-      el.textContent = translations[lang][key];
+      const titleBar = el.querySelector(".title-bar");
+      if (titleBar) {
+        el.innerHTML = "";
+        el.appendChild(titleBar);
+        el.appendChild(document.createTextNode(translations[lang][key]));
+      } else {
+        el.textContent = translations[lang][key];
+      }
     }
   });
 
   const searchInput = document.getElementById("searchInput");
   if (searchInput)
     searchInput.placeholder = translations[lang]["search-placeholder"];
+
   const btnPlay = document.querySelector(".btn-play");
   if (btnPlay) btnPlay.textContent = translations[lang]["btn-play"];
+
   const btnMore = document.querySelector(".btn-more");
   if (btnMore) btnMore.textContent = translations[lang]["btn-more"];
+
   const heroDesc = document.querySelector(".hero-description");
   if (heroDesc) heroDesc.textContent = translations[lang]["hero-description"];
 }
