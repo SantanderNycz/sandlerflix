@@ -146,14 +146,15 @@ button {
 
 /* ===== HEADER ===== */
 .header {
-  position: relative;
-  top: 10px;
+  position: fixed;
+  top: 0;
   left: 0;
   width: 100%;
   height: var(--header-height);
+  padding-top: 1.1rem;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.6) 0%,
     rgba(0, 0, 0, 0) 100%
   );
   z-index: 1000;
