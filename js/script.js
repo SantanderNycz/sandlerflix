@@ -197,18 +197,43 @@ function setupCarouselItems(movieModal) {
 // =================== SEARCH ===================
 function setupSearch() {
   const searchInput = document.getElementById("searchInput");
+  const searchBox = searchInput?.closest(".search-box");
+  const searchIcon = searchBox?.querySelector("i");
   const mainContent = document.querySelector(".main-content");
   const allSections = Array.from(
     document.querySelectorAll(".carousel-section"),
   );
   let searchSection = null;
 
-  searchInput.addEventListener("input", () => {
+  // Toggle ao clicar na lupa
+  searchIcon?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchBox.classList.toggle("active");
+    if (searchBox.classList.contains("active")) {
+      searchInput.focus();
+    } else {
+      searchInput.value = "";
+      // Limpa resultados
+      if (searchSection) searchSection.remove();
+      allSections.forEach((s) => (s.style.display = "block"));
+      searchSection = null;
+    }
+  });
+
+  // Fecha ao clicar fora
+  document.addEventListener("click", (e) => {
+    if (!searchBox?.contains(e.target)) {
+      searchBox?.classList.remove("active");
+    }
+  });
+
+  searchInput?.addEventListener("input", () => {
     const query = searchInput.value.toLowerCase().trim();
 
     if (query.length === 0) {
       if (searchSection) searchSection.remove();
       allSections.forEach((s) => (s.style.display = "block"));
+      searchSection = null;
       return;
     }
 
@@ -361,7 +386,8 @@ function aplicarTraducao(lang = "pt") {
   if (btnPlay) btnPlay.textContent = translations[lang]["btn-play"];
 
   const btnMore = document.querySelector(".btn-more");
-  if (btnMore) btnMore.textContent = translations[lang]["btn-more"];
+  if (btnMore)
+    btnMore.innerHTML = `<i class="fa-solid fa-circle-info"></i> ${translations[lang]["btn-more"]}`;
 
   const heroDesc = document.querySelector(".hero-description");
   if (heroDesc) heroDesc.textContent = translations[lang]["hero-description"];
@@ -388,17 +414,46 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  const languageSwitch = document.getElementById("languageSwitch");
-  if (languageSwitch) {
-    languageSwitch.value = currentLang;
-    languageSwitch.addEventListener("change", (e) => {
-      currentLang = e.target.value;
-      localStorage.setItem("lang", currentLang);
-      aplicarTraducao(currentLang);
-      document.dispatchEvent(
-        new CustomEvent("languageChange", { detail: { lang: currentLang } }),
-      );
-      carregarFilmes(currentLang);
+  const langSwitcher = document.getElementById("langSwitcher");
+  const langSelected = document.getElementById("langSelected");
+  const langSelectedText = document.getElementById("langSelectedText");
+  const langOptions = document.querySelectorAll(".lang-option");
+
+  if (langSwitcher && langSelected) {
+    // Abre/fecha dropdown
+    langSelected.addEventListener("click", (e) => {
+      e.stopPropagation();
+      langSwitcher.classList.toggle("open");
+    });
+
+    // Fecha ao clicar fora
+    document.addEventListener("click", () => {
+      langSwitcher.classList.remove("open");
+    });
+
+    // Seleciona opção
+    langOptions.forEach((option) => {
+      if (option.dataset.value === currentLang) {
+        option.classList.add("active");
+        langSelectedText.textContent = option.dataset.value.toUpperCase();
+      }
+
+      option.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentLang = option.dataset.value;
+        localStorage.setItem("lang", currentLang);
+
+        langOptions.forEach((o) => o.classList.remove("active"));
+        option.classList.add("active");
+        langSelectedText.textContent = currentLang.toUpperCase();
+        langSwitcher.classList.remove("open");
+
+        aplicarTraducao(currentLang);
+        document.dispatchEvent(
+          new CustomEvent("languageChange", { detail: { lang: currentLang } }),
+        );
+        carregarFilmes(currentLang);
+      });
     });
   }
 
