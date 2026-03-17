@@ -7,7 +7,42 @@
 
 // ── Estado ────────────────────────────────────────────────────
 let filmesData = [];
+let translations = {};
 let currentLang = localStorage.getItem("lang") || "pt";
+
+// ── Carregar e aplicar traduções ───────────────────────────────
+async function carregarTraducao() {
+  try {
+    const res = await fetch("./data/translations.json");
+    translations = await res.json();
+  } catch (err) {
+    console.warn("Erro ao carregar traduções:", err);
+  }
+}
+
+function aplicarTraducao(lang) {
+  document.querySelectorAll("[data-translate]").forEach((el) => {
+    const key = el.dataset.translate;
+    const value = translations[lang]?.[key];
+    if (!value) return;
+
+    // Preservar elementos filhos (ex: .title-bar)
+    const titleBar = el.querySelector(".title-bar");
+    if (titleBar) {
+      el.innerHTML = "";
+      el.appendChild(titleBar);
+      el.appendChild(document.createTextNode(value));
+    } else {
+      el.textContent = value;
+    }
+  });
+
+  // Placeholder da search box — usa chave específica da página de filmes
+  const placeholder =
+    translations[lang]?.["movies-search-placeholder"] ||
+    translations[lang]?.["search-placeholder"];
+  if (searchInput && placeholder) searchInput.placeholder = placeholder;
+}
 
 // ── Elementos ─────────────────────────────────────────────────
 const alphaNav = document.getElementById("alphaNav");
@@ -28,10 +63,21 @@ async function carregarFilmes(lang = currentLang) {
   try {
     const res = await fetch(file);
     filmesData = await res.json();
+    atualizarTitulosCards();
   } catch (err) {
     console.warn("Erro ao carregar filmes:", err);
     filmesData = [];
   }
+}
+
+// ── Actualizar títulos dos cards com o valor localizado do JSON ─
+function atualizarTitulosCards() {
+  document.querySelectorAll(".movie-alpha-card").forEach((card) => {
+    const filme = encontrarFilme(card.dataset.title);
+    if (!filme) return;
+    const titleEl = card.querySelector(".movie-alpha-title");
+    if (titleEl) titleEl.textContent = filme.title;
+  });
 }
 
 // ── Encontrar filme pelo data-title do card ────────────────────
@@ -269,16 +315,17 @@ if (langSwitcher && langSelected) {
         langSelectedText.textContent = currentLang.toUpperCase();
       langSwitcher.classList.remove("open");
 
-      // Recarregar dados no novo idioma (para modal funcionar correctamente)
+      // Aplicar traduções e recarregar dados no novo idioma
+      aplicarTraducao(currentLang);
       carregarFilmes(currentLang);
     });
   });
 }
 
 // ── Init ───────────────────────────────────────────────────────
-// Carregar dados assim que o modal estiver disponível
 function waitForModal(tries = 0) {
   if (window.movieModal) {
+    carregarTraducao().then(() => aplicarTraducao(currentLang));
     carregarFilmes(currentLang);
   } else if (tries < 20) {
     setTimeout(() => waitForModal(tries + 1), 50);

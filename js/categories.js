@@ -1,7 +1,33 @@
 const currentLang = localStorage.getItem("lang") || "pt";
+let translations = {};
 
 function getDataFile(lang) {
   return lang === "pt" ? "./data/filmes.json" : "./data/movies.json";
+}
+
+async function carregarTraducao() {
+  try {
+    const res = await fetch("./data/translations.json");
+    translations = await res.json();
+  } catch (err) {
+    console.warn("Erro ao carregar traduções:", err);
+  }
+}
+
+function aplicarTraducao(lang) {
+  document.querySelectorAll("[data-translate]").forEach((el) => {
+    const key = el.dataset.translate;
+    const value = translations[lang]?.[key];
+    if (!value) return;
+    const titleBar = el.querySelector(".title-bar");
+    if (titleBar) {
+      el.innerHTML = "";
+      el.appendChild(titleBar);
+      el.appendChild(document.createTextNode(value));
+    } else {
+      el.textContent = value;
+    }
+  });
 }
 
 async function carregarCategorias(lang = currentLang) {
@@ -55,6 +81,7 @@ function renderCategorias(categorias) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  carregarTraducao().then(() => aplicarTraducao(currentLang));
   carregarCategorias();
 
   // ── Lang switcher ──────────────────────────────────────────
@@ -93,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
         langSwitcher.classList.remove("open");
 
         carregarCategorias(newLang);
+        aplicarTraducao(newLang);
       });
     });
   }

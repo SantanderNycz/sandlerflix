@@ -2,6 +2,32 @@ import "./modal.js";
 
 const currentLang = localStorage.getItem("lang") || "pt";
 const file = currentLang === "pt" ? "./data/filmes.json" : "./data/movies.json";
+let translations = {};
+
+async function carregarTraducao() {
+  try {
+    const res = await fetch("./data/translations.json");
+    translations = await res.json();
+  } catch (err) {
+    console.warn("Erro ao carregar traduções:", err);
+  }
+}
+
+function aplicarTraducao(lang) {
+  document.querySelectorAll("[data-translate]").forEach((el) => {
+    const key = el.dataset.translate;
+    const value = translations[lang]?.[key];
+    if (!value) return;
+    const titleBar = el.querySelector(".title-bar");
+    if (titleBar) {
+      el.innerHTML = "";
+      el.appendChild(titleBar);
+      el.appendChild(document.createTextNode(value));
+    } else {
+      el.textContent = value;
+    }
+  });
+}
 
 // Pegar o género da URL
 const params = new URLSearchParams(window.location.search);
@@ -104,6 +130,7 @@ overlay.addEventListener("click", (e) => {
 
 // Botão "Assistir" no modal — abre trailer a partir do modal
 document.addEventListener("DOMContentLoaded", () => {
+  carregarTraducao().then(() => aplicarTraducao(currentLang));
   const modalPlayBtn = document.querySelector(".btn-modal-play");
   if (modalPlayBtn && window.movieModal) {
     const originalOpen = window.movieModal.open;
@@ -121,10 +148,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ── Lang switcher ──────────────────────────────────────────
-  const langSwitcher     = document.getElementById("langSwitcher");
-  const langSelected     = document.getElementById("langSelected");
+  const langSwitcher = document.getElementById("langSwitcher");
+  const langSelected = document.getElementById("langSelected");
   const langSelectedText = document.getElementById("langSelectedText");
-  const langOptions      = document.querySelectorAll(".lang-option");
+  const langOptions = document.querySelectorAll(".lang-option");
 
   if (langSwitcher && langSelected) {
     langSelected.addEventListener("click", (e) => {
@@ -153,18 +180,23 @@ document.addEventListener("DOMContentLoaded", () => {
         langSwitcher.classList.remove("open");
 
         // Recarregar filmes no novo idioma
-        const newFile = newLang === "pt" ? "./data/filmes.json" : "./data/movies.json";
+        const newFile =
+          newLang === "pt" ? "./data/filmes.json" : "./data/movies.json";
         fetch(newFile)
           .then((r) => r.json())
           .then((filmes) => {
             const filtrados = filmes.filter((f) => {
               if (!f.genres) return false;
-              return f.genres.split(",").map((g) => g.trim()).includes(genre);
+              return f.genres
+                .split(",")
+                .map((g) => g.trim())
+                .includes(genre);
             });
             document.getElementById("moviesGrid").innerHTML = "";
             renderFilmes(filtrados);
             document.getElementById("categoryCount").textContent =
               `${filtrados.length} ${filtrados.length === 1 ? "filme" : "filmes"}`;
+            aplicarTraducao(newLang);
           });
       });
     });
@@ -173,17 +205,21 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── Header scroll ──────────────────────────────────────────
   const header = document.querySelector(".header");
   if (header) {
-    window.addEventListener("scroll", () => {
-      header.classList.toggle("scrolled", window.scrollY > 50);
-    }, { passive: true });
+    window.addEventListener(
+      "scroll",
+      () => {
+        header.classList.toggle("scrolled", window.scrollY > 50);
+      },
+      { passive: true },
+    );
   }
 
   // ── Mobile menu ────────────────────────────────────────────
   const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
-  const mainNav       = document.querySelector(".main-nav");
+  const mainNav = document.querySelector(".main-nav");
   if (mobileMenuBtn && mainNav) {
     mobileMenuBtn.addEventListener("click", () =>
-      mainNav.classList.toggle("active")
+      mainNav.classList.toggle("active"),
     );
   }
 

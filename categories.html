@@ -16,36 +16,28 @@
 
 <body>
 
-	<!-- Header -->
 	<header class="header" id="mainHeader">
 		<div class="header-container">
 			<div>
 				<a href="./main.html"><img class="logo" src="./assets/logo.png" alt="Sandlerflix"></a>
 			</div>
-			<nav class="main-nav">
+			<nav class="main-nav" aria-label="Navegação principal">
 				<ul>
-					<li><a href="./main.html" class="active" data-translate="nav-home">Início</a></li>
+					<li><a href="./main.html" data-translate="nav-home">Início</a></li>
 					<li><a href="./movies.html" data-translate="nav-movies">Filmes</a></li>
-					<li><a href="./categories.html" data-translate="nav-categories">Categorias</a></li>
+					<li><a href="./categories.html" class="active" data-translate="nav-categories">Categorias</a></li>
 				</ul>
 			</nav>
 			<div class="header-right">
-				<div class="search-box">
-					<i class="fas fa-search" aria-hidden="true"></i>
-					<input type="text" id="searchInput" placeholder="Títulos, pessoas..." aria-label="Pesquisar filmes">
-				</div>
 				<div class="lang-switcher" id="langSwitcher">
-					<button class="lang-selected" id="langSelected">
+					<button class="lang-selected" id="langSelected" aria-label="Selecionar idioma">
 						<span id="langSelectedText">PT</span>
-						<i class="fas fa-chevron-down lang-arrow"></i>
+						<i class="fas fa-chevron-down lang-arrow" aria-hidden="true"></i>
 					</button>
-					<ul class="lang-options" id="langOptions">
-						<li class="lang-option active" data-value="pt">Português</li>
-						<li class="lang-option" data-value="en">English</li>
+					<ul class="lang-options" id="langOptions" role="listbox">
+						<li class="lang-option active" data-value="pt" role="option">Português</li>
+						<li class="lang-option" data-value="en" role="option">English</li>
 					</ul>
-				</div>
-				<div class="profile">
-					<img src="assets/avatar.webp" alt="Perfil">
 				</div>
 			</div>
 			<div class="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" role="button">
@@ -65,20 +57,19 @@
 		</div>
 	</main>
 
-	<!-- Footer -->
 	<footer class="footer">
 		<div class="footer-container">
 			<div class="footer-links">
 				<ul>
-					<li><a href="/404.html">Sobre</a></li>
-					<li><a href="/404.html">Contato</a></li>
-					<li><a href="/404.html">Termos de Uso</a></li>
-					<li><a href="/404.html">Privacidade</a></li>
+					<li><a href="/404.html" data-translate="footer-about">Sobre</a></li>
+					<li><a href="/404.html" data-translate="footer-contact">Contato</a></li>
+					<li><a href="/404.html" data-translate="footer-terms">Termos de Uso</a></li>
+					<li><a href="/404.html" data-translate="footer-privacy">Privacidade</a></li>
 				</ul>
 			</div>
 			<div class="footer-info">
-				<p>Sandlerflix &copy; 2026. Este é um projeto de clone para fins educacionais.</p>
-				<p>Não afiliado à Netflix ou Adam Sandler, mas queria.</p>
+				<p>Sandlerflix &copy; 2026. <span data-translate="footer-disclaimer-1">Este é um projeto de clone para fins educacionais.</span></p>
+				<p data-translate="footer-disclaimer-2">Não afiliado à Netflix ou Adam Sandler, mas queria.</p>
 			</div>
 		</div>
 	</footer>
