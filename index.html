@@ -4,9 +4,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Sandlerflix — Entra no universo de Adam Sandler. Seleciona o teu perfil e começa a explorar.">
 	<title>Sandlerflix - O universo de Adam Sandler</title>
-	<link rel="stylesheet" href="/css/reset.css">
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/variables.css">
+	<link rel="stylesheet" href="./css/style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -22,14 +24,14 @@
 			<div>
 				<a href="./main.html"><img class="logo" src="./assets/logo.png" alt="Sandlerflix"></a>
 			</div>
-			<div class="mobile-menu-btn">
-				<i class="fas fa-bars"></i>
+			<div class="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" role="button">
+				<i class="fas fa-bars" aria-hidden="true"></i>
 			</div>
 		</div>
 	</header>
 
 	<!-- INTRO VIDEO -->
-	<div id="video-container">
+	<div id="video-container" aria-hidden="true">
 		<video id="introVideo" muted playsinline preload="auto">
 			<source src="./assets/intro.mp4" type="video/mp4" />
 		</video>
@@ -45,7 +47,7 @@
 				<!-- Perfil único clicável -->
 				<div class="profile-item" id="mainProfile">
 					<div class="profile-avatar">
-						<img src="./assets/avatar.webp" alt="Avatar" />
+						<img src="./assets/avatar.webp" alt="Perfil de Adam" loading="lazy" />
 					</div>
 					<span class="profile-name">Adam</span>
 				</div>

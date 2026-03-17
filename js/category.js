@@ -38,31 +38,30 @@ function renderFilmes(filmes) {
   filmes.forEach((filme) => {
     const card = document.createElement("div");
     card.classList.add("movie-card");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", `Ver detalhes de ${filme.title}`);
     card.innerHTML = `
- <div class="movie-card-img">
-    <img src="${filme.image}" alt="${filme.title}" />
-    <div class="movie-card-overlay">
-      <button class="movie-card-play" aria-label="Assistir ${filme.title}">
-        &#9654;
-      </button>
-      <div class="movie-card-info">
-        <span class="movie-card-title">${filme.title}</span>
-        <span class="movie-card-year">${filme.year || ""}</span>
+      <div class="movie-card-img">
+        <img src="${filme.image}" alt="${filme.title}" loading="lazy" />
+        <div class="movie-card-overlay">
+          <div class="movie-card-info">
+            <span class="movie-card-title">${filme.title}</span>
+            <span class="movie-card-year">${filme.year || ""}</span>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
     `;
 
-    // Clique abre modal
+    // Clique e teclado abrem apenas o modal
     card.addEventListener("click", () => {
       if (window.movieModal) window.movieModal.open(filme);
     });
-
-    // Botão play abre trailer
-    const playBtn = card.querySelector(".movie-card-play");
-    playBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (filme.link) openTrailer(filme.link);
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        if (window.movieModal) window.movieModal.open(filme);
+      }
     });
 
     grid.appendChild(card);
@@ -103,7 +102,7 @@ overlay.addEventListener("click", (e) => {
   }
 });
 
-// Botão "Assistir" no modal
+// Botão "Assistir" no modal — abre trailer a partir do modal
 document.addEventListener("DOMContentLoaded", () => {
   const modalPlayBtn = document.querySelector(".btn-modal-play");
   if (modalPlayBtn && window.movieModal) {
@@ -119,6 +118,73 @@ document.addEventListener("DOMContentLoaded", () => {
         modalPlayBtn.onclick = null;
       }
     };
+  }
+
+  // ── Lang switcher ──────────────────────────────────────────
+  const langSwitcher     = document.getElementById("langSwitcher");
+  const langSelected     = document.getElementById("langSelected");
+  const langSelectedText = document.getElementById("langSelectedText");
+  const langOptions      = document.querySelectorAll(".lang-option");
+
+  if (langSwitcher && langSelected) {
+    langSelected.addEventListener("click", (e) => {
+      e.stopPropagation();
+      langSwitcher.classList.toggle("open");
+    });
+
+    document.addEventListener("click", () => {
+      langSwitcher.classList.remove("open");
+    });
+
+    langOptions.forEach((option) => {
+      if (option.dataset.value === currentLang) {
+        option.classList.add("active");
+        langSelectedText.textContent = option.dataset.value.toUpperCase();
+      }
+
+      option.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const newLang = option.dataset.value;
+        localStorage.setItem("lang", newLang);
+
+        langOptions.forEach((o) => o.classList.remove("active"));
+        option.classList.add("active");
+        langSelectedText.textContent = newLang.toUpperCase();
+        langSwitcher.classList.remove("open");
+
+        // Recarregar filmes no novo idioma
+        const newFile = newLang === "pt" ? "./data/filmes.json" : "./data/movies.json";
+        fetch(newFile)
+          .then((r) => r.json())
+          .then((filmes) => {
+            const filtrados = filmes.filter((f) => {
+              if (!f.genres) return false;
+              return f.genres.split(",").map((g) => g.trim()).includes(genre);
+            });
+            document.getElementById("moviesGrid").innerHTML = "";
+            renderFilmes(filtrados);
+            document.getElementById("categoryCount").textContent =
+              `${filtrados.length} ${filtrados.length === 1 ? "filme" : "filmes"}`;
+          });
+      });
+    });
+  }
+
+  // ── Header scroll ──────────────────────────────────────────
+  const header = document.querySelector(".header");
+  if (header) {
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 50);
+    }, { passive: true });
+  }
+
+  // ── Mobile menu ────────────────────────────────────────────
+  const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+  const mainNav       = document.querySelector(".main-nav");
+  if (mobileMenuBtn && mainNav) {
+    mobileMenuBtn.addEventListener("click", () =>
+      mainNav.classList.toggle("active")
+    );
   }
 
   carregarFilmesDaCategoria();

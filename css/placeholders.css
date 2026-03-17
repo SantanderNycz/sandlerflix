@@ -1,114 +1,20 @@
-/* Placeholder para imagens de filmes */
-/* Estilos do carrossel otimizados para transições suaves */
-.carousel-container {
-  display: flex;
-  overflow: hidden; /* Garante que não há scroll horizontal */
-  gap: 8px;
-  padding: 20px 0;
-  width: 100%;
-  transition: transform 0.5s ease-in-out;
-}
+/* ============================================================
+   placeholders.css — Breakpoints do carrossel
+   Nota: animações e estilos base do .carousel-item, 
+   .carousel-control e .carousel-img estão em style.css
+   ============================================================ */
 
-.carousel-track {
-  display: flex;
-  gap: 8px;
-  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transição suave */
-}
-
-.carousel-item {
-  flex: 0 0 auto;
-  width: calc(100% / 6 - 8px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 2px;
-  overflow: hidden;
-  cursor: pointer; /* Indica que é clicável */
-}
-
-.carousel-item:hover {
-  transform: scale(1.05); /* Hover mais sutil */
-  z-index: 10;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6); /* Sombra mais suave */
-}
-
-.carousel-control {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.7); /* Fundo mais visível */
-  color: #fff;
-  width: 50px; /* Botões maiores para melhor usabilidade */
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem; /* Ícones maiores */
-  z-index: 20;
-  opacity: 0;
-  transition: opacity 0.3s ease, background-color 0.3s ease;
-  cursor: pointer;
-  border: none;
-  user-select: none;
-}
-
-.carousel-control:hover {
-  background-color: rgba(0, 0, 0, 0.9); /* Hover mais escuro */
-}
-
-.carousel-control.disabled {
-  opacity: 0.3 !important; /* Estado desabilitado mais claro */
-  cursor: not-allowed;
-}
-
-.carousel:hover .carousel-control:not(.disabled) {
-  opacity: 1;
-}
-
-/* Estilos para o carregamento de imagens */
-.carousel-img {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-  min-height: 150px; /* Altura mínima para evitar layout shift */
-}
-
-.carousel-img.loaded {
-  opacity: 1;
-}
-
-/* Placeholder enquanto a imagem carrega */
-.carousel-img:not([src]),
-.carousel-img[src=""] {
-  background: linear-gradient(45deg, #2a2a2a, #3a3a3a, #2a2a2a);
-  background-size: 200% 200%;
-  animation: gradientShift 2s ease infinite;
-}
-
-.carousel-item {
-  overflow: hidden;
-  position: relative;
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Placeholder para imagem de hero */
-.hero {
-  background-color: #111 !important;
-}
-
-/* Placeholder para imagem de perfil */
+/* Placeholder para imagem de perfil no header */
 .profile img {
   background-color: #555;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
+
+/* Placeholder para hero enquanto a imagem de fundo não carrega */
+.hero {
+  background-color: var(--color-bg-elevated) !important;
+}
+
+/* ── Breakpoints responsivos do carrossel ─────────────────── */
 
 @media (max-width: 1200px) {
   .carousel-item {

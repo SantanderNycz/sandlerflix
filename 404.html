@@ -4,7 +4,9 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Página não encontrada — Sandlerflix">
 	<title>Sandlerflix — Página não encontrada</title>
+	<link rel="stylesheet" href="./css/variables.css" />
 	<link rel="stylesheet" href="./css/404.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
@@ -12,15 +14,15 @@
 
 <body>
 
-	<div class="error-container">
+	<main class="error-container">
 
 		<div class="error-content">
-			<img src="./assets/logo.png" alt="Sandlerflix" class="error-logo" />
+			<img src="./assets/logo.png" alt="Sandlerflix" class="error-logo" loading="lazy" />
 
 			<div class="error-code">
 				<span>4</span>
 				<div class="error-gif">
-					<img src="./assets/404.webp" alt="Adam Sandler confuso" />
+					<img src="./assets/404.webp" alt="Adam Sandler confuso" loading="lazy" />
 				</div>
 				<span>4</span>
 			</div>
@@ -33,10 +35,10 @@
 
 			<div class="error-buttons">
 				<a href="./index.html" class="btn-home">
-					<i class="fas fa-home"></i> Início
+					<i class="fas fa-home" aria-hidden="true"></i> Início
 				</a>
 				<a href="./main.html" class="btn-browse">
-					<i class="fas fa-film"></i> Ver Filmes
+					<i class="fas fa-film" aria-hidden="true"></i> Ver Filmes
 				</a>
 			</div>
 		</div>
@@ -50,22 +52,7 @@
 			</div>
 		</div>
 
-	</div>
-
-	<!-- <script>
-		// Redirecionar automaticamente após 20 segundos
-		let countdown = 20;
-		const countdownEl = document.getElementById("countdown");
-
-		const timer = setInterval(() => {
-			countdown--;
-			if (countdownEl) countdownEl.textContent = countdown;
-			if (countdown <= 0) {
-				clearInterval(timer);
-				window.location.href = "./index.html";
-			}
-		}, 1000);
-	</script> -->
+	</main>
 
 </body>
 

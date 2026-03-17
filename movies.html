@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Sandlerflix — Todos os filmes de Adam Sandler, organizados por ordem alfabética.">
+	<title>Sandlerflix — Filmes</title>
+	<link rel="stylesheet" href="./css/variables.css" />
+	<link rel="stylesheet" href="./css/reset.css" />
+	<link rel="stylesheet" href="./css/style.css" />
+	<link rel="stylesheet" href="./css/movies.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+	<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+	<!-- Header -->
+	<header class="header" id="mainHeader">
+		<div class="header-container">
+			<div>
+				<a href="./main.html"><img class="logo" src="./assets/logo.png" alt="Sandlerflix"></a>
+			</div>
+			<nav class="main-nav">
+				<ul>
+					<li><a href="./main.html" class="active" data-translate="nav-home">Início</a></li>
+					<li><a href="./movies.html" data-translate="nav-movies">Filmes</a></li>
+					<li><a href="./categories.html" data-translate="nav-categories">Categorias</a></li>
+				</ul>
+			</nav>
+			<div class="header-right">
+				<div class="search-box">
+					<i class="fas fa-search" aria-hidden="true"></i>
+					<input type="text" id="searchInput" placeholder="Títulos, pessoas..." aria-label="Pesquisar filmes">
+				</div>
+				<div class="lang-switcher" id="langSwitcher">
+					<button class="lang-selected" id="langSelected">
+						<span id="langSelectedText">PT</span>
+						<i class="fas fa-chevron-down lang-arrow"></i>
+					</button>
+					<ul class="lang-options" id="langOptions">
+						<li class="lang-option active" data-value="pt">Português</li>
+						<li class="lang-option" data-value="en">English</li>
+					</ul>
+				</div>
+				<div class="profile">
+					<img src="assets/avatar.webp" alt="Perfil">
+				</div>
+			</div>
+			<div class="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" role="button">
+				<i class="fas fa-bars" aria-hidden="true"></i>
+			</div>
+		</div>
+	</header>
+
+	<!-- Page Hero -->
+	<div class="movies-hero">
+		<div class="movies-hero-content">
+			<p class="movies-hero-eyebrow">Catálogo Completo</p>
+			<h1 class="movies-hero-title">Todos os Filmes</h1>
+			<p class="movies-hero-meta"><span id="totalCount">48</span> filmes &middot; Ordem alfabética</p>
+		</div>
+	</div>
+
+	<!-- Alphabet Nav -->
+	<nav class="alpha-nav" aria-label="Navegação alfabética" id="alphaNav">
+		<div class="alpha-nav-inner">
+			<button class="alpha-btn active" data-letter="all">Todos</button>
+			<button class="alpha-btn" data-letter="5">0–9</button>
+			<button class="alpha-btn" data-letter="A">A</button>
+			<button class="alpha-btn" data-letter="B">B</button>
+			<button class="alpha-btn" data-letter="C">C</button>
+			<button class="alpha-btn" data-letter="E">E</button>
+			<button class="alpha-btn" data-letter="F">F</button>
+			<button class="alpha-btn" data-letter="G">G</button>
+			<button class="alpha-btn" data-letter="H">H</button>
+			<button class="alpha-btn" data-letter="I">I</button>
+			<button class="alpha-btn" data-letter="J">J</button>
+			<button class="alpha-btn" data-letter="L">L</button>
+			<button class="alpha-btn" data-letter="M">M</button>
+			<button class="alpha-btn" data-letter="P">P</button>
+			<button class="alpha-btn" data-letter="R">R</button>
+			<button class="alpha-btn" data-letter="S">S</button>
+			<button class="alpha-btn" data-letter="T">T</button>
+			<button class="alpha-btn" data-letter="U">U</button>
+			<button class="alpha-btn" data-letter="Y">Y</button>
+		</div>
+	</nav>
+
+	<!-- Search Results (hidden by default) -->
+	<section class="search-results" id="searchResults" hidden>
+		<div class="movies-page-container">
+			<h2 class="letter-heading">Resultados</h2>
+			<div class="movies-alpha-grid" id="searchGrid"></div>
+			<p class="no-results" id="noResults" hidden>Nenhum filme encontrado.</p>
+		</div>
+	</section>
+
+	<!-- Main Catalog -->
+	<main class="movies-page-container" id="catalogMain">
+
+		<!-- 0–9 -->
+		<section class="letter-section" data-section="5" id="section-5">
+			<h2 class="letter-heading"><span class="letter-char">0–9</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="50 First Dates">
+					<div class="movie-alpha-poster">
+						<img src="./assets/50 first dates.png" alt="Como Se Fosse a Primeira Vez" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de 50 First Dates">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">50 First Dates</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- A -->
+		<section class="letter-section" data-section="A" id="section-A">
+			<h2 class="letter-heading"><span class="letter-char">A</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Airheads">
+					<div class="movie-alpha-poster">
+						<img src="./assets/airheads.png" alt="Os Cabeça de Vento" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Airheads">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Airheads</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Anger Management">
+					<div class="movie-alpha-poster">
+						<img src="./assets/tratamento.jpg" alt="Tratamento de Choque" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Anger Management">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Anger Management</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- B -->
+		<section class="letter-section" data-section="B" id="section-B">
+			<h2 class="letter-heading"><span class="letter-char">B</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Bedtime Stories">
+					<div class="movie-alpha-poster">
+						<img src="./assets/faz de conta.webp" alt="Faz de Conta que Acontece" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Bedtime Stories">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Bedtime Stories</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Big Daddy">
+					<div class="movie-alpha-poster">
+						<img src="./assets/bigddaddy.png" alt="O Paizão" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Big Daddy">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Big Daddy</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Billy Madison">
+					<div class="movie-alpha-poster">
+						<img src="./assets/billy.jpg" alt="Billy Madison" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Billy Madison">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Billy Madison</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Blended">
+					<div class="movie-alpha-poster">
+						<img src="./assets/juntos e misturados.jpg" alt="Juntos e Misturados" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Blended">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Blended</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Bulletproof">
+					<div class="movie-alpha-poster">
+						<img src="./assets/bullet.png" alt="À Prova de Balas" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Bulletproof">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Bulletproof</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- C -->
+		<section class="letter-section" data-section="C" id="section-C">
+			<h2 class="letter-heading"><span class="letter-char">C</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Click">
+					<div class="movie-alpha-poster">
+						<img src="./assets/click.jpg" alt="Click" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Click">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Click</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- E -->
+		<section class="letter-section" data-section="E" id="section-E">
+			<h2 class="letter-heading"><span class="letter-char">E</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Eight Crazy Nights">
+					<div class="movie-alpha-poster">
+						<img src="./assets/eight crazy nights.jpg" alt="Oito Noites Loucas" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Eight Crazy Nights">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Eight Crazy Nights</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- F -->
+		<section class="letter-section" data-section="F" id="section-F">
+			<h2 class="letter-heading"><span class="letter-char">F</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Funny People">
+					<div class="movie-alpha-poster">
+						<img src="./assets/ta rindo 1.jpg" alt="Tá Rindo de Quê" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Funny People">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Funny People</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- G -->
+		<section class="letter-section" data-section="G" id="section-G">
+			<h2 class="letter-heading"><span class="letter-char">G</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Going Overboard">
+					<div class="movie-alpha-poster">
+						<img src="./assets/ir ao mar.jpg" alt="Ir ao Mar" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Going Overboard">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Going Overboard</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Grown Ups">
+					<div class="movie-alpha-poster">
+						<img src="./assets/grownups.jpg" alt="Gente Grande" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Grown Ups">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Grown Ups</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Grown Ups 2">
+					<div class="movie-alpha-poster">
+						<img src="./assets/grownups 2.jpg" alt="Gente Grande 2" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Grown Ups 2">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Grown Ups 2</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- H -->
+		<section class="letter-section" data-section="H" id="section-H">
+			<h2 class="letter-heading"><span class="letter-char">H</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Happy Gilmore">
+					<div class="movie-alpha-poster">
+						<img src="./assets/um maluco no golfe.jpg" alt="Um Maluco no Golfe" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Happy Gilmore">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Happy Gilmore</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Happy Gilmore 2">
+					<div class="movie-alpha-poster">
+						<img src="./assets/um maluco no golfe 2.jpg" alt="Um Maluco no Golfe 2" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Happy Gilmore 2">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Happy Gilmore 2</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Hotel Transylvania">
+					<div class="movie-alpha-poster">
+						<img src="./assets/ht1.jpg" alt="Hotel Transilvânia" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Hotel Transylvania">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Hotel Transylvania</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Hotel Transylvania 2">
+					<div class="movie-alpha-poster">
+						<img src="./assets/ht2.jpg" alt="Hotel Transilvânia 2" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Hotel Transylvania 2">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Hotel Transylvania 2</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Hotel Transylvania 3">
+					<div class="movie-alpha-poster">
+						<img src="./assets/ht3.jpg" alt="Hotel Transilvânia 3" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Hotel Transylvania 3">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Hotel Transylvania 3</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Hotel Transylvania 4">
+					<div class="movie-alpha-poster">
+						<img src="./assets/ht4.jpg" alt="Hotel Transilvânia 4" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Hotel Transylvania 4">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Hotel Transylvania 4</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Hubie Halloween">
+					<div class="movie-alpha-poster">
+						<img src="./assets/hubie.jpg" alt="Hubie Halloween" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Hubie Halloween">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Hubie Halloween</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Hustle">
+					<div class="movie-alpha-poster">
+						<img src="./assets/hustle.jpg" alt="Arremessando Alto" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Hustle">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Hustle</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- I -->
+		<section class="letter-section" data-section="I" id="section-I">
+			<h2 class="letter-heading"><span class="letter-char">I</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="I Now Pronounce You Chuck & Larry">
+					<div class="movie-alpha-poster">
+						<img src="./assets/marido e larry.jpg" alt="Eu os Declaro Marido e… Larry" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de I Now Pronounce You Chuck and Larry">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">I Now Pronounce You Chuck &amp; Larry</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- J -->
+		<section class="letter-section" data-section="J" id="section-J">
+			<h2 class="letter-heading"><span class="letter-char">J</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Jack and Jill">
+					<div class="movie-alpha-poster">
+						<img src="./assets/gemea.jpg" alt="Cada Um Tem a Gêmea Que Merece" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Jack and Jill">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Jack and Jill</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Just Go with It">
+					<div class="movie-alpha-poster">
+						<img src="./assets/justgowithit.jpg" alt="Esposa de Mentirinha" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Just Go with It">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Just Go with It</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- L -->
+		<section class="letter-section" data-section="L" id="section-L">
+			<h2 class="letter-heading"><span class="letter-char">L</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Leo">
+					<div class="movie-alpha-poster">
+						<img src="./assets/leo.jpg" alt="Leo" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Leo">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Leo</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Little Nicky">
+					<div class="movie-alpha-poster">
+						<img src="./assets/little nicky.jpg" alt="Little Nicky" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Little Nicky">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Little Nicky</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- M -->
+		<section class="letter-section" data-section="M" id="section-M">
+			<h2 class="letter-heading"><span class="letter-char">M</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Monica's Gang">
+					<div class="movie-alpha-poster">
+						<img src="./assets/monica.png" alt="Turma da Monica" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Monica's Gang">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Monica's Gang</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Mr. Deeds">
+					<div class="movie-alpha-poster">
+						<img src="./assets/mr deeds.jpg" alt="A Herança de Mr. Deeds" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Mr Deeds">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Mr. Deeds</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Murder Mystery">
+					<div class="movie-alpha-poster">
+						<img src="./assets/misterio no mediterraneo 1.jpg" alt="Mistério no Mediterrâneo" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Murder Mystery">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Murder Mystery</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Murder Mystery 2">
+					<div class="movie-alpha-poster">
+						<img src="./assets/misterio no mediterraneo 2.jpg" alt="Mistério no Mediterrâneo 2" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Murder Mystery 2">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Murder Mystery 2</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- P -->
+		<section class="letter-section" data-section="P" id="section-P">
+			<h2 class="letter-heading"><span class="letter-char">P</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Pixels">
+					<div class="movie-alpha-poster">
+						<img src="./assets/pixels.jpg" alt="Pixels" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Pixels">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Pixels</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Punch-Drunk Love">
+					<div class="movie-alpha-poster">
+						<img src="./assets/embriagado.jpg" alt="Embriagado de Amor" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Punch-Drunk Love">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Punch-Drunk Love</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- R -->
+		<section class="letter-section" data-section="R" id="section-R">
+			<h2 class="letter-heading"><span class="letter-char">R</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Reign Over Me">
+					<div class="movie-alpha-poster">
+						<img src="./assets/rainoverme.jpg" alt="Reine Sobre Mim" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Reign Over Me">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Reign Over Me</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- S -->
+		<section class="letter-section" data-section="S" id="section-S">
+			<h2 class="letter-heading"><span class="letter-char">S</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Sandy Wexler">
+					<div class="movie-alpha-poster">
+						<img src="./assets/sandy 1.png" alt="Sandy Wexler" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Sandy Wexler">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Sandy Wexler</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Spaceman">
+					<div class="movie-alpha-poster">
+						<img src="./assets/spaceman.jpg" alt="O Astronauta" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Spaceman">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Spaceman</p>
+				</article>
+				<article class="movie-alpha-card" data-title="Spanglish">
+					<div class="movie-alpha-poster">
+						<img src="./assets/espangles.jpg" alt="Espanglês" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Spanglish">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Spanglish</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- T -->
+		<section class="letter-section" data-section="T" id="section-T">
+			<h2 class="letter-heading"><span class="letter-char">T</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="That's My Boy">
+					<div class="movie-alpha-poster">
+						<img src="./assets/esse é o meu garoto.jpg" alt="Esse É O Meu Garoto" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de That's My Boy">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">That's My Boy</p>
+				</article>
+				<article class="movie-alpha-card" data-title="The Cobbler">
+					<div class="movie-alpha-poster">
+						<img src="./assets/cobbler.jpg" alt="Trocando os Pés" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de The Cobbler">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">The Cobbler</p>
+				</article>
+				<article class="movie-alpha-card" data-title="The Do-Over">
+					<div class="movie-alpha-poster">
+						<img src="./assets/zerando.jpg" alt="Zerando a Vida" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de The Do-Over">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">The Do-Over</p>
+				</article>
+				<article class="movie-alpha-card" data-title="The Longest Yard">
+					<div class="movie-alpha-poster">
+						<img src="./assets/golpe baixo.jpg" alt="Golpe Baixo" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de The Longest Yard">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">The Longest Yard</p>
+				</article>
+				<article class="movie-alpha-card" data-title="The Meyerowitz Stories">
+					<div class="movie-alpha-poster">
+						<img src="./assets/meyerowitz.png" alt="Histórias de Meyerowitz" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de The Meyerowitz Stories">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">The Meyerowitz Stories</p>
+				</article>
+				<article class="movie-alpha-card" data-title="The Ridiculous 6">
+					<div class="movie-alpha-poster">
+						<img src="./assets/os 6 ridiculos.jpg" alt="Os 6 Ridículos" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de The Ridiculous 6">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">The Ridiculous 6</p>
+				</article>
+				<article class="movie-alpha-card" data-title="The Waterboy">
+					<div class="movie-alpha-poster">
+						<img src="./assets/waterboy.webp" alt="O Rei da Água" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de The Waterboy">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">The Waterboy</p>
+				</article>
+				<article class="movie-alpha-card" data-title="The Wedding Singer">
+					<div class="movie-alpha-poster">
+						<img src="./assets/afinado.jpg" alt="Afinado no Amor" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de The Wedding Singer">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">The Wedding Singer</p>
+				</article>
+				<article class="movie-alpha-card" data-title="The Week Of">
+					<div class="movie-alpha-poster">
+						<img src="./assets/la vem os pais.jpg" alt="Lá Vem os Pais" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de The Week Of">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">The Week Of</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- U -->
+		<section class="letter-section" data-section="U" id="section-U">
+			<h2 class="letter-heading"><span class="letter-char">U</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="Uncut Gems">
+					<div class="movie-alpha-poster">
+						<img src="./assets/uncutgems 2.jpg" alt="Jóias Brutas" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de Uncut Gems">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">Uncut Gems</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- Y -->
+		<section class="letter-section" data-section="Y" id="section-Y">
+			<h2 class="letter-heading"><span class="letter-char">Y</span></h2>
+			<div class="movies-alpha-grid">
+				<article class="movie-alpha-card" data-title="You Don't Mess with the Zohan">
+					<div class="movie-alpha-poster">
+						<img src="./assets/zohan.jpg" alt="Zohan: Um Agente Bom de Corte" loading="lazy">
+						<div class="movie-alpha-overlay">
+							<button class="movie-alpha-info" aria-label="Ver detalhes de You Don't Mess with the Zohan">
+								<i class="fas fa-circle-info" aria-hidden="true"></i>
+							</button>
+						</div>
+					</div>
+					<p class="movie-alpha-title">You Don't Mess with the Zohan</p>
+				</article>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- Movie Details Modal (mesmo do main.html) -->
+	<div class="modal" id="movie-modal" role="dialog" aria-modal="true" aria-labelledby="modal-detail-title" aria-hidden="true">
+		<div class="modal-content">
+			<button class="modal-close" aria-label="Fechar modal"><i class="fas fa-times" aria-hidden="true"></i></button>
+			<div class="modal-bg-blur"></div>
+			<div class="modal-detail-container">
+				<div class="modal-detail-grid">
+					<div class="modal-detail-main">
+						<div class="modal-trailer-wrapper">
+							<iframe class="modal-trailer-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Trailer do filme"></iframe>
+						</div>
+						<h2 class="modal-detail-title" id="modal-detail-title"></h2>
+						<p class="modal-detail-description"></p>
+					</div>
+					<div class="modal-detail-sidebar">
+						<div class="modal-detail-card">
+							<h3 class="modal-detail-card-title">Detalhes do Filme</h3>
+							<div class="modal-detail-info">
+								<div class="modal-info-item">
+									<div class="modal-info-icon rating"><i class="fas fa-star" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Avaliação</p>
+										<p class="modal-info-value"><span class="modal-info-rating"></span><span class="modal-info-sub">/ 5.0</span></p>
+									</div>
+								</div>
+								<div class="modal-info-item">
+									<div class="modal-info-icon"><i class="fas fa-clock" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Duração</p>
+										<p class="modal-info-value modal-info-duration"></p>
+									</div>
+								</div>
+								<div class="modal-info-item">
+									<div class="modal-info-icon"><i class="fas fa-calendar" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Ano</p>
+										<p class="modal-info-value modal-info-year"></p>
+									</div>
+								</div>
+								<div class="modal-info-item">
+									<div class="modal-info-icon"><i class="fas fa-user" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Adam Sandler como</p>
+										<p class="modal-info-value modal-info-role"></p>
+									</div>
+								</div>
+								<div class="modal-info-item">
+									<div class="modal-info-icon"><i class="fas fa-film" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Géneros</p>
+										<div class="modal-info-genres"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-detail-poster">
+							<img src="" alt="Poster" loading="lazy" />
+							<div class="modal-detail-poster-overlay"><span>POSTER OFICIAL</span></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="footer-container">
+			<div class="footer-links">
+				<ul>
+					<li><a href="/404.html">Sobre</a></li>
+					<li><a href="/404.html">Contato</a></li>
+					<li><a href="/404.html">Termos de Uso</a></li>
+					<li><a href="/404.html">Privacidade</a></li>
+				</ul>
+			</div>
+			<div class="footer-info">
+				<p>Sandlerflix &copy; 2026. Este é um projeto de clone para fins educacionais.</p>
+				<p>Não afiliado à Netflix ou Adam Sandler, mas queria.</p>
+			</div>
+		</div>
+	</footer>
+
+	<script src="./js/modal.js" type="module"></script>
+	<script src="./js/movies.js" type="module"></script>
+
+</body>
+
+</html>

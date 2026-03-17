@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sandlerflix — A plataforma de streaming dedicada ao universo cinematográfico de Adam Sandler. Comédias, dramas, clássicos e muito mais.">
     <title>Sandlerflix - O universo de Adam Sandler</title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/variables.css">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -25,7 +27,7 @@
 
 
     <!-- Header -->
-    <header class="header">
+    <header class="header" id="mainHeader">
         <div class="header-container">
             <div>
                 <a href="./main.html"><img class="logo" src="./assets/logo.png" alt="Sandlerflix"></a>
@@ -33,14 +35,14 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="./main.html" class="active" data-translate="nav-home">Início</a></li>
-                    <li><a href="./404.html" data-translate="nav-movies">Filmes</a></li>
+                    <li><a href="./movies.html" data-translate="nav-movies">Filmes</a></li>
                     <li><a href="./categories.html" data-translate="nav-categories">Categorias</a></li>
                 </ul>
             </nav>
             <div class="header-right">
                 <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Títulos, pessoas...">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input type="text" id="searchInput" placeholder="Títulos, pessoas..." aria-label="Pesquisar filmes">
                 </div>
                 <div class="lang-switcher" id="langSwitcher">
                     <button class="lang-selected" id="langSelected">
@@ -56,8 +58,8 @@
                     <img src="assets/avatar.webp" alt="Perfil">
                 </div>
             </div>
-            <div class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+            <div class="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" role="button">
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </div>
         </div>
     </header>
@@ -89,25 +91,25 @@
                 <button class="carousel-control left"><i class="fa-solid fa-angle-left"></i></button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/uncutgems 2.jpg" alt="Jóias Brutas" data-title="Uncut Gems">
+                        <img src="assets/uncutgems 2.jpg" alt="Jóias Brutas" data-title="Uncut Gems" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/grownups.jpg" alt="Gente Grande" data-title="Grown Ups">
+                        <img src="assets/grownups.jpg" alt="Gente Grande" data-title="Grown Ups" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/click.jpg" alt="Click" data-title="Click">
+                        <img src="assets/click.jpg" alt="Click" data-title="Click" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/justgowithit.jpg" alt="Esposa de Mentirinha" data-title="Just Go with It">
+                        <img src="assets/justgowithit.jpg" alt="Esposa de Mentirinha" data-title="Just Go with It" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/bigddaddy.png" alt="O Paizão" data-title="Big Daddy">
+                        <img src="assets/bigddaddy.png" alt="O Paizão" data-title="Big Daddy" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/50 first dates.png" alt="Como Se Fosse a Primeira Vez" data-title="50 First Dates">
+                        <img src="assets/50 first dates.png" alt="Como Se Fosse a Primeira Vez" data-title="50 First Dates" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="./assets/um maluco no golfe 2.jpg" data-title="Happy Gilmore 2" alt="Um Maluco no Golfe 2" data-title="">
+                        <img src="./assets/um maluco no golfe 2.jpg" data-title="Happy Gilmore 2" alt="Um Maluco no Golfe 2" loading="lazy">
                     </div>
                     <div class="carousel-item">
                         <img src="/assets/golpe baixo.jpg" data-title="The Longest Yard" alt="Golpe Baixo" loading="lazy" class="carousel-img">
@@ -207,34 +209,34 @@
                 <button class="carousel-control left"><i class="fa-solid fa-angle-left"></i></button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/uncutgems 2.jpg" data-title="Uncut Gems" alt="Jóias Brutas">
+                        <img src="assets/uncutgems 2.jpg" data-title="Uncut Gems" alt="Jóias Brutas" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/cobbler.jpg" data-title="The Cobbler" alt="Trocando os Pés">
+                        <img src="assets/cobbler.jpg" data-title="The Cobbler" alt="Trocando os Pés" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/meyerowitz.png" data-title="The Meyerowitz Stories" alt="Histórias de Meyerowitz">
+                        <img src="assets/meyerowitz.png" data-title="The Meyerowitz Stories" alt="Histórias de Meyerowitz" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/hustle.jpg" data-title="Hustle" alt="Arremessando Alto">
+                        <img src="assets/hustle.jpg" data-title="Hustle" alt="Arremessando Alto" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/spaceman.jpg" data-title="Spaceman" alt="O Astronauta">
+                        <img src="assets/spaceman.jpg" data-title="Spaceman" alt="O Astronauta" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/rainoverme.jpg" data-title="Reign Over Me" alt="Reine Sobre Mim">
+                        <img src="assets/rainoverme.jpg" data-title="Reign Over Me" alt="Reine Sobre Mim" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/embriagado.jpg" data-title="Punch-Drunk Love" alt="Embriagado de Amor">
+                        <img src="assets/embriagado.jpg" data-title="Punch-Drunk Love" alt="Embriagado de Amor" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/espangles.jpg" data-title="Spanglish" alt="Espanglês">
+                        <img src="assets/espangles.jpg" data-title="Spanglish" alt="Espanglês" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ta rindo 1.jpg" data-title="Funny People" alt="Tá rindo de quê">
+                        <img src="assets/ta rindo 1.jpg" data-title="Funny People" alt="Tá rindo de quê" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/sandy 1.png" data-title="Sandy Wexler" alt="Sandy Wexler">
+                        <img src="assets/sandy 1.png" data-title="Sandy Wexler" alt="Sandy Wexler" loading="lazy">
                     </div>
                 </div>
                 <button class="carousel-control right"><i class="fa-solid fa-angle-right"></i></button>
@@ -248,25 +250,25 @@
                 <button class="carousel-control left"><i class="fa-solid fa-angle-left"></i></button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/leo.jpg" data-title="Leo" alt="Leo">
+                        <img src="assets/leo.jpg" data-title="Leo" alt="Leo" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/eight crazy nights.jpg" data-title="Eight Crazy Nights" alt="Oito Noites Loucas">
+                        <img src="assets/eight crazy nights.jpg" data-title="Eight Crazy Nights" alt="Oito Noites Loucas" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ht1.jpg" data-title="Hotel Transylvania" alt="Hotel Transilvânia">
+                        <img src="assets/ht1.jpg" data-title="Hotel Transylvania" alt="Hotel Transilvânia" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ht2.jpg" data-title="Hotel Transylvania 2" alt="Hotel Transilvânia 2">
+                        <img src="assets/ht2.jpg" data-title="Hotel Transylvania 2" alt="Hotel Transilvânia 2" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ht3.jpg" data-title="Hotel Transylvania 3" alt="Hotel Transilvânia 3">
+                        <img src="assets/ht3.jpg" data-title="Hotel Transylvania 3" alt="Hotel Transilvânia 3" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ht4.jpg" data-title="Hotel Transylvania 4" alt="Hotel Transilvânia 4">
+                        <img src="assets/ht4.jpg" data-title="Hotel Transylvania 4" alt="Hotel Transilvânia 4" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/monica.png" data-title="Monica's Gang" alt="Turma da Monica">
+                        <img src="assets/monica.png" data-title="Monica's Gang" alt="Turma da Monica" loading="lazy">
                     </div>
                 </div>
                 <button class="carousel-control right"><i class="fa-solid fa-angle-right"></i></button>
@@ -280,22 +282,22 @@
                 <button class="carousel-control left"><i class="fa-solid fa-angle-left"></i></button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/misterio no mediterraneo 1.jpg" data-title="Murder Mistery" alt="Mistério no Mediterrâneo">
+                        <img src="assets/misterio no mediterraneo 1.jpg" data-title="Murder Mistery" alt="Mistério no Mediterrâneo" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/misterio no mediterraneo 2.jpg" data-title="Murder Mistery 2" alt="Mistério no Mediterrâneo 2">
+                        <img src="assets/misterio no mediterraneo 2.jpg" data-title="Murder Mistery 2" alt="Mistério no Mediterrâneo 2" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/bullet.png" data-title="Bulletproof" alt="À Prova de Balas">
+                        <img src="assets/bullet.png" data-title="Bulletproof" alt="À Prova de Balas" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/faz de conta.webp" data-title="Bedtime Stories" alt="Faz de Conta que Acontece">
+                        <img src="assets/faz de conta.webp" data-title="Bedtime Stories" alt="Faz de Conta que Acontece" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/zerando.jpg" data-title="The Do-Over" alt="Zerando a Vida">
+                        <img src="assets/zerando.jpg" data-title="The Do-Over" alt="Zerando a Vida" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/spaceman.jpg" data-title="Spaceman" alt="O Astronauta">
+                        <img src="assets/spaceman.jpg" data-title="Spaceman" alt="O Astronauta" loading="lazy">
                     </div>
                 </div>
                 <button class="carousel-control right"><i class="fa-solid fa-angle-right"></i></button>
@@ -309,40 +311,40 @@
                 <button class="carousel-control left"><i class="fa-solid fa-angle-left"></i></button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/little nicky.jpg" data-title="Little Nicky" alt="Little Nicky">
+                        <img src="assets/little nicky.jpg" data-title="Little Nicky" alt="Little Nicky" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/click.jpg" data-title="Click" alt="Click">
+                        <img src="assets/click.jpg" data-title="Click" alt="Click" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/bigddaddy.png" data-title="Big Daddy" alt="O Paizão">
+                        <img src="assets/bigddaddy.png" data-title="Big Daddy" alt="O Paizão" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/50 first dates.png" data-title="50 First Dates" alt="Como Se Fosse a Primeira Vez">
+                        <img src="assets/50 first dates.png" data-title="50 First Dates" alt="Como Se Fosse a Primeira Vez" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/mr deeds.jpg" data-title="Mr. Deeds" alt="A herança de Mr Deeds">
+                        <img src="assets/mr deeds.jpg" data-title="Mr. Deeds" alt="A herança de Mr Deeds" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/grownups.jpg" data-title="Grown Ups" alt="Gente Grande">
+                        <img src="assets/grownups.jpg" data-title="Grown Ups" alt="Gente Grande" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/um maluco no golfe.jpg" data-title="Happy Gilmore" alt="Um Maluco no Golfe">
+                        <img src="assets/um maluco no golfe.jpg" data-title="Happy Gilmore" alt="Um Maluco no Golfe" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/billy.jpg" data-title="Billy Madison" alt="Billy Madison">
+                        <img src="assets/billy.jpg" data-title="Billy Madison" alt="Billy Madison" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/waterboy.webp" data-title="The Waterboy" alt="O Rei da Água">
+                        <img src="assets/waterboy.webp" data-title="The Waterboy" alt="O Rei da Água" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/afinado.jpg" data-title="The Wedding Singer" alt="Afinado no Amor">
+                        <img src="assets/afinado.jpg" data-title="The Wedding Singer" alt="Afinado no Amor" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/ir ao mar.jpg" data-title="Going Overboard" alt="Ir ao Mar">
+                        <img src="assets/ir ao mar.jpg" data-title="Going Overboard" alt="Ir ao Mar" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/airheads.png" data-title="Airheads" alt="Os Cabeça de Vento">
+                        <img src="assets/airheads.png" data-title="Airheads" alt="Os Cabeça de Vento" loading="lazy">
                     </div>
                 </div>
                 <button class="carousel-control right"><i class="fa-solid fa-angle-right"></i></button>
@@ -357,19 +359,19 @@
                 <button class="carousel-control left"><i class="fa-solid fa-angle-left"></i></button>
                 <div class="carousel-container">
                     <div class="carousel-item">
-                        <img src="assets/esse é o meu garoto.jpg" data-title="That's My Boy" alt="Esse É O Meu Garoto">
+                        <img src="assets/esse é o meu garoto.jpg" data-title="That's My Boy" alt="Esse É O Meu Garoto" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/gemea.jpg" data-title="Jack and Jill" alt="Cada Um Tem a Gêmea Que Merece">
+                        <img src="assets/gemea.jpg" data-title="Jack and Jill" alt="Cada Um Tem a Gêmea Que Merece" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/hubie.jpg" data-title="Hubie Halloween" alt="Hubie Halloween">
+                        <img src="assets/hubie.jpg" data-title="Hubie Halloween" alt="Hubie Halloween" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/pixels.jpg" data-title="Pixels" alt="Pixels">
+                        <img src="assets/pixels.jpg" data-title="Pixels" alt="Pixels" loading="lazy">
                     </div>
                     <div class="carousel-item">
-                        <img src="assets/os 6 ridiculos.jpg" data-title="The Ridiculous 6" alt="Os 6 Ridículos">
+                        <img src="assets/os 6 ridiculos.jpg" data-title="The Ridiculous 6" alt="Os 6 Ridículos" loading="lazy">
                     </div>
                 </div>
                 <button class="carousel-control right"><i class="fa-solid fa-angle-right"></i></button>
@@ -378,9 +380,9 @@
     </main>
 
     <!-- Movie Details Modal -->
-    <div class="modal" id="movie-modal">
+    <div class="modal" id="movie-modal" role="dialog" aria-modal="true" aria-labelledby="modal-detail-title" aria-hidden="true">
         <div class="modal-content">
-            <button class="modal-close"><i class="fas fa-times"></i></button>
+            <button class="modal-close" aria-label="Fechar modal"><i class="fas fa-times" aria-hidden="true"></i></button>
 
             <!-- Fundo desfocado -->
             <div class="modal-bg-blur"></div>
@@ -393,7 +395,7 @@
                         <div class="modal-trailer-wrapper">
                             <iframe class="modal-trailer-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <h2 class="modal-detail-title"></h2>
+                        <h2 class="modal-detail-title" id="modal-detail-title"></h2>
                         <p class="modal-detail-description"></p>
                     </div>
 
@@ -475,9 +477,9 @@
 
     <!-- Mini Player Overlay -->
     <!-- Trailer Overlay -->
-    <div id="trailerOverlay" class="overlay">
+    <div id="trailerOverlay" class="overlay" role="dialog" aria-modal="true" aria-label="Trailer do filme" aria-hidden="true">
         <div class="overlay-content">
-            <button id="closeTrailer" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
+            <button id="closeTrailer" class="close-btn" aria-label="Fechar trailer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
             <iframe id="trailerIframe" width="100%" height="450" src="/placeholder.svg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
             </iframe>
         </div>
@@ -489,14 +491,14 @@
         <div class="footer-container">
             <div class="footer-links">
                 <ul>
-                    <li><a href="./404.html">Sobre</a></li>
-                    <li><a href="./404.html">Contato</a></li>
-                    <li><a href="./404.html">Termos de Uso</a></li>
-                    <li><a href="./404.html">Privacidade</a></li>
+                    <li><a href="/404.html">Sobre</a></li>
+                    <li><a href="/404.html">Contato</a></li>
+                    <li><a href="/404.html">Termos de Uso</a></li>
+                    <li><a href="/404.html">Privacidade</a></li>
                 </ul>
             </div>
             <div class="footer-info">
-                <p>Sandleflix &copy; 2025. Este é um projeto de clone para fins educacionais.</p>
+                <p>Sandlerflix &copy; 2026. Este é um projeto de clone para fins educacionais.</p>
                 <p>Não afiliado à Netflix ou Adam Sandler, mas queria.</p>
             </div>
         </div>

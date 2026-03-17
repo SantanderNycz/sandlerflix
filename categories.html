@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Sandlerflix — Explora todas as categorias do universo cinematográfico de Adam Sandler.">
 	<title>Sandlerflix — Categorias</title>
+	<link rel="stylesheet" href="./css/variables.css" />
+	<link rel="stylesheet" href="./css/reset.css" />
 	<link rel="stylesheet" href="./css/style.css" />
 	<link rel="stylesheet" href="./css/categories.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -13,52 +16,69 @@
 
 <body>
 
-	<header class="header">
+	<!-- Header -->
+	<header class="header" id="mainHeader">
 		<div class="header-container">
 			<div>
 				<a href="./main.html"><img class="logo" src="./assets/logo.png" alt="Sandlerflix"></a>
 			</div>
 			<nav class="main-nav">
 				<ul>
-					<li><a href="./main.html" data-translate="nav-home">Início</a></li>
-					<li><a href="./main.html" data-translate="nav-movies">Filmes</a></li>
-					<li><a href="./categories.html" class="active" data-translate="nav-categories">Categorias</a></li>
+					<li><a href="./main.html" class="active" data-translate="nav-home">Início</a></li>
+					<li><a href="./movies.html" data-translate="nav-movies">Filmes</a></li>
+					<li><a href="./categories.html" data-translate="nav-categories">Categorias</a></li>
 				</ul>
 			</nav>
 			<div class="header-right">
 				<div class="search-box">
-					<i class="fas fa-search"></i>
-					<input type="text" id="searchInput" placeholder="Títulos...">
+					<i class="fas fa-search" aria-hidden="true"></i>
+					<input type="text" id="searchInput" placeholder="Títulos, pessoas..." aria-label="Pesquisar filmes">
+				</div>
+				<div class="lang-switcher" id="langSwitcher">
+					<button class="lang-selected" id="langSelected">
+						<span id="langSelectedText">PT</span>
+						<i class="fas fa-chevron-down lang-arrow"></i>
+					</button>
+					<ul class="lang-options" id="langOptions">
+						<li class="lang-option active" data-value="pt">Português</li>
+						<li class="lang-option" data-value="en">English</li>
+					</ul>
+				</div>
+				<div class="profile">
+					<img src="assets/avatar.webp" alt="Perfil">
 				</div>
 			</div>
-			<div class="mobile-menu-btn">
-				<i class="fas fa-bars"></i>
+			<div class="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" role="button">
+				<i class="fas fa-bars" aria-hidden="true"></i>
 			</div>
 		</div>
 	</header>
 
 	<main class="categories-main">
 		<div class="categories-header">
-			<h1 class="categories-title">Categorias</h1>
+			<h1 class="categories-title" data-translate="nav-categories">Categorias</h1>
 			<p class="categories-subtitle">Escolhe uma categoria para explorar</p>
 		</div>
 
 		<div class="categories-grid" id="categoriesGrid">
-			<!-- Gerado dinamicamente -->
+			<!-- Gerado dinamicamente por categories.js -->
 		</div>
 	</main>
 
+	<!-- Footer -->
 	<footer class="footer">
 		<div class="footer-container">
 			<div class="footer-links">
 				<ul>
-					<li><a href="./404.html">Sobre</a></li>
-					<li><a href="./404.html">Contato</a></li>
-					<li><a href="./404.html">Termos de Uso</a></li>
+					<li><a href="/404.html">Sobre</a></li>
+					<li><a href="/404.html">Contato</a></li>
+					<li><a href="/404.html">Termos de Uso</a></li>
+					<li><a href="/404.html">Privacidade</a></li>
 				</ul>
 			</div>
 			<div class="footer-info">
-				<p>Sandlerflix &copy; 2025. Projeto educacional.</p>
+				<p>Sandlerflix &copy; 2026. Este é um projeto de clone para fins educacionais.</p>
+				<p>Não afiliado à Netflix ou Adam Sandler, mas queria.</p>
 			</div>
 		</div>
 	</footer>

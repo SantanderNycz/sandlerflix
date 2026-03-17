@@ -1,0 +1,333 @@
+/* ============================================================
+   movies.css — Página do catálogo alfabético de filmes
+   ============================================================ */
+
+/* ── Hero da página ─────────────────────────────────────────── */
+.movies-hero {
+  padding-top: calc(var(--header-height) + 48px);
+  padding-bottom: 40px;
+  padding-left: var(--page-padding-x);
+  padding-right: var(--page-padding-x);
+  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(
+    to bottom,
+    rgba(229, 9, 20, 0.04) 0%,
+    transparent 100%
+  );
+}
+
+.movies-hero-eyebrow {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--space-2);
+}
+
+.movies-hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: var(--font-bold);
+  color: var(--color-text);
+  line-height: var(--leading-tight);
+  margin-bottom: var(--space-3);
+  font-family: var(--font-display);
+  letter-spacing: -1px;
+}
+
+.movies-hero-meta {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.5px;
+}
+
+.movies-hero-meta span {
+  color: var(--color-text);
+  font-weight: var(--font-semibold);
+}
+
+/* ── Barra alfabética ───────────────────────────────────────── */
+.alpha-nav {
+  position: sticky;
+  top: var(--header-height);
+  z-index: var(--z-sticky);
+  background: rgba(20, 20, 20, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.alpha-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--page-padding-x);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.alpha-nav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.alpha-btn {
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  border-radius: var(--radius-base);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: 1px solid transparent;
+  letter-spacing: 0.5px;
+}
+
+.alpha-btn:hover {
+  color: var(--color-text);
+  background: var(--color-bg-hover);
+  border-color: var(--color-border-hover);
+}
+
+.alpha-btn.active {
+  color: var(--color-text);
+  background: var(--color-bg-hover);
+  border-color: var(--color-border-hover);
+  font-weight: var(--font-semibold);
+}
+
+.alpha-btn[data-letter="all"].active {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  background: rgba(229, 9, 20, 0.08);
+}
+
+/* ── Container principal ────────────────────────────────────── */
+.movies-page-container {
+  max-width: var(--max-width);
+  padding: var(--space-12) var(--page-padding-x) var(--space-16);
+  margin: 0 auto;
+}
+
+/* ── Secções por letra ──────────────────────────────────────── */
+.letter-section {
+  margin-bottom: var(--space-16);
+  scroll-margin-top: calc(var(--header-height) + 56px);
+}
+
+.letter-section.hidden {
+  display: none;
+}
+
+.letter-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.letter-heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.letter-char {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 900;
+  font-family: var(--font-display);
+  color: var(--color-primary);
+  line-height: 1;
+  letter-spacing: -1px;
+  min-width: 2ch;
+}
+
+/* ── Grelha de filmes ───────────────────────────────────────── */
+.movies-alpha-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-4) var(--space-3);
+}
+
+/* ── Card de filme ──────────────────────────────────────────── */
+.movie-alpha-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.movie-alpha-poster {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-base);
+  transition:
+    transform var(--transition-slow),
+    box-shadow var(--transition-slow);
+}
+
+.movie-alpha-card:hover .movie-alpha-poster {
+  transform: scale(var(--card-scale-hover));
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-raised);
+}
+
+.movie-alpha-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter var(--transition-base);
+}
+
+.movie-alpha-card:hover .movie-alpha-poster img {
+  filter: brightness(0.55);
+}
+
+/* Overlay com botão de info */
+.movie-alpha-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.movie-alpha-card:hover .movie-alpha-overlay {
+  opacity: 1;
+}
+
+.movie-alpha-info {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-spring),
+    border-color var(--transition-fast);
+}
+
+.movie-alpha-info:hover,
+.movie-alpha-info:focus-visible {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: #fff;
+  transform: scale(1.12);
+}
+
+/* Título do card */
+.movie-alpha-title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--transition-fast);
+  padding: 0 var(--space-1);
+}
+
+.movie-alpha-card:hover .movie-alpha-title {
+  color: var(--color-text);
+}
+
+/* ── Pesquisa ───────────────────────────────────────────────── */
+.search-results {
+  max-width: var(--max-width);
+  padding: var(--space-8) var(--page-padding-x) 0;
+  margin: 0 auto;
+}
+
+.no-results {
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  padding: var(--space-12) 0;
+  text-align: center;
+}
+
+/* ── Animação de entrada em cascade ─────────────────────────── */
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.movie-alpha-card {
+  animation: card-in 0.35s ease both;
+}
+
+/* Stagger por posição — aplica-se aos primeiros 12 cards visíveis */
+.movies-alpha-grid .movie-alpha-card:nth-child(1) {
+  animation-delay: 0ms;
+}
+.movies-alpha-grid .movie-alpha-card:nth-child(2) {
+  animation-delay: 40ms;
+}
+.movies-alpha-grid .movie-alpha-card:nth-child(3) {
+  animation-delay: 80ms;
+}
+.movies-alpha-grid .movie-alpha-card:nth-child(4) {
+  animation-delay: 120ms;
+}
+.movies-alpha-grid .movie-alpha-card:nth-child(5) {
+  animation-delay: 160ms;
+}
+.movies-alpha-grid .movie-alpha-card:nth-child(6) {
+  animation-delay: 200ms;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .movies-alpha-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .movies-alpha-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: var(--space-3) var(--space-2);
+  }
+
+  .letter-char {
+    font-size: 2rem;
+  }
+
+  .movies-hero-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .movies-alpha-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+  }
+
+  .alpha-btn {
+    font-size: 0.8rem;
+    padding: var(--space-1) var(--space-2);
+  }
+}

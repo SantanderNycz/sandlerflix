@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Sandlerflix — Filmes por categoria do universo de Adam Sandler.">
 	<title>Sandlerflix — Categoria</title>
+	<link rel="stylesheet" href="./css/variables.css" />
+	<link rel="stylesheet" href="./css/reset.css" />
 	<link rel="stylesheet" href="./css/style.css" />
 	<link rel="stylesheet" href="./css/categories.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -13,26 +16,32 @@
 
 <body>
 
-	<header class="header">
+	<header class="header" id="mainHeader">
 		<div class="header-container">
 			<div>
 				<a href="./main.html"><img class="logo" src="./assets/logo.png" alt="Sandlerflix"></a>
 			</div>
-			<nav class="main-nav">
+			<nav class="main-nav" aria-label="Navegação principal">
 				<ul>
 					<li><a href="./main.html" data-translate="nav-home">Início</a></li>
-					<li><a href="./main.html" data-translate="nav-movies">Filmes</a></li>
+					<li><a href="./movies.html" data-translate="nav-movies">Filmes</a></li>
 					<li><a href="./categories.html" class="active" data-translate="nav-categories">Categorias</a></li>
 				</ul>
 			</nav>
 			<div class="header-right">
-				<div class="search-box">
-					<i class="fas fa-search"></i>
-					<input type="text" id="searchInput" placeholder="Títulos...">
+				<div class="lang-switcher" id="langSwitcher">
+					<button class="lang-selected" id="langSelected" aria-label="Selecionar idioma">
+						<span id="langSelectedText">PT</span>
+						<i class="fas fa-chevron-down lang-arrow" aria-hidden="true"></i>
+					</button>
+					<ul class="lang-options" id="langOptions" role="listbox">
+						<li class="lang-option active" data-value="pt" role="option">Português</li>
+						<li class="lang-option" data-value="en" role="option">English</li>
+					</ul>
 				</div>
 			</div>
-			<div class="mobile-menu-btn">
-				<i class="fas fa-bars"></i>
+			<div class="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" role="button">
+				<i class="fas fa-bars" aria-hidden="true"></i>
 			</div>
 		</div>
 	</header>
@@ -40,45 +49,108 @@
 	<main class="category-main">
 		<div class="category-header">
 			<a href="./categories.html" class="btn-back">
-				<i class="fas fa-arrow-left"></i> Categorias
+				<i class="fas fa-arrow-left" aria-hidden="true"></i> Categorias
 			</a>
 			<h1 class="category-title" id="categoryTitle">Categoria</h1>
 			<span class="category-count" id="categoryCount"></span>
 		</div>
 
 		<div class="movies-grid" id="moviesGrid">
-			<!-- Gerado dinamicamente -->
+			<!-- Gerado dinamicamente por category.js -->
 		</div>
 	</main>
 
-	<!-- Modal (igual ao main.html) -->
-	<div class="modal" id="movie-modal">
+	<!-- Modal de detalhes -->
+	<div class="modal" id="movie-modal" role="dialog" aria-modal="true" aria-labelledby="modal-detail-title" aria-hidden="true">
 		<div class="modal-content">
-			<button class="modal-close"><i class="fas fa-times"></i></button>
-			<div class="modal-header">
-				<img src="" alt="Banner do filme" class="modal-banner">
-				<div class="modal-header-content">
-					<h2 class="modal-title">Título do Filme</h2>
-					<div class="modal-meta">
-						<span class="modal-year">Ano</span>
-						<span class="modal-genres">Gêneros</span>
+			<button class="modal-close" aria-label="Fechar modal"><i class="fas fa-times" aria-hidden="true"></i></button>
+			<div class="modal-bg-blur"></div>
+			<div class="modal-detail-container">
+				<div class="modal-detail-grid">
+					<div class="modal-detail-main">
+						<div class="modal-trailer-wrapper">
+							<iframe class="modal-trailer-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Trailer do filme"></iframe>
+						</div>
+						<h2 class="modal-detail-title" id="modal-detail-title"></h2>
+						<p class="modal-detail-description"></p>
 					</div>
-					<p class="modal-description">Descrição...</p>
-					<p class="modal-role">Adam Sandler como: <span></span></p>
-					<!-- <button class="btn btn-modal-play"><i class="fas fa-play"></i> Assistir</button> -->
+					<div class="modal-detail-sidebar">
+						<div class="modal-detail-card">
+							<h3 class="modal-detail-card-title">Detalhes do Filme</h3>
+							<div class="modal-detail-info">
+								<div class="modal-info-item">
+									<div class="modal-info-icon rating"><i class="fas fa-star" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Avaliação</p>
+										<p class="modal-info-value"><span class="modal-info-rating"></span><span class="modal-info-sub">/ 5.0</span></p>
+									</div>
+								</div>
+								<div class="modal-info-item">
+									<div class="modal-info-icon"><i class="fas fa-clock" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Duração</p>
+										<p class="modal-info-value modal-info-duration"></p>
+									</div>
+								</div>
+								<div class="modal-info-item">
+									<div class="modal-info-icon"><i class="fas fa-calendar" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Ano</p>
+										<p class="modal-info-value modal-info-year"></p>
+									</div>
+								</div>
+								<div class="modal-info-item">
+									<div class="modal-info-icon"><i class="fas fa-user" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Adam Sandler como</p>
+										<p class="modal-info-value modal-info-role"></p>
+									</div>
+								</div>
+								<div class="modal-info-item">
+									<div class="modal-info-icon"><i class="fas fa-film" aria-hidden="true"></i></div>
+									<div>
+										<p class="modal-info-label">Géneros</p>
+										<div class="modal-info-genres"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-detail-poster">
+							<img src="" alt="Poster" loading="lazy" />
+							<div class="modal-detail-poster-overlay"><span>POSTER OFICIAL</span></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Trailer Overlay -->
-	<div id="trailerOverlay" class="overlay">
+	<!-- Trailer overlay -->
+	<div id="trailerOverlay" class="overlay" role="dialog" aria-modal="true" aria-label="Trailer do filme" aria-hidden="true">
 		<div class="overlay-content">
-			<button id="closeTrailer" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
-			<iframe id="trailerIframe" width="100%" height="450" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+			<button id="closeTrailer" class="close-btn" aria-label="Fechar trailer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+			<iframe id="trailerIframe" width="100%" height="450" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Trailer do filme">
 			</iframe>
 		</div>
 	</div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="/404.html">Sobre</a></li>
+                    <li><a href="/404.html">Contato</a></li>
+                    <li><a href="/404.html">Termos de Uso</a></li>
+                    <li><a href="/404.html">Privacidade</a></li>
+                </ul>
+            </div>
+            <div class="footer-info">
+                <p>Sandlerflix &copy; 2026. Este é um projeto de clone para fins educacionais.</p>
+                <p>Não afiliado à Netflix ou Adam Sandler, mas queria.</p>
+            </div>
+        </div>
+    </footer>
 
 	<script src="./js/modal.js" type="module"></script>
 	<script src="./js/category.js" type="module"></script>

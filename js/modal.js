@@ -27,14 +27,25 @@ document.addEventListener("DOMContentLoaded", () => {
     // Trailer
     const trailer = modal.querySelector(".modal-trailer-iframe");
     if (filme.link) {
-      let embedUrl = filme.link;
-      if (filme.link.includes("watch?v=")) {
-        const videoId = new URL(filme.link).searchParams.get("v");
+      // Sanitizar URL com protocolo malformado (ex: "hhttps://")
+      const rawLink = filme.link.replace(/^h+(ttps?:\/\/)/i, "h$1");
+
+      let embedUrl = rawLink;
+
+      if (rawLink.includes("watch?v=")) {
+        const videoId = new URL(rawLink).searchParams.get("v");
         embedUrl = `https://www.youtube.com/embed/${videoId}`;
-      } else if (filme.link.includes("youtu.be/")) {
-        const videoId = filme.link.split("youtu.be/")[1].split("?")[0];
+      } else if (rawLink.includes("youtu.be/")) {
+        const videoId = rawLink.split("youtu.be/")[1].split("?")[0];
         embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      } else if (rawLink.includes("youtube.com/embed/")) {
+        // Já é embed — usar directamente (já sanitizado acima)
+        embedUrl = rawLink;
       }
+
+      // Remover autoplay do embed no modal (o utilizador controla)
+      embedUrl = embedUrl.replace(/[?&]autoplay=1/, "");
+
       trailer.src = embedUrl;
     } else {
       trailer.src = "";
