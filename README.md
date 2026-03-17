@@ -1,122 +1,118 @@
-# Sandlerflix 🎬
+# 🎬 Sandlerflix
 
-Uma página de streaming temática inspirada no estilo Netflix, baseado apenas na carreira cinematográfica de um dos melhores atores de todos os tempos. O projeto conta com carrossel interativo, intro em vídeo, modal de detalhes dos filmes, busca dinâmica e tradução. Projeto pessoal de front-end criado por **Leonardo (Nycz)**.
+> Uma plataforma de streaming temática dedicada à carreira cinematográfica de **Adam Sandler** — inspirada no estilo visual da Netflix, construída com HTML, CSS e JavaScript puro.
 
----
-
-## 🧰 Tecnologias usadas
-
-- HTML5 & CSS3 (com flexbox / grid / transições)
-- JavaScript (ES6+)
-- Fetch API para carregar dados locais dos filmes
-- Manipulação de DOM para montar carrosséis, modais e busca
-- Tratamento de eventos de toque (touch) para swipe
-- LocalStorage para persistência de idioma
-- Estratégias de internacionalização (i18n simples)
-- Vercel para hospedagem (deploy)
+[![Deploy](https://img.shields.io/badge/deploy-Vercel-black?logo=vercel)](https://sandlerflix.vercel.app)
+[![Stack](https://img.shields.io/badge/stack-HTML%20%7C%20CSS%20%7C%20JS-red)](https://github.com/SantanderNycz/sandlerflix)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 ---
 
-## 🎯 Funcionalidades principais
+## 🖥️ Demo ao vivo
 
-1. **Intro em vídeo + áudio**  
-   Exibe uma introdução com vídeo e som ao carregar a página.
+🔗 **[sandlerflix.vercel.app](https://sandlerflix.vercel.app)**
 
-2. **Carrossel de filmes**  
-   Permite navegar entre cards, com suporte a toque (swipe) em dispositivos móveis.
-
-3. **Modal de detalhes**  
-   Ao clicar em um card, abre modal com informações do filme (descrição, imagem, trailer etc).
-
-4. **Busca dinâmica**  
-   O usuário digita no campo de busca e a interface filtra os filmes, exibindo resultados em uma seção separada.
-
-5. **Switch de idioma / tradução**  
-   Suporte a múltiplos idiomas: português / inglês (carregamento de JSON de tradução, traduz elementos via `data-translate`).
-
-6. **Responsividade adaptativa**  
-   Adapta o número de cards visíveis & quantidade de scroll conforme a largura da tela.
+> 💡 _Tip: na primeira visita é reproduzida uma intro com vídeo e som — comportamento intencional._
 
 ---
 
-## 🛠️ Estrutura do projeto
+## ✨ Funcionalidades
+
+| Funcionalidade               | Descrição                                                           |
+| ---------------------------- | ------------------------------------------------------------------- |
+| 🎞️ **Intro cinematográfica** | Vídeo de abertura com áudio ao carregar a página                    |
+| 🎠 **Carrossel interativo**  | Navegação entre cards com suporte a swipe em mobile                 |
+| 🔍 **Busca dinâmica**        | Filtragem em tempo real por título                                  |
+| 🎬 **Modal de detalhes**     | Informação completa do filme com trailer incorporado                |
+| 🌐 **i18n (PT / EN)**        | Tradução completa da interface via JSON, persistida em localStorage |
+| 📱 **Responsivo**            | Layout adaptativo com número de cards variável por breakpoint       |
+
+---
+
+## 🧰 Stack
+
+- **HTML5** — estrutura semântica
+- **CSS3** — Flexbox, Grid, variáveis CSS, transições e animações
+- **JavaScript ES6+** — manipulação de DOM, Fetch API, eventos de toque
+- **localStorage** — persistência de idioma e preferências
+- **Vercel** — deploy e hosting
+
+> Projeto deliberadamente sem framework — foco em domínio dos fundamentos da web.
+
+---
+
+## 📁 Estrutura do projeto
 
 ```
-/
-├── public/
-│ ├── index.html
-│ ├── assets/ (vídeos, imagens, áudio)
-│ └── …
-├── src/
-│ ├── carousel.js
-│ ├── modal.js
-│ ├── main.js (ou entry point)
-│ └── …
-├── data/
-│ ├── filmes.json
-│ ├── movies.json
-│ └── translations.json
-├── styles/
-│ ├── main.css
-│ ├── responsive.css
-│ └── …
-└── README.md
+sandlerflix/
+├── index.html              # Entrada principal
+├── intro.html              # Página da intro em vídeo
+│
+├── assets/                 # Imagens, vídeos e áudios
+│   ├── images/
+│   ├── videos/
+│   └── audio/
+│
+├── css/                    # Estilos
+│   ├── variables.css       # Design tokens (cores, espaçamento, tipografia)
+│   ├── main.css            # Estilos globais e layout
+│   ├── carousel.css        # Carrossel de filmes
+│   ├── modal.css           # Modal de detalhes
+│   └── responsive.css      # Media queries
+│
+├── js/                     # Lógica da aplicação
+│   ├── main.js             # Bootstrap e inicialização
+│   ├── carousel.js         # Lógica do carrossel
+│   ├── modal.js            # Lógica do modal
+│   ├── search.js           # Busca dinâmica
+│   └── i18n.js             # Sistema de tradução
+│
+├── data/                   # Dados estáticos
+│   ├── movies_pt.json      # Catálogo em português
+│   ├── movies_en.json      # Catálogo em inglês
+│   └── translations.json   # Strings da interface
+│
+├── fonts/                  # Fontes locais
+├── netflix-intro/          # Assets da intro
+└── .vscode/                # Configurações do editor
 ```
-
-- **data/**: contém os arquivos estáticos JSON com dados dos filmes e traduções.
-- **src/**: lógicas de carrossel, modal, controle de idioma, busca etc.
-- **public/assets**: vídeos, imagens, áudios (intro, capas de filme etc).
-- **styles/**: CSS modularizado, com responsividade e efeitos visuais.
 
 ---
 
-## ✅ Como rodar localmente
+## 🚀 Como correr localmente
 
-1. Clone o repositório:
+```bash
+# Clonar o repositório
+git clone https://github.com/SantanderNycz/sandlerflix.git
+cd sandlerflix
 
-   ```bash
-   git clone https://github.com/SantanderNycz/sandlerflix.git
-   ```
+# Servir com qualquer servidor estático
+npx serve .
+# ou
+python -m http.server 8000
+```
 
-2. Entre na pasta:
+Abre no browser: `http://localhost:3000`
 
-   ```bash
-   cd sandlerflix
-   ```
+> ⚠️ É necessário servir os ficheiros via servidor HTTP (não abrir `index.html` diretamente no browser) — a Fetch API bloqueia ficheiros locais por restrições de CORS.
 
-3. Instale dependências (se houver bundler / bundling):
+---
 
-   ```bash
-   npm install
-   ```
+## 🗺️ Roadmap
 
-4. Se não houver, basta servir os arquivos estáticos, por exemplo usando um servidor local simples:
+- [ ] Integração com a **API do TMDB** para dados dinâmicos
+- [ ] **Watchlist** pessoal com persistência em localStorage
+- [ ] **Skeleton loading** durante o carregamento dos cards
+- [ ] Carrossel com **loop infinito** (sem reset ao início)
+- [ ] Acessibilidade completa (ARIA, navegação por teclado, foco gerido)
+- [ ] Animações mais elaboradas com **GSAP** ou Web Animations API
+- [ ] Intro automática mesmo ao mudar de aba (via timestamp)
 
-   ```bash
-   npx serve .
-   ```
+---
 
-5. Acesse no navegador:
+## 👤 Autor
 
-   ```bash
-   http://localhost:3000
-   ```
+**Leonardo (Nycz)** — formado na [42 Porto](https://www.42porto.com/)
 
-## 🎨 Possíveis melhorias & ideias futuras
-
-Automatizar a intro para que ela termine mesmo quando o usuário muda de aba (baseado em timestamp).
-
-Tornar o áudio “ativo por padrão” após primeira interação ou “desbloqueio”.
-
-Implementar loop infinito no carrossel (efeito “circular”), no lugar do reset ao início.
-
-Adicionar paginação ou lazy loading caso o catálogo de filmes cresça muito.
-
-Modificar todos os trailers, tanto em inglês quanto em português.
-
-Melhorar acessibilidade (foco, roles, descrições aria-\*, navegação por teclado).
-
-Animações mais suaves com GSAP ou Web Animations API.
-
-Armazenamento remoto dos dados (API) em vez de JSON estáticos.
-
+[![Portfolio](https://img.shields.io/badge/portfolio-vercel-black)](https://portfolio-leo-nycz.vercel.app)
+[![GitHub](https://img.shields.io/badge/github-SantanderNycz-181717?logo=github)](https://github.com/SantanderNycz)
