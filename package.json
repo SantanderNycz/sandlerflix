@@ -1,0 +1,32 @@
+{
+  "name": "sandlerflix",
+  "private": true,
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Sandlerflix v2 — plataforma de streaming temática dedicada à filmografia do Adam Sandler.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "tsc -b --noEmit",
+    "data:check": "tsx --tsconfig tsconfig.app.json src/lib/validateData.ts"
+  },
+  "dependencies": {
+    "embla-carousel-react": "^8.5.2",
+    "framer-motion": "^11.18.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11"
+  }
+}
