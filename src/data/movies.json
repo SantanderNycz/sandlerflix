@@ -1,0 +1,1145 @@
+[
+  {
+    "id": "uncut-gems",
+    "year": 2019,
+    "runtime": 135,
+    "rating": 4.5,
+    "genres": [
+      "drama",
+      "thriller"
+    ],
+    "sandlerRole": "Howard Ratner",
+    "poster": "/assets/uncutgems 2.jpg",
+    "backdrop": "/assets/uncutgems 1.jpg",
+    "trailerId": "vTfJp2Ts9X8",
+    "translations": {
+      "pt": {
+        "title": "Jóias Brutas",
+        "synopsis": "Um joalheiro de Nova York tenta encontrar um jeito de pagar seus credores e fazer as pazes com sua família. Mas ele não resiste quando vê uma chance de faturar alto e acaba se envolvendo em uma espiral de riscos e dinheiro."
+      },
+      "en": {
+        "title": "Uncut Gems",
+        "synopsis": "A New York jeweler tries to find a way to pay his creditors and make peace with his family. But he can't resist when he sees a chance to make big money and ends up getting caught in a spiral of risks and money."
+      }
+    }
+  },
+  {
+    "id": "50-first-dates",
+    "year": 2004,
+    "runtime": 99,
+    "rating": 4.3,
+    "genres": [
+      "comedy",
+      "romance"
+    ],
+    "sandlerRole": "Henry Roth",
+    "poster": "/assets/50 first dates.png",
+    "backdrop": "/assets/50 first dates.png",
+    "trailerId": "17KJk3ErIx0",
+    "translations": {
+      "pt": {
+        "title": "Como Se Fosse a Primeira Vez",
+        "synopsis": "Um mulherengo que não acredita no amor se apaixona por uma mulher com amnésia de curto prazo que esquece tudo cada manhã ao acordar."
+      },
+      "en": {
+        "title": "50 First Dates",
+        "synopsis": "A womanizer who doesn't believe in love falls for a woman with short-term amnesia who forgets everything each morning when she wakes up."
+      }
+    }
+  },
+  {
+    "id": "just-go-with-it",
+    "year": 2011,
+    "runtime": 116,
+    "rating": 4.2,
+    "genres": [
+      "comedy",
+      "romance"
+    ],
+    "sandlerRole": "Dr. Daniel 'Danny' Maccabee",
+    "poster": "/assets/justgowithit.jpg",
+    "backdrop": "/assets/justgowithit.jpg",
+    "trailerId": "fpj7i2CPt8M",
+    "translations": {
+      "pt": {
+        "title": "Esposa de Mentirinha",
+        "synopsis": "Um cirurgião plástico convence sua assistente a fingir ser sua esposa para enganar sua jovem namorada, mas acaba se apaixonando por ela."
+      },
+      "en": {
+        "title": "Just Go with It",
+        "synopsis": "A plastic surgeon convinces his assistant to pretend to be his wife to deceive his young girlfriend, but ends up falling in love with her."
+      }
+    }
+  },
+  {
+    "id": "hustle",
+    "year": 2022,
+    "runtime": 104,
+    "rating": 3.9,
+    "genres": [
+      "drama",
+      "sports"
+    ],
+    "sandlerRole": "Stanley Sugarman",
+    "poster": "/assets/hustle.jpg",
+    "backdrop": "/assets/hustle.jpg",
+    "trailerId": "nM4iy0reaCA",
+    "translations": {
+      "pt": {
+        "title": "Arremessando Alto",
+        "synopsis": "Um caça-talentos de basquete decide levar um fenômeno amador espanhol para os EUA e transformá-lo em uma estrela da NBA."
+      },
+      "en": {
+        "title": "Hustle",
+        "synopsis": "A basketball scout decides to take an amateur Spanish phenom to the US and turn him into an NBA star."
+      }
+    }
+  },
+  {
+    "id": "happy-gilmore",
+    "year": 1996,
+    "runtime": 92,
+    "rating": 4.1,
+    "genres": [
+      "comedy",
+      "sports"
+    ],
+    "sandlerRole": "Happy Gilmore",
+    "poster": "/assets/um maluco no golfe.jpg",
+    "backdrop": "/assets/um maluco no golfe.jpg",
+    "trailerId": "y1emDAYCfVQ",
+    "translations": {
+      "pt": {
+        "title": "Um Maluco no Golfe",
+        "synopsis": "Um jogador de hóquei fracassado descobre seu talento para o golfe e decide participar de um torneio para ganhar dinheiro e salvar a casa de sua avó."
+      },
+      "en": {
+        "title": "Happy Gilmore",
+        "synopsis": "A failed hockey player discovers his talent for golf and decides to enter a tournament to earn money and save his grandmother's house."
+      }
+    }
+  },
+  {
+    "id": "grown-ups",
+    "year": 2010,
+    "runtime": 102,
+    "rating": 3.9,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Lenny Feder",
+    "poster": "/assets/grownups.jpg",
+    "backdrop": "/assets/grownups.jpg",
+    "trailerId": "e01NVCveGkg",
+    "translations": {
+      "pt": {
+        "title": "Gente Grande",
+        "synopsis": "Cinco amigos de infância se reúnem após o funeral do treinador de basquete da juventude deles. Decidem passar o fim de semana do feriado de 4 de julho com suas famílias em uma casa no lago onde celebraram o campeonato anos atrás."
+      },
+      "en": {
+        "title": "Grown Ups",
+        "synopsis": "Five childhood friends reunite after their youth basketball coach's funeral. They decide to spend the July 4th holiday weekend with their families at a lake house where they celebrated the championship years ago."
+      }
+    }
+  },
+  {
+    "id": "you-dont-mess-with-the-zohan",
+    "year": 2008,
+    "runtime": 113,
+    "rating": 4,
+    "genres": [
+      "comedy",
+      "action"
+    ],
+    "sandlerRole": "Zohan Dvir",
+    "poster": "/assets/zohan.jpg",
+    "backdrop": "/assets/zohan.jpg",
+    "trailerId": "ucmnTmYpGhI",
+    "translations": {
+      "pt": {
+        "title": "Zohan: Um Agente Bom de Corte",
+        "synopsis": "Um agente secreto israelense finge a própria morte para realizar seu sonho de se tornar cabeleireiro em Nova York, mas continua envolvido em confusões internacionais."
+      },
+      "en": {
+        "title": "You Don't Mess with the Zohan",
+        "synopsis": "An Israeli secret agent fakes his own death to fulfill his dream of becoming a hairstylist in New York, but continues to get involved in international troubles."
+      }
+    }
+  },
+  {
+    "id": "click",
+    "year": 2006,
+    "runtime": 107,
+    "rating": 4.1,
+    "genres": [
+      "comedy",
+      "drama",
+      "fantasy"
+    ],
+    "sandlerRole": "Michael Newman",
+    "poster": "/assets/click.jpg",
+    "backdrop": "/assets/click.jpg",
+    "trailerId": "zZNC5emNyEQ",
+    "translations": {
+      "pt": {
+        "title": "Click",
+        "synopsis": "Um arquiteto sobrecarregado encontra um controle remoto universal que permite avançar rapidamente pelas partes chatas de sua vida. Mas logo descobre que não pode voltar atrás."
+      },
+      "en": {
+        "title": "Click",
+        "synopsis": "An overworked architect finds a universal remote control that allows him to fast-forward through the boring parts of his life. But he soon discovers he can't go back."
+      }
+    }
+  },
+  {
+    "id": "jack-and-jill",
+    "year": 2011,
+    "runtime": 98,
+    "rating": 3.9,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Jack & Jill Sadelstein",
+    "poster": "/assets/gemea.jpg",
+    "backdrop": "/assets/gemea.jpg",
+    "trailerId": "oJVv3PBoPMc",
+    "translations": {
+      "pt": {
+        "title": "Cada Um Tem a Gêmea Que Merece",
+        "synopsis": "Jack é um executivo de publicidade bem-sucedido que vive em Los Angeles com sua esposa e filhos. Todo ano ele teme a visita de sua irmã gêmea Jill, que sempre causa problemas."
+      },
+      "en": {
+        "title": "Jack and Jill",
+        "synopsis": "Jack is a successful advertising executive living in Los Angeles with his wife and children. Every year he dreads the visit from his twin sister Jill, who always causes problems."
+      }
+    }
+  },
+  {
+    "id": "hotel-transylvania",
+    "year": 2012,
+    "runtime": 91,
+    "rating": 4.3,
+    "genres": [
+      "animation",
+      "comedy",
+      "family"
+    ],
+    "sandlerRole": "Count Dracula (voice)",
+    "poster": "/assets/ht1.jpg",
+    "backdrop": "/assets/ht1.jpg",
+    "trailerId": "q4RK3jY7AVk",
+    "translations": {
+      "pt": {
+        "title": "Hotel Transilvânia",
+        "synopsis": "O Hotel Transilvânia é um resort cinco estrelas onde monstros e suas famílias podem viver livremente sem humanos para incomodá-los. Um fim de semana especial reúne vários convidados famosos para comemorar o aniversário de 118 anos da filha de Drácula."
+      },
+      "en": {
+        "title": "Hotel Transylvania",
+        "synopsis": "Hotel Transylvania is a five-star resort where monsters and their families can live freely without humans to bother them. A special weekend brings together several famous guests to celebrate Dracula's daughter's 118th birthday."
+      }
+    }
+  },
+  {
+    "id": "hubie-halloween",
+    "year": 2020,
+    "runtime": 102,
+    "rating": 3.9,
+    "genres": [
+      "comedy",
+      "horror"
+    ],
+    "sandlerRole": "Hubie Dubois",
+    "poster": "/assets/hubie.jpg",
+    "backdrop": "/assets/hubie.jpg",
+    "trailerId": "kY3SuNvqQPw",
+    "translations": {
+      "pt": {
+        "title": "Hubie Halloween",
+        "synopsis": "Hubie Dubois, um cara que não é muito popular, mas mesmo sofrendo bullying e sendo medroso ele tem bom coração e busca ao máximo garantir a segurança de todos no Halloween em Salem."
+      },
+      "en": {
+        "title": "Hubie Halloween",
+        "synopsis": "Hubie Dubois, a guy who's not very popular, but despite being bullied and being a scaredy-cat, he has a good heart and tries his best to ensure everyone's safety on Halloween in Salem."
+      }
+    }
+  },
+  {
+    "id": "murder-mystery",
+    "year": 2019,
+    "runtime": 97,
+    "rating": 4,
+    "genres": [
+      "comedy",
+      "mystery"
+    ],
+    "sandlerRole": "Nick Spitz",
+    "poster": "/assets/misterio no mediterraneo 1.jpg",
+    "backdrop": "/assets/misterio no mediterraneo 1.jpg",
+    "trailerId": "5YEVQDr2f3Q",
+    "translations": {
+      "pt": {
+        "title": "Mistério no Mediterrâneo",
+        "synopsis": "Um policial de Nova York e sua esposa vão para a Europa para revitalizar o casamento, mas acabam sendo acusados do assassinato de um idoso bilionário e precisam fugir."
+      },
+      "en": {
+        "title": "Murder Mystery",
+        "synopsis": "A New York cop and his wife go to Europe to revitalize their marriage, but end up being accused of murdering an elderly billionaire and must flee."
+      }
+    }
+  },
+  {
+    "id": "happy-gilmore-2",
+    "year": 2025,
+    "runtime": 92,
+    "rating": 4,
+    "genres": [
+      "comedy",
+      "sports"
+    ],
+    "sandlerRole": "Happy Gilmore",
+    "poster": "/assets/um maluco no golfe 2.jpg",
+    "backdrop": "/assets/um maluco no golfe 2.jpg",
+    "trailerId": "YKzRPFvky9Y",
+    "translations": {
+      "pt": {
+        "title": "Um Maluco no Golfe 2",
+        "synopsis": "Happy Gilmore está de volta para ajudar sua família mais uma vez, e superar seus traumas."
+      },
+      "en": {
+        "title": "Happy Gilmore 2",
+        "synopsis": "Happy Gilmore is back to help his family once again, and overcome his traumas."
+      }
+    }
+  },
+  {
+    "id": "big-daddy",
+    "year": 1999,
+    "runtime": 93,
+    "rating": 4,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Sonny Koufax",
+    "poster": "/assets/bigddaddy.png",
+    "backdrop": "/assets/bigddaddy.png",
+    "trailerId": "jxnccxgybUI",
+    "translations": {
+      "pt": {
+        "title": "O Paizão",
+        "synopsis": "Um preguiçoso que cria um filho para impressionar sua namorada acaba se apegando à criança e aprendendo sobre responsabilidade."
+      },
+      "en": {
+        "title": "Big Daddy",
+        "synopsis": "A slacker who raises a child to impress his girlfriend ends up bonding with the kid and learning about responsibility."
+      }
+    }
+  },
+  {
+    "id": "the-ridiculous-6",
+    "year": 2015,
+    "runtime": 110,
+    "rating": 3.5,
+    "genres": [
+      "comedy",
+      "western"
+    ],
+    "sandlerRole": "Tommy 'White Knife'",
+    "poster": "/assets/os 6 ridiculos.jpg",
+    "backdrop": "/assets/os 6 ridiculos.jpg",
+    "trailerId": "qUp7Qgimn38",
+    "translations": {
+      "pt": {
+        "title": "Os 6 Ridículos",
+        "synopsis": "Seis irmãos separados no nascimento se reencontram e precisam lidar com trapaceiros e confusões em busca do tesouro de seu pai."
+      },
+      "en": {
+        "title": "The Ridiculous 6",
+        "synopsis": "Six brothers separated at birth reunite and must deal with con artists and chaos in search of their father's treasure."
+      }
+    }
+  },
+  {
+    "id": "sandy-wexler",
+    "year": 2017,
+    "runtime": 134,
+    "rating": 3.8,
+    "genres": [
+      "comedy",
+      "romance"
+    ],
+    "sandlerRole": "Sandy Wexler",
+    "poster": "/assets/sandy 1.png",
+    "backdrop": "/assets/sandy 1.png",
+    "trailerId": "wBPBSroi_VE",
+    "translations": {
+      "pt": {
+        "title": "Sandy Wexler",
+        "synopsis": "Um agente de talentos excêntrico trabalha para promover artistas em Los Angeles, enquanto enfrenta problemas amorosos e profissionais."
+      },
+      "en": {
+        "title": "Sandy Wexler",
+        "synopsis": "An eccentric talent agent works to promote artists in Los Angeles, while facing romantic and professional problems."
+      }
+    }
+  },
+  {
+    "id": "thats-my-boy",
+    "year": 2012,
+    "runtime": 116,
+    "rating": 2.6,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Donny Berger",
+    "poster": "/assets/esse é o meu garoto.jpg",
+    "backdrop": "/assets/esse é o meu garoto.jpg",
+    "trailerId": "HZJKgniCvUI",
+    "translations": {
+      "pt": {
+        "title": "Esse É O Meu Garoto",
+        "synopsis": "Donny não vê o filho Todd há anos e resolve se mudar para a casa do jovem. O rapaz, prestes a se casar, tem que lidar com a presença do pai, que tenta reatar os laços familiares e acaba criando vários problemas com a noiva."
+      },
+      "en": {
+        "title": "That's My Boy",
+        "synopsis": "Donny hasn't seen his son Todd in years and decides to move into the young man's house. The boy, about to get married, has to deal with his father's presence, who tries to reconnect family ties and ends up creating various problems with the bride."
+      }
+    }
+  },
+  {
+    "id": "little-nicky",
+    "year": 2000,
+    "runtime": 91,
+    "rating": 3.7,
+    "genres": [
+      "comedy",
+      "fantasy"
+    ],
+    "sandlerRole": "Nicky",
+    "poster": "/assets/little nicky.jpg",
+    "backdrop": "/assets/little nicky.jpg",
+    "trailerId": "_e3FajuSgs0",
+    "translations": {
+      "pt": {
+        "title": "Little Nicky",
+        "synopsis": "O filho de Satanás precisa salvar o mundo quando seus irmãos escapam do inferno e causam caos na Terra."
+      },
+      "en": {
+        "title": "Little Nicky",
+        "synopsis": "Satan's son must save the world when his brothers escape from hell and cause chaos on Earth."
+      }
+    }
+  },
+  {
+    "id": "i-now-pronounce-you-chuck-and-larry",
+    "year": 2007,
+    "runtime": 115,
+    "rating": 3.6,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Chuck Levine",
+    "poster": "/assets/marido e larry.jpg",
+    "backdrop": "/assets/marido e larry.jpg",
+    "trailerId": "y2hxNuaju78",
+    "translations": {
+      "pt": {
+        "title": "Eu os Declaro Marido e… Larry",
+        "synopsis": "Dois bombeiros fingem ser um casal gay para que um deles possa garantir benefícios de pensão para seus filhos."
+      },
+      "en": {
+        "title": "I Now Pronounce You Chuck & Larry",
+        "synopsis": "Two firefighters pretend to be a gay couple to qualify for domestic partner benefits."
+      }
+    }
+  },
+  {
+    "id": "blended",
+    "year": 2014,
+    "runtime": 117,
+    "rating": 3.8,
+    "genres": [
+      "comedy",
+      "romance"
+    ],
+    "sandlerRole": "Jim Friedman",
+    "poster": "/assets/juntos e misturados.jpg",
+    "backdrop": "/assets/juntos e misturados.jpg",
+    "trailerId": "V6cKLTmDB-k",
+    "translations": {
+      "pt": {
+        "title": "Juntos e Misturados",
+        "synopsis": "Duas famílias muito diferentes precisam conviver quando se encontram por causa de um casamento improvável, causando muitas confusões."
+      },
+      "en": {
+        "title": "Blended",
+        "synopsis": "Two very different families must coexist when they meet because of an unlikely marriage, causing many mix-ups."
+      }
+    }
+  },
+  {
+    "id": "the-waterboy",
+    "year": 1998,
+    "runtime": 91,
+    "rating": 3.7,
+    "genres": [
+      "comedy",
+      "sports"
+    ],
+    "sandlerRole": "Bobby Boucher",
+    "poster": "/assets/waterboy.webp",
+    "backdrop": "/assets/waterboy.webp",
+    "trailerId": "vVLvkqfTRVQ",
+    "translations": {
+      "pt": {
+        "title": "O Rei da Água",
+        "synopsis": "Um jovem tímido que trabalha como 'boy da água' descobre seu talento para o futebol americano e tenta conquistar o sucesso e o amor."
+      },
+      "en": {
+        "title": "The Waterboy",
+        "synopsis": "A shy young man who works as a waterboy discovers his talent for football and tries to achieve success and love."
+      }
+    }
+  },
+  {
+    "id": "mr-deeds",
+    "year": 2002,
+    "runtime": 96,
+    "rating": 3.9,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Longfellow Deeds",
+    "poster": "/assets/mr deeds.jpg",
+    "backdrop": "/assets/mr deeds.jpg",
+    "trailerId": "ASw47FiEhes",
+    "translations": {
+      "pt": {
+        "title": "A herança de Mr Deeds",
+        "synopsis": "Deeds é muito querido em sua pequena cidade, mas após a morte de um tio com quem havia perdido contato, e que também era um magnata bilionário, herda uma fortuna e vai para a cidade grande para assumir a empresa do falecido. A mídia faz um alvoroço sobre a herança de Deeds, e a jornalista Babe Bennett se disfarça para expor o rapaz como um caipira do interior que ela acha que ele é."
+      },
+      "en": {
+        "title": "Mr. Deeds",
+        "synopsis": "Deeds is very popular in his small town, but after the death of an uncle he had lost contact with, who was also a billionaire mogul, he inherits a fortune and goes to the big city to take over the deceased's company. The media makes a fuss about Deeds' inheritance, and journalist Babe Bennett goes undercover to expose the guy as a country bumpkin she thinks he is."
+      }
+    }
+  },
+  {
+    "id": "the-week-of",
+    "year": 2018,
+    "runtime": 116,
+    "rating": 3.8,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Kenny Lustig",
+    "poster": "/assets/la vem os pais.jpg",
+    "backdrop": "/assets/la vem os pais.jpg",
+    "trailerId": "vc0fb3xhFHY",
+    "translations": {
+      "pt": {
+        "title": "Lá Vem os Pais",
+        "synopsis": "Dois pais com ideias opostas para a festa de casamento dos filhos dão duro para sobreviver à caótica semana de preparativos para o grande dia."
+      },
+      "en": {
+        "title": "The Week Of",
+        "synopsis": "Two fathers with opposing ideas for their children's wedding party work hard to survive the chaotic week of preparations for the big day."
+      }
+    }
+  },
+  {
+    "id": "the-cobbler",
+    "year": 2014,
+    "runtime": 99,
+    "rating": 4,
+    "genres": [
+      "comedy",
+      "drama"
+    ],
+    "sandlerRole": "Max Simkin",
+    "poster": "/assets/cobbler.jpg",
+    "backdrop": "/assets/cobbler.jpg",
+    "trailerId": "kMVGScC0vDA",
+    "translations": {
+      "pt": {
+        "title": "Trocando os Pés",
+        "synopsis": "Um solitário sapateiro encontra uma relíquia mágica que possibilita que ele se transforme em qualquer pessoa ao calçar os sapatos dela."
+      },
+      "en": {
+        "title": "The Cobbler",
+        "synopsis": "A lonely cobbler finds a magical relic that enables him to transform into anyone by wearing their shoes."
+      }
+    }
+  },
+  {
+    "id": "grown-ups-2",
+    "year": 2013,
+    "runtime": 102,
+    "rating": 3.7,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Lenny Feder",
+    "poster": "/assets/grownups 2.jpg",
+    "backdrop": "/assets/grownups 2.jpg",
+    "trailerId": "Sq5CIH0duMk",
+    "translations": {
+      "pt": {
+        "title": "Gente Grande 2",
+        "synopsis": "Os amigos da infância se reencontram e precisam lidar com confusões, filhos e problemas familiares durante as férias de verão."
+      },
+      "en": {
+        "title": "Grown Ups 2",
+        "synopsis": "Childhood friends reunite and must deal with chaos, children, and family problems during summer vacation."
+      }
+    }
+  },
+  {
+    "id": "the-meyerowitz-stories",
+    "year": 2017,
+    "runtime": 109,
+    "rating": 4,
+    "genres": [
+      "comedy",
+      "drama"
+    ],
+    "sandlerRole": "Danny Meyerowitz",
+    "poster": "/assets/meyerowitz.png",
+    "backdrop": "/assets/meyerowitz.png",
+    "trailerId": "MYzFieit8dI",
+    "translations": {
+      "pt": {
+        "title": "Histórias de Meyerowitz",
+        "synopsis": "Uma família disfuncional se reúne em Nova York para celebrar a carreira de seu pai, e antigos conflitos ressurgem entre irmãos e pais."
+      },
+      "en": {
+        "title": "The Meyerowitz Stories",
+        "synopsis": "A dysfunctional family gathers in New York to celebrate their father's career, and old conflicts resurface between siblings and parents."
+      }
+    }
+  },
+  {
+    "id": "anger-management",
+    "year": 2003,
+    "runtime": 106,
+    "rating": 4,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Dave Buznik",
+    "poster": "/assets/tratamento.jpg",
+    "backdrop": "/assets/tratamento.jpg",
+    "trailerId": "jA_j1WNDd_Q",
+    "translations": {
+      "pt": {
+        "title": "Tratamento de Choque",
+        "synopsis": "Dave Buznik é geralmente um cara pacato que não gosta de confrontos. Porém depois de uma briga a bordo de um avião, ele tem que ir a um terapeuta para controlar sua agressividade e visita o Dr. Buddy Rydell, o qual poderia usar um pouco da sua própria terapia."
+      },
+      "en": {
+        "title": "Anger Management",
+        "synopsis": "Dave Buznik is generally a peaceful guy who doesn't like confrontations. However, after a fight aboard a plane, he has to go to a therapist to control his aggression and visits Dr. Buddy Rydell, who could use a little therapy himself."
+      }
+    }
+  },
+  {
+    "id": "funny-people",
+    "year": 2009,
+    "runtime": 146,
+    "rating": 4,
+    "genres": [
+      "comedy",
+      "drama"
+    ],
+    "sandlerRole": "George Simmons",
+    "poster": "/assets/ta rindo 1.jpg",
+    "backdrop": "/assets/ta rindo 1.jpg",
+    "trailerId": "kzciY15Q3BA",
+    "translations": {
+      "pt": {
+        "title": "Tá rindo de quê",
+        "synopsis": "Um comediante famoso recebe um diagnóstico de doença grave e começa a refletir sobre sua vida, amizade e relacionamentos amorosos."
+      },
+      "en": {
+        "title": "Funny People",
+        "synopsis": "A famous comedian receives a diagnosis of serious illness and begins to reflect on his life, friendship, and romantic relationships."
+      }
+    }
+  },
+  {
+    "id": "pixels",
+    "year": 2015,
+    "runtime": 105,
+    "rating": 2.8,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Sam Brenner",
+    "poster": "/assets/pixels.jpg",
+    "backdrop": "/assets/pixels.jpg",
+    "trailerId": "XAHprLW48no",
+    "translations": {
+      "pt": {
+        "title": "Pixels",
+        "synopsis": "Em busca de contato com seres extraterrestres, a humanidade envia imagens e sons variados sobre sua própria cultura nos mais diversos satélites lançados ao espaço. Após encontrar um desses registros, uma raça alienígena resolve criar monstros digitais inspirados em videogames clássicos dos anos 1980 e tentar conquistar a Terra. Para combatê-los, um grupo de especialistas em jogos da época é convocado e encarregado de derrotar os invasores, salvando assim o planeta."
+      },
+      "en": {
+        "title": "Pixels",
+        "synopsis": "In search of contact with extraterrestrial beings, humanity sends various images and sounds about its own culture on satellites launched into space. After finding one of these records, an alien race decides to create digital monsters inspired by classic 1980s video games and attempt to conquer Earth. To combat them, a group of game specialists from that era is summoned and tasked with defeating the invaders, thus saving the planet."
+      }
+    }
+  },
+  {
+    "id": "the-do-over",
+    "year": 2016,
+    "runtime": 112,
+    "rating": 3.8,
+    "genres": [
+      "comedy",
+      "action"
+    ],
+    "sandlerRole": "Charlie McMillan",
+    "poster": "/assets/zerando.jpg",
+    "backdrop": "/assets/zerando.jpg",
+    "trailerId": "lZ1fKYmF4qU",
+    "translations": {
+      "pt": {
+        "title": "Zerando a Vida",
+        "synopsis": "Dois amigos fingem suas mortes para começar uma nova vida, mas acabam se metendo em aventuras perigosas e hilárias."
+      },
+      "en": {
+        "title": "The Do-Over",
+        "synopsis": "Two friends fake their deaths to start a new life, but end up getting into dangerous and hilarious adventures."
+      }
+    }
+  },
+  {
+    "id": "spaceman",
+    "year": 2024,
+    "runtime": 109,
+    "rating": 4.2,
+    "genres": [
+      "sci-fi",
+      "adventure"
+    ],
+    "sandlerRole": "Jakub Procházka",
+    "poster": "/assets/spaceman.jpg",
+    "backdrop": "/assets/spaceman.jpg",
+    "trailerId": "rNZ0xKaCdus",
+    "translations": {
+      "pt": {
+        "title": "O Astronauta",
+        "synopsis": "Um astronauta enfrenta uma missão solitária de seis meses no espaço. Ele sente os efeitos extremos do isolamento e sofre com saudades da esposa. Lutando para se manter são, o homem é visitado por uma criatura alienígena que promete ajudá-lo a curar seus traumas. Os dois partem juntos em uma viagem pela mente e pelas angústias do viajante do espaço."
+      },
+      "en": {
+        "title": "Spaceman",
+        "synopsis": "An astronaut faces a solitary six-month mission in space. He feels the extreme effects of isolation and suffers from missing his wife. Struggling to stay sane, the man is visited by an alien creature that promises to help him heal his traumas. Together they embark on a journey through the space traveler's mind and anxieties."
+      }
+    }
+  },
+  {
+    "id": "reign-over-me",
+    "year": 2007,
+    "runtime": 124,
+    "rating": 4.3,
+    "genres": [
+      "drama"
+    ],
+    "sandlerRole": "Charlie Fineman",
+    "poster": "/assets/rainoverme.jpg",
+    "backdrop": "/assets/rainoverme.jpg",
+    "trailerId": "yzQYokimcg0",
+    "translations": {
+      "pt": {
+        "title": "Reine Sobre Mim",
+        "synopsis": "Charlie Finema perdeu sua família no ataque terrorista de 11 de Setembro e ainda não se recuperou. Ele reencontra Alan Johnson, um ex-colega de quarto da faculdade, e os dois reatam a amizade. Alan passa por um momento delicado em sua vida devido às responsabilidades do seu trabalho, mas, juntos, os dois encontram forças para enfrentar os problemas de suas vidas."
+      },
+      "en": {
+        "title": "Reign Over Me",
+        "synopsis": "Charlie Fineman lost his family in the September 11 terrorist attack and still hasn't recovered. He reunites with Alan Johnson, a former college roommate, and the two rekindle their friendship. Alan is going through a delicate time in his life due to his work responsibilities, but together, the two find strength to face their life problems."
+      }
+    }
+  },
+  {
+    "id": "punch-drunk-love",
+    "year": 2002,
+    "runtime": 95,
+    "rating": 4,
+    "genres": [
+      "comedy",
+      "romance"
+    ],
+    "sandlerRole": "Barry Egan",
+    "poster": "/assets/embriagado.jpg",
+    "backdrop": "/assets/embriagado.jpg",
+    "trailerId": "KGqn5k227HY",
+    "translations": {
+      "pt": {
+        "title": "Embriagado de Amor",
+        "synopsis": "O empresário Barry Egan é um homem tímido que leva uma vida solitária e tranquila. Porém, vários eventos ocorrem e mudam sua vida, como apaixonar-se por Lena Leonard. Porém, o romance é ameaçado quando Egan é vítima de um chantagista."
+      },
+      "en": {
+        "title": "Punch-Drunk Love",
+        "synopsis": "Businessman Barry Egan is a shy man who leads a solitary and quiet life. However, several events occur and change his life, such as falling in love with Lena Leonard. But the romance is threatened when Egan becomes a victim of a blackmailer."
+      }
+    }
+  },
+  {
+    "id": "spanglish",
+    "year": 2004,
+    "runtime": 131,
+    "rating": 4,
+    "genres": [
+      "comedy",
+      "romance"
+    ],
+    "sandlerRole": "John Clasky",
+    "poster": "/assets/espangles.jpg",
+    "backdrop": "/assets/espangles.jpg",
+    "trailerId": "--2IG_rxfUM",
+    "translations": {
+      "pt": {
+        "title": "Espanglês",
+        "synopsis": "Uma mulher e sua filha emigram do México para os Estados Unidos, em busca de uma vida melhor. A mãe começa a trabalhar para uma família cujo patriarca é um chef badalado casado com uma mulher insegura, levando a um inevitável choque de culturas."
+      },
+      "en": {
+        "title": "Spanglish",
+        "synopsis": "A woman and her daughter emigrate from Mexico to the United States, seeking a better life. The mother starts working for a family whose patriarch is a famous chef married to an insecure woman, leading to an inevitable clash of cultures."
+      }
+    }
+  },
+  {
+    "id": "eight-crazy-nights",
+    "year": 2002,
+    "runtime": 76,
+    "rating": 3.7,
+    "genres": [
+      "comedy",
+      "animation"
+    ],
+    "sandlerRole": "Davey Stone (voice)",
+    "poster": "/assets/eight crazy nights.jpg",
+    "backdrop": "/assets/eight crazy nights.jpg",
+    "trailerId": "VoFIpnSGnZk",
+    "translations": {
+      "pt": {
+        "title": "Oito Noites Loucas",
+        "synopsis": "Davey Stone se mete em mais uma encrenca e vai parar atrás das grades na época das festas de fim de ano. Com boa vontade, o juiz resolve dar uma chance para Davey e, assim, ele poderá prestar serviços comunitários, ajudando um juiz de basquete juvenil. Porém, a tarefa não será tão fácil quanto parece."
+      },
+      "en": {
+        "title": "Eight Crazy Nights",
+        "synopsis": "Davey Stone gets into another mess and ends up behind bars during the holiday season. Goodheartedly, the judge decides to give Davey a chance, and thus he can perform community service, helping a youth basketball referee. However, the task won't be as easy as it seems."
+      }
+    }
+  },
+  {
+    "id": "leo",
+    "year": 2023,
+    "runtime": 102,
+    "rating": 3.4,
+    "genres": [
+      "comedy",
+      "animation",
+      "musical"
+    ],
+    "sandlerRole": "Leo (voice)",
+    "poster": "/assets/leo.jpg",
+    "backdrop": "/assets/leo.jpg",
+    "trailerId": "27M2lZHAllI",
+    "translations": {
+      "pt": {
+        "title": "Leo",
+        "synopsis": "Após décadas preso na escola, o lagarto Leo planeja conseguir sua liberdade."
+      },
+      "en": {
+        "title": "Leo",
+        "synopsis": "After decades trapped in school, Leo the lizard plans to gain his freedom."
+      }
+    }
+  },
+  {
+    "id": "monicas-gang",
+    "year": 2015,
+    "runtime": 2,
+    "rating": 2.4,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Adam Sandler (already very rich)",
+    "poster": "/assets/monica.png",
+    "backdrop": "/assets/monica.png",
+    "trailerId": "kRi8tB5VU3A",
+    "translations": {
+      "pt": {
+        "title": "Turma da Monica",
+        "synopsis": "Há, te peguei! Adam Sandler entra na história da Turma da Mônica para explicar porque o Sansão foi transformado em pixels, explicando a premissa do filme Pixels."
+      },
+      "en": {
+        "title": "Monica's Gang",
+        "synopsis": "Gotcha! Adam Sandler enters Monica's Gang story to explain why Samson was turned into pixels, explaining the premise of the movie Pixels."
+      }
+    }
+  },
+  {
+    "id": "hotel-transylvania-2",
+    "year": 2015,
+    "runtime": 89,
+    "rating": 4.3,
+    "genres": [
+      "animation",
+      "comedy",
+      "family"
+    ],
+    "sandlerRole": "Count Dracula (voice)",
+    "poster": "/assets/ht2.jpg",
+    "backdrop": "/assets/ht2.jpg",
+    "trailerId": "T3nqmGgnJe8",
+    "translations": {
+      "pt": {
+        "title": "Hotel Transilvânia 2",
+        "synopsis": "Drácula percebe que seu neto, que é metade humano, não está mostrando seu lado vampiro. Preocupado, o avô conta com a ajuda de seus amigos para colocar o menino em um treinamento especial enquanto Mavis e Johnny estão fora."
+      },
+      "en": {
+        "title": "Hotel Transylvania 2",
+        "synopsis": "Dracula realizes that his grandson, who is half human, isn't showing his vampire side. Worried, the grandfather enlists the help of his friends to put the boy through special training while Mavis and Johnny are away."
+      }
+    }
+  },
+  {
+    "id": "hotel-transylvania-3",
+    "year": 2018,
+    "runtime": 97,
+    "rating": 4.3,
+    "genres": [
+      "animation",
+      "comedy",
+      "family"
+    ],
+    "sandlerRole": "Count Dracula (voice)",
+    "poster": "/assets/ht3.jpg",
+    "backdrop": "/assets/ht3.jpg",
+    "trailerId": "Ku52zNnft8k",
+    "translations": {
+      "pt": {
+        "title": "Hotel Transilvânia 3",
+        "synopsis": "A família faz um cruzeiro para que Drácula possa sair de férias e abandonar por uns dias seu trabalho no Hotel Transilvânia. Tudo vai bem até que Mavis percebe que Drácula se apaixonou por uma humana que pode colocá-los em perigo."
+      },
+      "en": {
+        "title": "Hotel Transylvania 3",
+        "synopsis": "The family takes a cruise so Dracula can go on vacation and leave his work at Hotel Transylvania for a few days. Everything goes well until Mavis realizes that Dracula has fallen in love with a human who could put them in danger."
+      }
+    }
+  },
+  {
+    "id": "hotel-transylvania-4",
+    "year": 2022,
+    "runtime": 87,
+    "rating": 4.3,
+    "genres": [
+      "animation",
+      "comedy",
+      "family"
+    ],
+    "sandlerRole": "Count Dracula (voice)",
+    "poster": "/assets/ht4.jpg",
+    "backdrop": "/assets/ht4.jpg",
+    "trailerId": "7AP86CYeR30",
+    "translations": {
+      "pt": {
+        "title": "Hotel Transilvânia 4",
+        "synopsis": "A nova invenção de Van Helsing transforma Drac e os amigos em humanos, e Johnny em um monstro. Agora, Drac precisa encontrar uma maneira de reverter o feitiço antes que a mudança se torne permanente."
+      },
+      "en": {
+        "title": "Hotel Transylvania 4",
+        "synopsis": "Van Helsing's new invention transforms Drac and friends into humans, and Johnny into a monster. Now, Drac needs to find a way to reverse the spell before the change becomes permanent."
+      }
+    }
+  },
+  {
+    "id": "bedtime-stories",
+    "year": 2008,
+    "runtime": 99,
+    "rating": 3.8,
+    "genres": [
+      "comedy",
+      "family"
+    ],
+    "sandlerRole": "Skeeter Bronson",
+    "poster": "/assets/faz de conta.webp",
+    "backdrop": "/assets/faz de conta.webp",
+    "trailerId": "e-6N1NZrQAQ",
+    "translations": {
+      "pt": {
+        "title": "Faz de Conta que Acontece",
+        "synopsis": "Skeeter Bronson descobre que as histórias que conta aos seus sobrinhos se tornam realidade. Para aproveitar o misterioso fenômeno, Skeeter acaba cometendo vários erros, e as contribuições das crianças viram sua vida de cabeça para baixo."
+      },
+      "en": {
+        "title": "Bedtime Stories",
+        "synopsis": "Skeeter Bronson discovers that the stories he tells his niece and nephew come true. To take advantage of the mysterious phenomenon, Skeeter ends up making several mistakes, and the children's contributions turn his life upside down."
+      }
+    }
+  },
+  {
+    "id": "bulletproof",
+    "year": 1996,
+    "runtime": 84,
+    "rating": 3.8,
+    "genres": [
+      "comedy",
+      "action"
+    ],
+    "sandlerRole": "Archie Moses",
+    "poster": "/assets/bullet.png",
+    "backdrop": "/assets/bullet.png",
+    "trailerId": "iOPXStM4blg",
+    "translations": {
+      "pt": {
+        "title": "À Prova de Balas",
+        "synopsis": "Um criminoso nada brilhante, Archie Moses, trabalha para o narcotraficante Frank Colton e permanece alheio ao fato de que um de seus melhores amigos é, na verdade, um policial disfarçado, chamado Jack Carter. Depois que Moses atira em Carter acidentalmente, o policial tenta se recuperar e, em seguida, procura trazer o bandido para depor contra Colton."
+      },
+      "en": {
+        "title": "Bulletproof",
+        "synopsis": "A not-so-bright criminal, Archie Moses, works for drug dealer Frank Colton and remains oblivious to the fact that one of his best friends is actually an undercover cop named Jack Carter. After Moses accidentally shoots Carter, the cop tries to recover and then seeks to bring the criminal to testify against Colton."
+      }
+    }
+  },
+  {
+    "id": "the-wedding-singer",
+    "year": 1998,
+    "runtime": 95,
+    "rating": 3.9,
+    "genres": [
+      "comedy",
+      "romance"
+    ],
+    "sandlerRole": "Robbie Hart",
+    "poster": "/assets/afinado.jpg",
+    "backdrop": "/assets/afinado.jpg",
+    "trailerId": "Yy-TwYB1UQw",
+    "translations": {
+      "pt": {
+        "title": "Afinado no Amor",
+        "synopsis": "Robbie Hart é um compositor frustrado que canta em festas de casamento. Em uma certa noite ele conhece Julia Sullivan, uma bela garçonete que se saiu muito bem no seu primeiro dia de trabalho. Os dois estão de casamento marcado com outras pessoas, mas o destino lhes reserva uma surpresa romântica. Linda, a noiva de Robbie, o abandona no altar, enquanto Julia descobre que seu noivo é infiel. Com isso, Robbie decide fazer o possível para conquistar a mulher que ama."
+      },
+      "en": {
+        "title": "The Wedding Singer",
+        "synopsis": "Robbie Hart is a frustrated composer who sings at wedding parties. One night he meets Julia Sullivan, a beautiful waitress who did very well on her first day of work. Both are engaged to other people, but fate has a romantic surprise in store for them. Linda, Robbie's fiancée, abandons him at the altar, while Julia discovers that her fiancé is unfaithful. With that, Robbie decides to do everything possible to win over the woman he loves."
+      }
+    }
+  },
+  {
+    "id": "going-overboard",
+    "year": 1989,
+    "runtime": 99,
+    "rating": 2.9,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Shecky Moskowitz",
+    "poster": "/assets/ir ao mar.jpg",
+    "backdrop": "/assets/ir ao mar.jpg",
+    "trailerId": "MKNZqnJ0hzU",
+    "translations": {
+      "pt": {
+        "title": "Ir ao Mar",
+        "synopsis": "Shecky Moskowitz, um comediante esforçado, consegue um emprego como garçom no cruzeiro onde a competição de Miss Universo é realizada. Lá, ele vive nas sombras do humorista oficial do navio, Dickie Diamond, que fica com todas as garotas e sequer deixa Shecky abrir as suas apresentações. No entanto, quando Dickie fica trancado no banheiro antes de um show, Shecky tem sua grande oportunidade de se apresentar ao mundo do entretenimento e às mulheres a bordo."
+      },
+      "en": {
+        "title": "Going Overboard",
+        "synopsis": "Shecky Moskowitz, a struggling comedian, gets a job as a waiter on the cruise where the Miss Universe pageant is held. There, he lives in the shadow of the ship's official comedian, Dickie Diamond, who gets all the girls and won't even let Shecky open his shows. However, when Dickie gets locked in the bathroom before a show, Shecky has his big opportunity to present himself to the entertainment world and the women on board."
+      }
+    }
+  },
+  {
+    "id": "airheads",
+    "year": 1994,
+    "runtime": 92,
+    "rating": 3.2,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Pip",
+    "poster": "/assets/airheads.png",
+    "backdrop": "/assets/airheads.png",
+    "trailerId": "mpxOTk4DDJo",
+    "translations": {
+      "pt": {
+        "title": "Os Cabeça de Vento",
+        "synopsis": "Para conseguir o sucesso que tanto desejam, músicos de uma banda de rock ocupam a principal rádio da cidade, exigindo que sua música seja tocada. Mas o plano não acontece como previsto, a polícia acaba envolvida e a situação fica fora de controle."
+      },
+      "en": {
+        "title": "Airheads",
+        "synopsis": "To achieve the success they so desire, members of a rock band occupy the city's main radio station, demanding that their music be played. But the plan doesn't go as expected, the police get involved, and the situation gets out of control."
+      }
+    }
+  },
+  {
+    "id": "the-longest-yard",
+    "year": 2005,
+    "runtime": 113,
+    "rating": 4.2,
+    "genres": [
+      "comedy",
+      "drama"
+    ],
+    "sandlerRole": "Paul Crewe",
+    "poster": "/assets/golpe baixo.jpg",
+    "backdrop": "/assets/golpe baixo.jpg",
+    "trailerId": "pKqv0NcaOak",
+    "translations": {
+      "pt": {
+        "title": "Golpe Baixo",
+        "synopsis": "Paul Crewe é um ex-astro do futebol americano que acaba sendo detido dirigindo bêbado e vai para a penitenciária de Allenville, uma das mais duras do país. Lá, Paul é encarregado pelo diretor do presídio de montar uma equipe de prisioneiros para disputar uma partida contra os guardas da instituição. Paul convoca um comerciante malandro para recrutar os melhores detentos, aos quais é prometida uma possibilidade de vingança em um confronto em que vale tudo."
+      },
+      "en": {
+        "title": "The Longest Yard",
+        "synopsis": "Paul Crewe is a former football star who ends up being arrested for drunk driving and goes to Allenville Penitentiary, one of the toughest in the country. There, Paul is tasked by the prison warden to assemble a team of prisoners to play a game against the institution's guards. Paul recruits a cunning businessman to recruit the best inmates, who are promised a chance for revenge in a no-holds-barred showdown."
+      }
+    }
+  },
+  {
+    "id": "murder-mystery-2",
+    "year": 2023,
+    "runtime": 90,
+    "rating": 4,
+    "genres": [
+      "comedy",
+      "mystery"
+    ],
+    "sandlerRole": "Nick Spitz",
+    "poster": "/assets/misterio no mediterraneo 2.jpg",
+    "backdrop": "/assets/misterio no mediterraneo 2.jpg",
+    "trailerId": "LM2F56uK0fs",
+    "translations": {
+      "pt": {
+        "title": "Mistério no Mediterrâneo 2",
+        "synopsis": "Depois de abrir uma agência de investigação, Nick e Audrey Spitz finalmente conseguem um caso importante: um amigo bilionário é sequestrado no dia de seu casamento."
+      },
+      "en": {
+        "title": "Murder Mystery 2",
+        "synopsis": "After opening a detective agency, Nick and Audrey Spitz finally get an important case: a billionaire friend is kidnapped on his wedding day."
+      }
+    }
+  },
+  {
+    "id": "billy-madison",
+    "year": 1995,
+    "runtime": 89,
+    "rating": 4,
+    "genres": [
+      "comedy"
+    ],
+    "sandlerRole": "Billy Madison",
+    "poster": "/assets/billy.jpg",
+    "backdrop": "/assets/billy.jpg",
+    "trailerId": "V2Q40rXJuMU",
+    "translations": {
+      "pt": {
+        "title": "Billy Madison",
+        "synopsis": "Billy é o filho irresponsável de Brian Madison, magnata de uma cadeia de hotéis. Ele tem 27 anos e só pensa em beber cerveja, ler revistas masculinas e se divertir com seus amigos tolos. O jovem espera herdar a fortuna da família, mas fica chocado ao saber que o pai determinou que ele não leva nada, a menos que conclua o segundo grau em 24 semanas. É uma missão bem difícil, já que Bill nunca passou da primeira série. Determinado a provar ao pai que é capaz, ele se matricula em uma escola."
+      },
+      "en": {
+        "title": "Billy Madison",
+        "synopsis": "Billy is the irresponsible son of Brian Madison, a hotel chain magnate. He is 27 years old and only thinks about drinking beer, reading men's magazines, and having fun with his foolish friends. The young man hopes to inherit the family fortune, but is shocked to learn that his father has decided that he will get nothing unless he completes high school in 24 weeks. It's a very difficult task, since Bill never made it past first grade. Determined to prove to his father that he is capable, he enrolls in school."
+      }
+    }
+  }
+]

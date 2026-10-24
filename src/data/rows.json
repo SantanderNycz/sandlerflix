@@ -1,0 +1,116 @@
+[
+  {
+    "id": "popular",
+    "titleKey": "row.popular",
+    "movieIds": [
+      "uncut-gems",
+      "grown-ups",
+      "click",
+      "just-go-with-it",
+      "big-daddy",
+      "50-first-dates",
+      "happy-gilmore-2",
+      "the-longest-yard",
+      "mr-deeds",
+      "anger-management",
+      "reign-over-me",
+      "spanglish",
+      "little-nicky"
+    ]
+  },
+  {
+    "id": "comedy",
+    "titleKey": "row.comedy",
+    "movieIds": [
+      "mr-deeds",
+      "pixels",
+      "murder-mystery",
+      "the-longest-yard",
+      "murder-mystery-2",
+      "little-nicky",
+      "happy-gilmore",
+      "happy-gilmore-2",
+      "you-dont-mess-with-the-zohan",
+      "hubie-halloween",
+      "jack-and-jill",
+      "anger-management",
+      "i-now-pronounce-you-chuck-and-larry",
+      "thats-my-boy",
+      "the-ridiculous-6",
+      "grown-ups-2",
+      "blended",
+      "the-week-of",
+      "billy-madison"
+    ]
+  },
+  {
+    "id": "drama",
+    "titleKey": "row.drama",
+    "movieIds": [
+      "uncut-gems",
+      "the-cobbler",
+      "the-meyerowitz-stories",
+      "hustle",
+      "spaceman",
+      "reign-over-me",
+      "punch-drunk-love",
+      "spanglish",
+      "funny-people",
+      "sandy-wexler"
+    ]
+  },
+  {
+    "id": "animation",
+    "titleKey": "row.animation",
+    "movieIds": [
+      "leo",
+      "eight-crazy-nights",
+      "hotel-transylvania",
+      "hotel-transylvania-2",
+      "hotel-transylvania-3",
+      "hotel-transylvania-4",
+      "monicas-gang"
+    ]
+  },
+  {
+    "id": "action",
+    "titleKey": "row.action",
+    "movieIds": [
+      "murder-mystery",
+      "murder-mystery-2",
+      "bulletproof",
+      "bedtime-stories",
+      "the-do-over",
+      "spaceman"
+    ]
+  },
+  {
+    "id": "classics",
+    "titleKey": "row.classics",
+    "movieIds": [
+      "little-nicky",
+      "click",
+      "big-daddy",
+      "50-first-dates",
+      "mr-deeds",
+      "grown-ups",
+      "happy-gilmore",
+      "billy-madison",
+      "the-waterboy",
+      "the-wedding-singer",
+      "going-overboard",
+      "airheads"
+    ]
+  },
+  {
+    "id": "unrated",
+    "titleKey": "row.unrated",
+    "movieIds": [
+      "thats-my-boy",
+      "jack-and-jill",
+      "hubie-halloween",
+      "pixels",
+      "the-ridiculous-6"
+    ]
+  }
+]
