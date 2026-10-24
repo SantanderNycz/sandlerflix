@@ -1,38 +1,45 @@
 # 🎬 Sandlerflix v2
 
-> Uma plataforma de streaming temática dedicada à filmografia de **Adam Sandler** — espírito Netflix com personalidade própria e **curadoria autoral** (do indefensável ao clássico). Reconstrução da [v1 em HTML/CSS/JS puro](https://github.com/SantanderNycz/sandlerflix) com uma stack moderna, mais fluida, mais polida e **mobile-first de verdade**.
+> Uma plataforma de streaming temática dedicada à filmografia de **Adam Sandler**.
+> Reconstrução da [v1 em HTML/CSS/JS puro](https://github.com/SantanderNycz/sandlerflix)
+> para uma stack moderna (Vite + React + TypeScript), **preservando o visual original
+> por completo** e tratando a responsividade e os dados como cidadãos de primeira classe.
 
 [![Stack](https://img.shields.io/badge/stack-Vite%20%7C%20React%20%7C%20TypeScript-646CFF?logo=vite)](https://vite.dev)
-[![Motion](https://img.shields.io/badge/motion-Framer%20Motion-ff0055)](https://www.framer.com/motion/)
-[![Styling](https://img.shields.io/badge/styling-Tailwind%20CSS-38BDF8?logo=tailwindcss)](https://tailwindcss.com)
+[![Carousel](https://img.shields.io/badge/carousel-Embla-1f1f1f)](https://www.embla-carousel.com/)
+[![Data](https://img.shields.io/badge/data-Zod%20validated-3E67B1)](https://zod.dev)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 ---
 
-## ✨ O que tem de novo na v2
+## 🎯 O que esta v2 faz
+
+A v2 **migra** o projeto para uma stack moderna **sem mudar o visual** da v1:
+o CSS original (`reset.css`, `variables.css`, `style.css`, `movies.css`,
+`categories.css`, `profiles.css`) é reaproveitado tal e qual, em
+[`src/styles/`](src/styles). O que muda é a engenharia por baixo:
 
 | Área | v1 | v2 |
 | --- | --- | --- |
-| Stack | HTML/CSS/JS puro | **Vite + React + TypeScript (strict)** |
-| Dados | `movies_pt.json` + `movies_en.json` (duplicados) | **`movies.json` normalizado** (1 filme, traduções embutidas) + `rows.json` |
-| Validação | — | **Zod** no carregamento (`schema → z.infer`), falha com erro claro |
-| Carrossel | scroll manual | **Embla** (swipe fluido no mobile, setas no desktop, loop) |
-| Modal | abre/fecha | **layout animation** (`layoutId`): o poster "vira" o modal sem corte |
-| Animações | CSS | **Framer Motion** (hero, modal, intro, menu) |
-| Responsividade | ponto fraco | **requisito de primeira classe** — testada em 360/390/768/1024/1440 |
-| Intro vertical | faixas pretas | **fundo borrado** do próprio vídeo preenchendo a viewport |
-| i18n | JSON + DOM | **contexto React** leve, PT/EN, persistido em `localStorage` |
+| Stack | HTML/CSS/JS puro, multipáginas | **Vite + React + TypeScript (strict)**, SPA com React Router |
+| Visual | — | **idêntico** (mesmo CSS, mesmo markup/classes) |
+| Dados | `movies_pt.json` + `movies_en.json` duplicados | **`movies.json` normalizado** (1 filme, traduções embutidas) + `rows.json` |
+| Validação | — | **Zod** no carregamento (schema → `z.infer`) + integridade referencial |
+| Carrossel | script próprio | **Embla** (swipe mobile, setas desktop, loop) com o CSS da v1 |
+| Menu mobile | botão existia, dropdown sem estilo | **funcional** (dropdown no tema escuro do header) |
+| i18n | JSON + DOM | contexto React leve, PT/EN, persistido em `localStorage` |
 
 ---
 
-## 🧱 Stack
+## 🧭 Fluxo e páginas (fiéis à v1)
 
-- **Vite + React 18 + TypeScript** (strict, zero `any`)
-- **Tailwind CSS** — tokens de design migrados do `variables.css` da v1 para o `tailwind.config.ts`
-- **Framer Motion** — animações, incluindo layout animation card → modal
-- **Embla Carousel** — carrosséis acessíveis e fluidos
-- **Zod** — validação do JSON de dados + tipos derivados
-- Dados **JSON local curado** (sem TMDB — fica no roadmap)
+- **Entrada (`/`)** — intro em **tela cheia** (vídeo `object-fit: cover` + som
+  "tudum") → tela de perfis **"Quem está a ver?"** → ao escolher o perfil, vai para a home.
+- **Início (`/inicio`)** — hero rotativo (5 filmes), fileiras curadas, busca inline.
+- **Filmes (`/filmes`)** — catálogo alfabético com navegação por letra e busca.
+- **Categorias (`/categorias`)** — grelha por gênero.
+- **Categoria (`/categoria/:genero`)** — filmes de um gênero.
+- **Modal** — trailer (YouTube), sinopse, nota, duração, ano, papel do Sandler e gêneros.
 
 ---
 
@@ -40,56 +47,38 @@
 
 ```
 .
-├── public/
-│   ├── assets/           # pôsteres, backdrops, intro.mp4 / intro-mobile.mp4, fontes de mídia
-│   └── fonts/            # Netflix Sans (local)
+├── public/assets/        # pôsteres, backdrops, intro.mp4 / intro-mobile.mp4, tudum.mp3, logo…
+├── public/fonts/         # Netflix Sans
 ├── src/
-│   ├── components/       # Header, Hero, Row, MovieCard, MovieModal, Intro, SearchOverlay, ErrorBoundary
-│   ├── context/          # SelectionContext (card ↔ modal)
+│   ├── styles/           # CSS ORIGINAL da v1 (visual preservado) — só URLs de asset/fonte ajustadas
+│   ├── components/       # Header, Hero, Carousel, MovieCard, MovieAlphaCard, MovieModal, Footer…
+│   ├── pages/            # EntryPage, HomePage, MoviesPage, CategoriesPage, CategoryPage, NotFound
+│   ├── context/          # SelectionContext (abre/fecha o modal)
 │   ├── data/             # movies.json + rows.json (modelo normalizado)
-│   ├── i18n/             # I18nContext + messages (PT/EN)
+│   ├── i18n/             # contexto + mensagens PT/EN (chaves iguais às da v1)
 │   ├── lib/              # loadData (valida com Zod), utils, validateData
-│   ├── types/            # schemas Zod + tipos (movie.ts)
-│   ├── App.tsx
+│   ├── types/            # schemas Zod + tipos
+│   ├── App.tsx           # rotas (HashRouter) + modal global
 │   └── main.tsx
 ├── legacy/               # v1 completa, preservada para referência
-├── tailwind.config.ts    # tokens de design (cores, tipografia, sombras, z-index…)
-└── vite.config.ts        # server.host = true (host de rede para testar no celular)
+└── index.css             # importa o CSS da v1 + menu mobile + prefers-reduced-motion
 ```
 
 ### Modelo de dados
 
 - **`movies.json`** — cada filme **uma vez**. Campos neutros na raiz (`year`, `runtime`,
-  `rating`, `genres`, `sandlerRole`, `poster`, `backdrop`, `trailerId`); campos traduzíveis
-  em `translations.pt` / `translations.en` (`title`, `synopsis`). IDs em **slug legível**
-  (`happy-gilmore`). `genres` como **enum tipado**.
-- **`rows.json`** — curadoria das fileiras referenciando `movieIds` (a mesma obra aparece em
-  várias fileiras **sem duplicar** dados).
-- Validados por **Zod** no carregamento, incluindo integridade referencial (toda fileira
-  aponta para um filme existente).
+  `rating`, `genres` como enum, `sandlerRole`, `poster`, `backdrop`, `trailerId`); títulos e
+  sinopses em `translations.pt` / `translations.en`. IDs em **slug** (`happy-gilmore`).
+- **`rows.json`** — curadoria das fileiras referenciando `movieIds` (sem duplicar).
+- Validados por **Zod** no carregamento. 48 filmes, 7 fileiras.
 
 ---
 
-## 📱 Responsividade (prioridade alta)
+## 📱 Responsividade
 
-- **Mobile-first**, testado em 360 / 390 / 768 / 1024 / 1440.
-- Sem scroll horizontal indesejado; alvos de toque ≥ 44px; tipografia fluida.
-- Cards por fileira por breakpoint: **2** (mobile) → **3** (tablet) → **5–6** (desktop).
-- Header com **menu mobile funcional**.
-- **Intro responsiva (ponto crítico):** vídeo horizontal com uma camada de **fundo em
-  `object-fit: cover` + `blur`** que estende as cores do próprio vídeo até as bordas
-  (técnica tipo YouTube/Instagram), e a camada da frente em `object-fit: contain` no aspect
-  ratio real. Fallback de autoplay (poster + botão) e opção de **pular a intro**. Já
-  preparada (via `<source media>`) para servir um corte vertical dedicado no mobile.
-
----
-
-## ♿ Acessibilidade & performance
-
-- Foco gerido no modal (trap + restauração), navegação por teclado, `Esc` para fechar, ARIA.
-- `prefers-reduced-motion` respeitado em toda a UI (intro, hero, carrosséis, modal).
-- Imagens com `width`/`height` explícitos, `fetchpriority` nas above-the-fold, `lazy` no
-  resto, skeleton shimmer enquanto carregam, transforms GPU-friendly, `touch-action` correto.
+Mantém os breakpoints da v1 (cards por fileira 6 → 5 → 4 → 3 → 2) e corrige o que
+era fraco: **menu mobile funcional**, intro em tela cheia também no vertical (corte
+`intro-mobile.mp4` abaixo de 1200px) e sem scroll horizontal. Testado em 360/390/768/1024/1440.
 
 ---
 
@@ -100,7 +89,7 @@ npm install
 npm run dev
 ```
 
-O Vite expõe também um **host de rede** (`server.host = true`) — use o endereço `Network:`
+O Vite expõe um **host de rede** (`server.host = true`) — use o endereço `Network:`
 impresso no terminal para testar no celular na mesma rede Wi-Fi.
 
 | Script | O que faz |
@@ -115,14 +104,11 @@ impresso no terminal para testar no celular na mesma rede Wi-Fi.
 ## 🗺️ Roadmap
 
 - [ ] Integração opcional com **TMDB** (hoje os dados são 100% curados localmente)
-- [ ] Corte vertical dedicado do vídeo de intro no mobile (já estruturado)
-- [ ] Página de categorias / filtro por gênero
-- [ ] Testes (Vitest + Testing Library)
-- [ ] Lighthouse CI
+- [ ] Testes (Vitest + Testing Library) e Lighthouse CI
 
 ---
 
 ## ⚠️ Aviso
 
-Projeto pessoal, sem fins lucrativos e para fins educacionais. Não afiliado à Netflix nem ao
-Adam Sandler — mas que eu queria, eu queria.
+Projeto pessoal, sem fins lucrativos e para fins educacionais. Não afiliado à Netflix
+nem ao Adam Sandler — mas que eu queria, eu queria.

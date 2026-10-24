@@ -6,6 +6,15 @@ export function cn(...parts: Array<string | false | null | undefined>): string {
   return parts.filter(Boolean).join(" ");
 }
 
+/** Normaliza texto para busca (minúsculas, sem acentos). */
+export function normalize(s: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
 /** Minutos → "2h 15m" / "47m". */
 export function formatRuntime(minutes: number | null): string | null {
   if (!minutes) return null;

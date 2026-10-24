@@ -1,123 +1,181 @@
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { useI18n } from "@/i18n/I18nContext";
-import { cn } from "@/lib/utils";
+import type { Locale } from "@/types/movie";
 
-interface HeaderProps {
-  onOpenSearch: () => void;
+interface SearchConfig {
+  value: string;
+  onChange: (q: string) => void;
+  placeholder: string;
 }
 
-export function Header({ onOpenSearch }: HeaderProps) {
-  const { t, locale, toggleLocale } = useI18n();
+interface HeaderProps {
+  search?: SearchConfig;
+}
+
+export function Header({ search }: HeaderProps) {
+  const { t, locale, setLocale } = useI18n();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchActive, setSearchActive] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // fecha o menu mobile ao passar para desktop
+  // fecha dropdown de idioma ao clicar fora
   useEffect(() => {
-    const mql = window.matchMedia("(min-width: 768px)");
-    const onChange = () => mql.matches && setMenuOpen(false);
-    mql.addEventListener("change", onChange);
-    return () => mql.removeEventListener("change", onChange);
-  }, []);
+    if (!langOpen) return;
+    const onDoc = () => setLangOpen(false);
+    document.addEventListener("click", onDoc);
+    return () => document.removeEventListener("click", onDoc);
+  }, [langOpen]);
 
-  const links = [
-    { href: "#top", label: t("nav.home") },
-    { href: "#movies", label: t("nav.movies") },
-  ];
+  function toggleSearch() {
+    const next = !searchActive;
+    setSearchActive(next);
+    if (next) {
+      requestAnimationFrame(() => searchInputRef.current?.focus());
+    } else {
+      search?.onChange("");
+    }
+  }
+
+  function pickLang(l: Locale) {
+    setLocale(l);
+    setLangOpen(false);
+  }
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-sticky h-header transition-colors duration-300",
-        scrolled || menuOpen
-          ? "bg-bg/95 backdrop-blur-sm"
-          : "bg-gradient-to-b from-black/80 to-transparent",
-      )}
-    >
-      <div className="page-gutter flex h-full items-center justify-between gap-4">
-        <div className="flex items-center gap-6">
-          <a
-            href="#top"
-            className="font-display text-3xl leading-none tracking-wider text-primary sm:text-4xl"
-          >
-            SANDLERFLIX
-          </a>
-          <nav className="hidden items-center gap-5 md:flex" aria-label="Principal">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="font-body text-sm text-content-secondary transition-colors hover:text-white"
-              >
-                {l.label}
-              </a>
-            ))}
-          </nav>
+    <header className={`header${scrolled || menuOpen ? " scrolled" : ""}`} id="mainHeader">
+      <div className="header-container">
+        <div>
+          <Link to="/inicio">
+            <img className="logo" src="/assets/logo.png" alt="Sandlerflix" />
+          </Link>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <button
-            type="button"
-            onClick={onOpenSearch}
-            aria-label={t("nav.search")}
-            className="grid h-10 w-10 place-items-center rounded-full text-lg text-white transition hover:bg-bg-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-          >
-            ⌕
-          </button>
+        <nav className={`main-nav${menuOpen ? " active" : ""}`} aria-label="Navegação principal">
+          <ul>
+            <li>
+              <NavLink
+                to="/inicio"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                onClick={() => setMenuOpen(false)}
+              >
+                {t("nav-home")}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/filmes"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                onClick={() => setMenuOpen(false)}
+              >
+                {t("nav-movies")}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/categorias"
+                className={({ isActive }) => (isActive ? "active" : "")}
+                onClick={() => setMenuOpen(false)}
+              >
+                {t("nav-categories")}
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
 
-          <button
-            type="button"
-            onClick={toggleLocale}
-            className="rounded-base border border-line-hover px-2.5 py-1 font-body text-xs font-semibold uppercase text-white transition hover:border-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-            aria-label={t("lang.toggle")}
-          >
-            {locale === "pt" ? "EN" : "PT"}
-          </button>
+        <div className="header-right">
+          {search && (
+            <div className={`search-box${searchActive ? " active" : ""}`}>
+              <i
+                className="fas fa-search"
+                aria-hidden="true"
+                role="button"
+                tabIndex={0}
+                aria-label={search.placeholder}
+                onClick={toggleSearch}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    toggleSearch();
+                  }
+                }}
+              />
+              <input
+                ref={searchInputRef}
+                type="text"
+                value={search.value}
+                onChange={(e) => search.onChange(e.target.value)}
+                placeholder={search.placeholder}
+                aria-label={search.placeholder}
+              />
+            </div>
+          )}
 
-          {/* hambúrguer — só no mobile */}
-          <button
-            type="button"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-label="Menu"
-            aria-expanded={menuOpen}
-            className="grid h-10 w-10 place-items-center rounded-full text-xl text-white transition hover:bg-bg-hover focus:outline-none focus-visible:ring-2 focus-visible:ring-white md:hidden"
+          <div
+            className={`lang-switcher${langOpen ? " open" : ""}`}
+            id="langSwitcher"
+            onClick={(e) => e.stopPropagation()}
           >
-            {menuOpen ? "✕" : "☰"}
-          </button>
+            <button
+              className="lang-selected"
+              id="langSelected"
+              aria-label="Selecionar idioma"
+              onClick={() => setLangOpen((v) => !v)}
+            >
+              <span id="langSelectedText">{locale.toUpperCase()}</span>
+              <i className="fas fa-chevron-down lang-arrow" aria-hidden="true" />
+            </button>
+            <ul className="lang-options" id="langOptions" role="listbox">
+              <li
+                className={`lang-option${locale === "pt" ? " active" : ""}`}
+                role="option"
+                aria-selected={locale === "pt"}
+                onClick={() => pickLang("pt")}
+              >
+                Português
+              </li>
+              <li
+                className={`lang-option${locale === "en" ? " active" : ""}`}
+                role="option"
+                aria-selected={locale === "en"}
+                onClick={() => pickLang("en")}
+              >
+                English
+              </li>
+            </ul>
+          </div>
+
+          <div className="profile">
+            <img src="/assets/avatar.webp" alt="Perfil" />
+          </div>
+        </div>
+
+        <div
+          className="mobile-menu-btn"
+          aria-label="Abrir menu"
+          aria-expanded={menuOpen}
+          role="button"
+          tabIndex={0}
+          onClick={() => setMenuOpen((v) => !v)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setMenuOpen((v) => !v);
+            }
+          }}
+        >
+          <i className={menuOpen ? "fas fa-times" : "fas fa-bars"} aria-hidden="true" />
         </div>
       </div>
-
-      {/* menu mobile */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.nav
-            aria-label="Mobile"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="page-gutter absolute inset-x-0 top-header border-t border-line bg-bg/98 py-2 backdrop-blur-sm md:hidden"
-          >
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setMenuOpen(false)}
-                className="block border-b border-line/60 py-3 font-body text-base text-content transition-colors hover:text-primary"
-              >
-                {l.label}
-              </a>
-            ))}
-          </motion.nav>
-        )}
-      </AnimatePresence>
     </header>
   );
 }

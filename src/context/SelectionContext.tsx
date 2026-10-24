@@ -10,9 +10,7 @@ import type { Movie } from "@/types/movie";
 
 interface SelectionValue {
   selected: Movie | null;
-  /** id do layout de origem — garante que o layoutId do poster seja único por trilho. */
-  originId: string | null;
-  open: (movie: Movie, originId?: string) => void;
+  open: (movie: Movie) => void;
   close: () => void;
 }
 
@@ -20,21 +18,13 @@ const SelectionContext = createContext<SelectionValue | null>(null);
 
 export function SelectionProvider({ children }: { children: ReactNode }) {
   const [selected, setSelected] = useState<Movie | null>(null);
-  const [originId, setOriginId] = useState<string | null>(null);
 
-  const open = useCallback((movie: Movie, origin?: string) => {
-    setSelected(movie);
-    setOriginId(origin ?? movie.id);
-  }, []);
-
-  const close = useCallback(() => {
-    setSelected(null);
-    setOriginId(null);
-  }, []);
+  const open = useCallback((movie: Movie) => setSelected(movie), []);
+  const close = useCallback(() => setSelected(null), []);
 
   const value = useMemo<SelectionValue>(
-    () => ({ selected, originId, open, close }),
-    [selected, originId, open, close],
+    () => ({ selected, open, close }),
+    [selected, open, close],
   );
 
   return (

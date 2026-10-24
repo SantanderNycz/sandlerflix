@@ -1,127 +1,49 @@
+/* Fontes de títulos (Bebas Neue) — como na v1 */
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* CSS original da v1 — o visual é preservado exatamente.
+   Ordem igual à das páginas originais: reset → variables → style → páginas. */
+@import "./styles/reset.css";
+@import "./styles/variables.css";
+@import "./styles/style.css";
+@import "./styles/movies.css";
+@import "./styles/categories.css";
+@import "./styles/profiles.css";
 
-/* ============================================================
-   Netflix Sans — fontes locais (public/fonts)
-   ============================================================ */
-@font-face {
-  font-family: "Netflix Sans";
-  src: url("/fonts/NetflixSans-Regular.otf") format("opentype");
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Netflix Sans";
-  src: url("/fonts/NetflixSans-Medium.otf") format("opentype");
-  font-weight: 500;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Netflix Sans";
-  src: url("/fonts/NetflixSans-Bold.otf") format("opentype");
-  font-weight: 700;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Netflix Sans";
-  src: url("/fonts/NetflixSans-Light.otf") format("opentype");
-  font-weight: 300;
-  font-display: swap;
+/* Viewport do Embla dentro do .carousel — recorta os slides sem alterar o visual
+   (a máscara de gradiente continua no .carousel, como na v1). */
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
 }
 
-@layer base {
-  :root {
-    /* padding lateral responsivo (igual à v1) */
-    --page-padding-x: 4vw;
-    color-scheme: dark;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    -webkit-text-size-adjust: 100%;
-  }
-
-  body {
-    margin: 0;
-    background-color: #141414;
-    color: #ffffff;
-    font-family: "Netflix Sans", Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    overflow-x: hidden; /* trava qualquer scroll horizontal indesejado */
-  }
-
-  h1, h2, h3, h4 {
-    font-family: "Bebas Neue", "Netflix Sans", Arial, sans-serif;
-    letter-spacing: 0.02em;
-    line-height: 1.05;
-    margin: 0;
-  }
-
-  img {
+/* Menu mobile funcional (a v1 tinha o botão, mas o dropdown não tinha estilo).
+   Mantém o visual escuro do header; só aparece abaixo de 768px. */
+@media (max-width: 768px) {
+  .main-nav.active {
     display: block;
-    max-width: 100%;
+    position: absolute;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    background: #000;
+    border-top: 1px solid var(--color-border);
+    padding: 8px 4%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
   }
 
-  button {
-    font-family: inherit;
+  .main-nav.active ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
   }
 
-  /* foco visível e consistente para acessibilidade */
-  :focus-visible {
-    outline: 2px solid #e50914;
-    outline-offset: 2px;
-    border-radius: 2px;
-  }
-
-  /* scrollbar discreta */
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #2a2a2a;
-    border-radius: 9999px;
+  .main-nav.active a {
+    width: 100%;
   }
 }
 
-@layer components {
-  /* container com o padding lateral responsivo dos trilhos */
-  .page-gutter {
-    padding-left: var(--page-padding-x);
-    padding-right: var(--page-padding-x);
-  }
-
-  /* esconde a scrollbar do viewport do Embla sem perder o scroll por toque */
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .skeleton {
-    background: linear-gradient(
-      90deg,
-      #1f1f1f 25%,
-      #2d2d2d 50%,
-      #1f1f1f 75%
-    );
-    background-size: 200% 100%;
-    @apply animate-shimmer;
-  }
-}
-
-/* ============================================================
-   Acessibilidade — respeitar prefers-reduced-motion
-   ============================================================ */
+/* Respeitar prefers-reduced-motion (melhoria de acessibilidade, sem alterar o visual) */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

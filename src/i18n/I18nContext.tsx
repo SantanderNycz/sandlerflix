@@ -10,16 +10,14 @@ import {
 import type { Locale } from "@/types/movie";
 import { messages, type MessageKey } from "./messages";
 
-const STORAGE_KEY = "sandlerflix:locale";
+const STORAGE_KEY = "lang"; // mesma chave da v1
 
 interface I18nValue {
   locale: Locale;
   setLocale: (l: Locale) => void;
-  toggleLocale: () => void;
-  /** Tradução de chave estática. */
   t: (key: MessageKey) => string;
-  /** Tradução de chave que recebe contagem (ex: resultados). */
-  tn: (key: MessageKey, n: number) => string;
+  /** Pluralização de "filme/filmes". */
+  unit: (n: number) => string;
 }
 
 const I18nContext = createContext<I18nValue | null>(null);
@@ -30,10 +28,9 @@ function readInitialLocale(): Locale {
     const saved = window.localStorage.getItem(STORAGE_KEY);
     if (saved === "pt" || saved === "en") return saved;
   } catch {
-    /* localStorage indisponível (ex: modo privado) — ignora */
+    /* ignora */
   }
-  const nav = window.navigator.language?.toLowerCase() ?? "";
-  return nav.startsWith("en") ? "en" : "pt";
+  return "pt";
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
@@ -43,33 +40,22 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     try {
       window.localStorage.setItem(STORAGE_KEY, locale);
     } catch {
-      /* ignora falha de persistência */
+      /* ignora */
     }
     document.documentElement.lang = locale === "pt" ? "pt-BR" : "en";
   }, [locale]);
 
   const setLocale = useCallback((l: Locale) => setLocaleState(l), []);
-  const toggleLocale = useCallback(
-    () => setLocaleState((prev) => (prev === "pt" ? "en" : "pt")),
-    [],
-  );
 
   const value = useMemo<I18nValue>(() => {
     const dict = messages[locale];
     return {
       locale,
       setLocale,
-      toggleLocale,
-      t: (key) => {
-        const v = dict[key];
-        return typeof v === "function" ? key : v;
-      },
-      tn: (key, n) => {
-        const v = dict[key];
-        return typeof v === "function" ? v(n) : v;
-      },
+      t: (key) => dict[key] ?? key,
+      unit: (n) => (n === 1 ? dict["unit-movie"] : dict["unit-movies"]),
     };
-  }, [locale, setLocale, toggleLocale]);
+  }, [locale, setLocale]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }
