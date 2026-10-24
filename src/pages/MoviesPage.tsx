@@ -1,17 +1,22 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MovieAlphaCard } from "@/components/MovieAlphaCard";
 import { MOVIES } from "@/lib/loadData";
 import { useI18n } from "@/i18n/I18nContext";
 import { normalize } from "@/lib/utils";
-import type { Movie } from "@/types/movie";
+import type { Locale, Movie } from "@/types/movie";
 
 const DIGITS_BUCKET = "0–9";
 
-/** Letra da secção a partir do título em inglês (como a v1 agrupava por id/EN). */
-function bucketOf(movie: Movie): string {
-  const ch = movie.translations.en.title.trim()[0]?.toUpperCase() ?? "#";
+/** Letra da secção a partir do título no idioma atual (em PT agrupa pelo título PT).
+ *  Remove acentos da letra inicial para "À Prova de Balas" cair em "A", etc. */
+function bucketOf(movie: Movie, locale: Locale): string {
+  const raw = movie.translations[locale].title.trim()[0] ?? "#";
+  const ch = raw
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toUpperCase();
   return /[0-9]/.test(ch) ? DIGITS_BUCKET : ch;
 }
 
@@ -20,11 +25,16 @@ export function MoviesPage() {
   const [query, setQuery] = useState("");
   const [activeLetter, setActiveLetter] = useState("all");
 
-  // Agrupa e ordena por letra (0–9 primeiro)
+  // ao trocar de idioma as letras mudam — volta para "Todos"
+  useEffect(() => {
+    setActiveLetter("all");
+  }, [locale]);
+
+  // Agrupa e ordena por letra do título no idioma atual (0–9 primeiro)
   const sections = useMemo(() => {
     const map = new Map<string, Movie[]>();
     for (const m of MOVIES) {
-      const b = bucketOf(m);
+      const b = bucketOf(m, locale);
       if (!map.has(b)) map.set(b, []);
       map.get(b)!.push(m);
     }
@@ -35,11 +45,11 @@ export function MoviesPage() {
     });
     for (const k of keys) {
       map.get(k)!.sort((a, b) =>
-        a.translations.en.title.localeCompare(b.translations.en.title),
+        a.translations[locale].title.localeCompare(b.translations[locale].title),
       );
     }
     return keys.map((k) => ({ letter: k, movies: map.get(k)! }));
-  }, []);
+  }, [locale]);
 
   const q = normalize(query);
   const results = useMemo(() => {
