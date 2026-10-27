@@ -31,9 +31,15 @@ function MovieCardBase({ movie }: MovieCardProps) {
       <img
         src={movie.poster}
         alt={title}
-        loading="lazy"
+        /* eager: como os cards se repetem (poucas imagens únicas, deduplicadas
+           pelo navegador), pré-carregar evita a espera ao rolar para os repetidos */
+        loading="eager"
         decoding="async"
         draggable={false}
+        ref={(el) => {
+          // se já estiver em cache, mostra na hora (sem fade/esqueleto)
+          if (el?.complete) setLoaded(true);
+        }}
         onLoad={() => setLoaded(true)}
         className={`carousel-img${loaded ? " loaded" : ""}`}
       />

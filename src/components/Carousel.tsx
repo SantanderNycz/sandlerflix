@@ -10,20 +10,21 @@ interface CarouselProps {
 }
 
 /**
- * Carrossel infinito, fluido e com a emenda INVISÍVEL.
+ * Carrossel infinito, com swipe SOLTO (momentum livre) e a emenda INVISÍVEL.
  *
- * Em vez do `loop` nativo do Embla (que reposiciona os cards de forma visível —
- * o efeito de cards "passeando" até o fim da fila), replicamos a técnica da v1:
- *  - renderizamos a lista em N cópias idênticas e começamos na cópia do MEIO;
- *  - quando o scroll assenta ("settle"), se o utilizador saiu da cópia do meio,
- *    saltamos INSTANTANEAMENTE (sem animação) para a posição equivalente no
- *    meio. Como as cópias são idênticas, os cards visíveis são exatamente os
- *    mesmos — o salto não aparece. E como voltamos sempre ao meio, há sempre
- *    buffer dos dois lados: as setas/o swipe nunca "prendem" na ponta.
+ * - `dragFree: true` dá o arrasto fluido/deslizante (em vez de "agarrar" card a
+ *   card como o snap do `slidesToScroll: 1`).
+ * - A ilusão de infinito é feita com N cópias idênticas + recentramento: quando
+ *   o scroll assenta fora da cópia do meio, saltamos para a posição equivalente
+ *   no meio. O salto é por cópias inteiras (mesmos cards visíveis) → não aparece.
+ *   Como voltamos sempre ao meio, há buffer dos dois lados e o fling nunca bate
+ *   na ponta.
  */
-// Cópias: mais para fileiras curtas (buffer suficiente para flings), 3 p/ longas.
+// Mais cópias para fileiras curtas (buffer p/ flings do dragFree); menos p/ longas.
 function copiesFor(len: number): number {
-  return len >= 8 ? 3 : 5;
+  if (len >= 12) return 3;
+  if (len >= 7) return 5;
+  return 7;
 }
 
 export function Carousel({ movies, title }: CarouselProps) {
@@ -40,9 +41,9 @@ export function Carousel({ movies, title }: CarouselProps) {
     loop: false,
     align: "start",
     slidesToScroll: 1,
-    dragFree: false,
+    dragFree: true,
     containScroll: false,
-    startIndex: centerCopy * n, // começa na cópia do meio
+    startIndex: centerCopy * n,
   });
 
   // Recentra para a cópia do meio quando o scroll assenta (salto invisível).
@@ -52,7 +53,7 @@ export function Carousel({ movies, title }: CarouselProps) {
       const i = emblaApi.selectedScrollSnap();
       const within = ((i % n) + n) % n;
       const target = centerCopy * n + within;
-      if (i !== target) emblaApi.scrollTo(target, true); // jump = sem animação
+      if (i !== target) emblaApi.scrollTo(target, true); // jump = instantâneo
     };
     emblaApi.on("settle", recenter);
     return () => {
@@ -60,8 +61,7 @@ export function Carousel({ movies, title }: CarouselProps) {
     };
   }, [emblaApi, n, centerCopy]);
 
-  // Setas avançam/recuam uma página (nº de cards visíveis). Como voltamos sempre
-  // ao meio, há buffer de sobra e o scroll nunca clampa na ponta.
+  // Setas avançam/recuam uma página (nº de cards visíveis).
   const page = useCallback(
     (dir: 1 | -1) => {
       if (!emblaApi) return;
