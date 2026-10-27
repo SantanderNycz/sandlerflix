@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Movie } from "@/types/movie";
 import { MovieCard } from "./MovieCard";
@@ -10,60 +10,42 @@ interface CarouselProps {
 }
 
 /**
- * Fileira infinita com setas (desktop) + swipe (mobile). Markup/classe idênticos à v1.
- *
- * Em vez do `loop` do Embla (que, ao dar a volta, pode fazer um grupo de cards
- * "correr" pela tela), replicamos a técnica da v1: renderizamos a lista em 3
- * cópias e começamos na cópia do meio; quando o utilizador entra na primeira ou
- * última cópia, saltamos **instantaneamente** (sem animação) para a posição
- * equivalente na cópia do meio. Como as cópias são idênticas, o salto é
- * invisível e o carrossel parece infinito, sem nenhum card "atravessando".
+ * Buffer mínimo de slides para o loop contínuo do Embla ficar fluido: com cards
+ * suficientes a emenda do loop acontece fora da tela (nenhum card "atravessa").
  */
-const COPIES = 3;
+const MIN_SLIDES = 24;
 
+/**
+ * Fileira infinita e fluida. Usa o loop NATIVO do Embla (reposicionamento
+ * contínuo, sem saltos/travadas) com `slidesToScroll: 1` — assim não há "grupo
+ * parcial" na volta (a causa do antigo efeito de cards "correndo"). As setas
+ * avançam uma página inteira via `scrollTo`, que no loop vai pelo caminho mais
+ * curto (para a frente/trás conforme a seta). Swipe no mobile segue nativo.
+ */
 export function Carousel({ movies, title }: CarouselProps) {
-  const base = movies;
-
-  const slides = useMemo(
-    () =>
-      base.length === 0
-        ? []
-        : Array.from({ length: COPIES }, () => base).flat(),
-    [base],
-  );
-
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false,
+    loop: true,
     align: "start",
     slidesToScroll: 1,
     dragFree: false,
-    containScroll: false,
-    startIndex: base.length, // começa na cópia do meio
   });
 
-  // Recentra instantaneamente para a cópia do meio ao entrar nas cópias das pontas.
-  useEffect(() => {
-    if (!emblaApi || base.length === 0) return;
-    const n = base.length;
+  // Duplica a lista (mantendo a ordem) até ter buffer suficiente para o loop.
+  const slides = useMemo(() => {
+    if (movies.length === 0) return [];
+    if (movies.length >= MIN_SLIDES) return movies;
+    const times = Math.ceil(MIN_SLIDES / movies.length);
+    return Array.from({ length: times }, () => movies).flat();
+  }, [movies]);
 
-    const recenter = () => {
-      const i = emblaApi.selectedScrollSnap();
-      if (i < n) emblaApi.scrollTo(i + n, true); // jump = sem animação
-      else if (i >= n * 2) emblaApi.scrollTo(i - n, true);
-    };
-
-    emblaApi.on("select", recenter);
-    return () => {
-      emblaApi.off("select", recenter);
-    };
-  }, [emblaApi, base.length]);
-
-  // Setas avançam/retrocedem uma página (nº de cards visíveis), como na v1.
+  // Avança/recua uma página (nº de cards visíveis) mantendo a sensação da v1.
   const page = useCallback(
     (dir: 1 | -1) => {
       if (!emblaApi) return;
+      const count = emblaApi.scrollSnapList().length;
       const step = Math.max(1, emblaApi.slidesInView().length);
-      emblaApi.scrollTo(emblaApi.selectedScrollSnap() + dir * step);
+      const target = (emblaApi.selectedScrollSnap() + dir * step + count) % count;
+      emblaApi.scrollTo(target);
     },
     [emblaApi],
   );
