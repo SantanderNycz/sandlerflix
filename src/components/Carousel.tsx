@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { Movie } from "@/types/movie";
 import { MovieCard } from "./MovieCard";
@@ -10,42 +10,63 @@ interface CarouselProps {
 }
 
 /**
- * Buffer mínimo de slides para o loop contínuo do Embla ficar fluido: com cards
- * suficientes a emenda do loop acontece fora da tela (nenhum card "atravessa").
+ * Carrossel infinito, fluido e com a emenda INVISÍVEL.
+ *
+ * Em vez do `loop` nativo do Embla (que reposiciona os cards de forma visível —
+ * o efeito de cards "passeando" até o fim da fila), replicamos a técnica da v1:
+ *  - renderizamos a lista em N cópias idênticas e começamos na cópia do MEIO;
+ *  - quando o scroll assenta ("settle"), se o utilizador saiu da cópia do meio,
+ *    saltamos INSTANTANEAMENTE (sem animação) para a posição equivalente no
+ *    meio. Como as cópias são idênticas, os cards visíveis são exatamente os
+ *    mesmos — o salto não aparece. E como voltamos sempre ao meio, há sempre
+ *    buffer dos dois lados: as setas/o swipe nunca "prendem" na ponta.
  */
-const MIN_SLIDES = 24;
+// Cópias: mais para fileiras curtas (buffer suficiente para flings), 3 p/ longas.
+function copiesFor(len: number): number {
+  return len >= 8 ? 3 : 5;
+}
 
-/**
- * Fileira infinita e fluida. Usa o loop NATIVO do Embla (reposicionamento
- * contínuo, sem saltos/travadas) com `slidesToScroll: 1` — assim não há "grupo
- * parcial" na volta (a causa do antigo efeito de cards "correndo"). As setas
- * avançam uma página inteira via `scrollTo`, que no loop vai pelo caminho mais
- * curto (para a frente/trás conforme a seta). Swipe no mobile segue nativo.
- */
 export function Carousel({ movies, title }: CarouselProps) {
+  const n = movies.length;
+  const copies = n > 0 ? copiesFor(n) : 1;
+  const centerCopy = Math.floor(copies / 2);
+
+  const slides = useMemo(
+    () => (n === 0 ? [] : Array.from({ length: copies }, () => movies).flat()),
+    [movies, n, copies],
+  );
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: true,
+    loop: false,
     align: "start",
     slidesToScroll: 1,
     dragFree: false,
+    containScroll: false,
+    startIndex: centerCopy * n, // começa na cópia do meio
   });
 
-  // Duplica a lista (mantendo a ordem) até ter buffer suficiente para o loop.
-  const slides = useMemo(() => {
-    if (movies.length === 0) return [];
-    if (movies.length >= MIN_SLIDES) return movies;
-    const times = Math.ceil(MIN_SLIDES / movies.length);
-    return Array.from({ length: times }, () => movies).flat();
-  }, [movies]);
+  // Recentra para a cópia do meio quando o scroll assenta (salto invisível).
+  useEffect(() => {
+    if (!emblaApi || n === 0) return;
+    const recenter = () => {
+      const i = emblaApi.selectedScrollSnap();
+      const within = ((i % n) + n) % n;
+      const target = centerCopy * n + within;
+      if (i !== target) emblaApi.scrollTo(target, true); // jump = sem animação
+    };
+    emblaApi.on("settle", recenter);
+    return () => {
+      emblaApi.off("settle", recenter);
+    };
+  }, [emblaApi, n, centerCopy]);
 
-  // Avança/recua uma página (nº de cards visíveis) mantendo a sensação da v1.
+  // Setas avançam/recuam uma página (nº de cards visíveis). Como voltamos sempre
+  // ao meio, há buffer de sobra e o scroll nunca clampa na ponta.
   const page = useCallback(
     (dir: 1 | -1) => {
       if (!emblaApi) return;
-      const count = emblaApi.scrollSnapList().length;
       const step = Math.max(1, emblaApi.slidesInView().length);
-      const target = (emblaApi.selectedScrollSnap() + dir * step + count) % count;
-      emblaApi.scrollTo(target);
+      emblaApi.scrollTo(emblaApi.selectedScrollSnap() + dir * step);
     },
     [emblaApi],
   );
@@ -53,7 +74,7 @@ export function Carousel({ movies, title }: CarouselProps) {
   const scrollPrev = useCallback(() => page(-1), [page]);
   const scrollNext = useCallback(() => page(1), [page]);
 
-  if (movies.length === 0) return null;
+  if (n === 0) return null;
 
   return (
     <section className="carousel-section">
